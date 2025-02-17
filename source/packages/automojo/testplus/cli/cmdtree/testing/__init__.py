@@ -10,16 +10,14 @@ __license__ = "MIT"
 
 import click
 
-from mojo.testplus.cli.cmdtree.testing.jobs import group_testplus_testing_jobs
-
-from mojo.testplus.cli.cmdtree.testing.query import command_testplus_testing_query
-from mojo.testplus.cli.cmdtree.testing.run import command_testplus_testing_run
+from automojo.testplus.cli.cmdtree.testing.jobs import group_testplus_testing_jobs
+from automojo.testplus.cli.cmdtree.testing.query import command_testplus_testing_query
+from automojo.testplus.cli.cmdtree.testing.run import command_testplus_testing_run
 
 @click.group("testing", help="Contains command for working with tests and test results.")
 def group_testplus_testing():
     return
 
 group_testplus_testing.add_command(group_testplus_testing_jobs)
-
 group_testplus_testing.add_command(command_testplus_testing_query)
 group_testplus_testing.add_command(command_testplus_testing_run)
