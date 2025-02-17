@@ -1,5 +1,5 @@
 """
-.. module:: mojointerotestplusfactories
+.. module:: testplusdefaulttypefactory
     :platform: Darwin, Linux, Unix, Windows
     :synopsis: Module that contains the factories for extending the TestPlus package to
                support included landscaping and interop protocols.
