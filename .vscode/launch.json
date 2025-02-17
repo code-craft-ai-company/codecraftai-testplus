@@ -12,6 +12,34 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Python: Internal Tests - Run",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/source/packages/automojo/testplus/cli/testplus_command.py",
+            "envFile": "${workspaceFolder}/.env",
+            "args": [
+                "testing",
+                "run",
+                "--root=${workspaceFolder}/source/testroots/automojo",
+                "--includes=automojo.tests"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Python: Test Results",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/source/packages/automojo/testplus/cli/testplus_command.py",
+            "envFile": "${workspaceFolder}/.env",
+            "args": [
+                "services",
+                "results"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
         }
     ]
 }
