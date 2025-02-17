@@ -126,6 +126,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     from automojo.foundation.runtime.runtimevariables import AM_RUNTIME_VARIABLES
     
     from automojo.foundation.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
+    from automojo.foundation.configuration.optionoverrides import AM_CONFIG_OPTION_OVERRIDES
 
     # STEP 1 - Initialize the Runtime (Performed by the root command)
 
@@ -191,50 +192,50 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
     if len(credential_files) > 0:
         use_credentials = True
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_credentials_files(credential_files)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_credentials_files(credential_files)
 
     if len(credential_names) > 0:
         use_credentials = True
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_credentials_names(credential_names)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_credentials_names(credential_names)
     
     if len(credential_sources) > 0:
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_credentials_sources(credential_sources)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_credentials_sources(credential_sources)
 
 
     if len(landscape_files) > 0:
         use_landscape = True
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_landscape_files(landscape_files)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_landscape_files(landscape_files)
 
     if len(landscape_names) > 0:
         use_landscape = True
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_landscape_names(landscape_names)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_landscape_names(landscape_names)
     
     if len(landscape_sources) > 0:
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_landscape_sources(landscape_sources)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_landscape_sources(landscape_sources)
 
 
     if len(runtime_files) > 0:
         use_runtime = True
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_runtime_files(runtime_files)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_runtime_files(runtime_files)
     
     if len(runtime_names) > 0:
         use_runtime = True
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_runtime_names(runtime_names)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_runtime_names(runtime_names)
 
     if len(runtime_sources) > 0:
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_runtime_sources(runtime_sources)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_runtime_sources(runtime_sources)
 
 
     if len(topology_files) > 0:
         use_topology = True
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_topology_files(topology_files)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_topology_files(topology_files)
     
     if len(topology_names) > 0:
         use_topology = True
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_topology_names(topology_names)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_topology_names(topology_names)
 
     if len(topology_sources) > 0:
-        AM_RUNTIME_OPTION_OVERRIDES.override_config_topology_sources(topology_sources)
+        AM_CONFIG_OPTION_OVERRIDES.override_config_topology_sources(topology_sources)
 
     if console_level is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_loglevel_console(console_level)

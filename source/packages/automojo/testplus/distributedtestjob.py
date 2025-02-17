@@ -47,7 +47,6 @@ from automojo.landscaping.wellknown import LandscapeSingleton
 from automojo.testplus.distributedtestsequencer import DistributedTestSequencer
 
 
-
 class DistributedTestJob(ContextUser):
     """
         The :class:`DistributedTestJob` spans the execution of all :class:`TestPack` and organizes the
@@ -63,12 +62,20 @@ class DistributedTestJob(ContextUser):
         * Can be used to customize the sequencing of :class:`TestPack` runs.
     """
 
-    title = "" # Friendly name for the test job
+    name = "" # Friendly name for the test job
+    title = "" # A descriptive title for the test job
     description = "" # Description of the job
+    owner = "" # The owning individual or team
 
     includes = None # The test packs or tests that are included in this TestJob
     excludes = None # The tests that are to be excluded from this TestJob
     metafilters = None
+
+    requires_landscape = False
+    requires_topology = False
+    requires_runtime = False
+    requires_credentials = False
+
 
     def __init__(self, logger, testroot, includes: Optional[List[str]]=None, excludes: Optional[List[str]]=None,
                  metafilters: Optional[List[str]]=None, test_module: Optional[str]=None, parser=None):
@@ -124,17 +131,21 @@ class DistributedTestJob(ContextUser):
 
         return
 
+
     def __enter__(self):
         self.begin()
         return self
+
 
     def __exit__(self, ex_type, ex_inst, ex_tb):
         self.finalize()
         return False
 
+
     @property
     def import_errors(self):
         return self._import_errors
+
 
     def begin(self):
         """
@@ -160,6 +171,7 @@ class DistributedTestJob(ContextUser):
         self._testrun_sequence_filename = os.path.join(self._test_results_dir, "testrun_sequence.py")
         
         return
+
 
     def execute(self):
         """
@@ -354,6 +366,7 @@ class DistributedTestJob(ContextUser):
 
         return result_code
 
+
     def fire_attach_to_environment(self, tseq: DistributedTestSequencer):
         """
             Goes through all the integrations and provides them with an opportunity to
@@ -363,6 +376,7 @@ class DistributedTestJob(ContextUser):
         tseq.attach_to_environment()
 
         return
+
 
     def fire_attach_to_framework(self, tseq: DistributedTestSequencer):
         """
@@ -374,6 +388,7 @@ class DistributedTestJob(ContextUser):
 
         return
 
+
     def fire_activate_configuration(self):
         
         landscape = LandscapeSingleton()
@@ -381,7 +396,8 @@ class DistributedTestJob(ContextUser):
         landscape.activate_configuration()
 
         return
-    
+
+
     def fire_activate_integration(self):
         
         landscape = LandscapeSingleton()
@@ -389,7 +405,8 @@ class DistributedTestJob(ContextUser):
         landscape.activate_integration()
 
         return
-    
+
+
     def fire_activate_operations(self):
         
         landscape = LandscapeSingleton()
@@ -397,7 +414,8 @@ class DistributedTestJob(ContextUser):
         landscape.activate_operations()
 
         return
-    
+
+
     def fire_attach_to_environment(self, tseq: DistributedTestSequencer):
         
         landscape = LandscapeSingleton()
@@ -415,11 +433,13 @@ class DistributedTestJob(ContextUser):
 
         return
 
+
     def fire_diagnostic_capture_post_testrun(self, tseq: DistributedTestSequencer, level: int=9):
         
         tseq.diagnostic_capture_post_testrun(level)
         
         return
+
 
     def fire_diagnostic_capture_pre_testrun(self, tseq: DistributedTestSequencer, level: int=9):
         
@@ -427,11 +447,13 @@ class DistributedTestJob(ContextUser):
         
         return
 
+
     def fire_establish_presence(self, tseq: DistributedTestSequencer):
 
         tseq.establish_presence()
 
         return
+
 
     def finalize(self): # pylint: disable=no-self-use
         """
@@ -439,6 +461,7 @@ class DistributedTestJob(ContextUser):
             the report template to the output directory.
         """
         return
+
 
     def query(self, format: CommandOutputFormat=CommandOutputFormat.DISPLAY):
         
@@ -454,6 +477,7 @@ class DistributedTestJob(ContextUser):
 
         return query_results
 
+
     @classmethod
     def user_interface_display_options(cls):
         """
@@ -464,6 +488,7 @@ class DistributedTestJob(ContextUser):
             to configure the job.
         """
         return
+
 
     @classmethod
     def user_interface_edit_options(cls):
@@ -476,6 +501,7 @@ class DistributedTestJob(ContextUser):
         """
         return
 
+
     def _create_recorder(self, runid: str, start: str, render_info: RenderInfo, build_info: BuildInfo,
                          pipeline_info: PipelineInfo, job_info: JobInfo) -> ResultRecorder:
         """
@@ -486,6 +512,7 @@ class DistributedTestJob(ContextUser):
         inst = JsonResultRecorder(runid=runid, start=start, render_info=render_info, apod=self._apod,
                                         build_info=build_info, pipeline_info=pipeline_info, job_info=job_info)
         return inst
+
 
     def _create_sequencer(self):
         """

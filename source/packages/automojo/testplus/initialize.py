@@ -26,14 +26,21 @@ class TestPlusVariables:
     
 
 def initialize_testplus_runtime():
+
     if not AM_RUNTIME_STATE.INITIALIZED:
         name="automojo"
         home_dir = os.path.join(os.path.expanduser("~"), name)
-        initialize_runtime(name=name, home_dir=home_dir, logger_name="TP")
+
+        # Register the testplus default type factory so the default job type will be a distributed test job for
+        # any tests run with the 'testplus' command.
+        extension_modules = "automojo.testplus.testplusdefaulttypefactory"
+        initialize_runtime(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules)
+        
     return
 
 
 def initialize_testplus_results():
+
     dest_static_dir = os.path.join(AM_RUNTIME_VARIABLES.AM_PRESENCE_DIRECTORY, "results", TestPlusVariables.TESTPLUS_RESOURCE_DEST_LEAF)
 
     if AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_SRC_DIR is None:

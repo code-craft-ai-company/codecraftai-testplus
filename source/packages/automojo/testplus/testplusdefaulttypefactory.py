@@ -21,11 +21,11 @@ from automojo.testbase.testjob import TestJob
 
 from automojo.testplus.distributedtestjob import DistributedTestJob
 
-class MojoInteropTestPlusExtentionFactory(ExtensionFactory, TestBaseExtensionProtocol):
+class TestPlusDefaultTypeFactory(ExtensionFactory, TestBaseExtensionProtocol):
 
     PRECEDENCE = 20
 
-    def get_testplus_default_job_type() -> Type[TestJob]:
+    def get_testbase_default_job_type() -> Type[TestJob]:
         """
             Used to lookup and return the most relevant default job type as determined
             by the super factory search path.
