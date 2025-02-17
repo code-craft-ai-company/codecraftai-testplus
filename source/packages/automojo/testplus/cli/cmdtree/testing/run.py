@@ -11,6 +11,7 @@ import sys
 
 import click
 
+from automojo.interfaces.itestjob import ITestJob
 from automojo.foundation.xlogging.levels import LOG_LEVEL_NAMES
 
 from automojo.testbase.cli.cmdtree.testing.constants import (
@@ -337,6 +338,8 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     # from the includes, excludes or test_module
     sfactory = ConfiguredSuperFactorySingleton()
     TestJobType = sfactory.get_override_types_by_order(TestBaseExtensionProtocol.get_testbase_default_job_type)
+
+    tjob: ITestJob
 
     result_code = 0
     with TestJobType(logger, test_root, includes=includes, excludes=excludes, metafilters=metafilters) as tjob:
