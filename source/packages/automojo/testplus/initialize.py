@@ -11,7 +11,8 @@ from automojo.foundation.collections.wellknown import ContextSingleton
 
 from automojo.foundation.xlogging.foundations import logging_initialize
     
-from automojo.foundation.runtime.initialize import initialize_runtime, AM_RUNTIME_STATE
+from automojo.foundation.configuration.initialize import initialize_configuration, AM_CONFIGURATION_STATE
+
 from automojo.foundation.runtime.runtimevariables import AM_RUNTIME_VARIABLES
 
 from automojo import testbase
@@ -27,14 +28,14 @@ class TestPlusVariables:
 
 def initialize_testplus_runtime():
 
-    if not AM_RUNTIME_STATE.INITIALIZED:
+    if not AM_CONFIGURATION_STATE.INITIALIZED:
         name="automojo"
         home_dir = os.path.join(os.path.expanduser("~"), name)
 
         # Register the testplus default type factory so the default job type will be a distributed test job for
         # any tests run with the 'testplus' command.
         extension_modules = "automojo.testplus.testplusdefaulttypefactory"
-        initialize_runtime(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules)
+        initialize_configuration(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules)
         
     return
 

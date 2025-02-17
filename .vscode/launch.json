@@ -23,7 +23,9 @@
                 "testing",
                 "run",
                 "--root=${workspaceFolder}/source/testroots/automojo",
-                "--includes=automojo.tests"
+                "--includes=automojo.tests",
+                "--default-configs=credentials",
+                "--default-configs=landscape"
             ],
             "console": "integratedTerminal",
             "justMyCode": false

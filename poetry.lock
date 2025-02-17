@@ -17,7 +17,7 @@ automojo-foundation = {git = "git@github.com:automationmojo/automojo-foundation.
 type = "git"
 url = "git@github.com:automationmojo/automojo-credentials.git"
 reference = "main"
-resolved_reference = "bf45f5730c0fd1a8ca0637f9e3663d89b55b21e0"
+resolved_reference = "8fcca7d7515a2e0d3493acfbe1028b78e251144e"
 
 [[package]]
 name = "automojo-dataprofiles"
@@ -37,7 +37,7 @@ automojo-interfaces = {git = "git@github.com:automationmojo/automojo-interfaces.
 type = "git"
 url = "git@github.com:automationmojo/automojo-dataprofiles.git"
 reference = "main"
-resolved_reference = "064456e58541fa9a1c38fbd4c3e2441e2f67e420"
+resolved_reference = "b0cfb2f9a786eb3249c4861a13b4b2a6b9d709ea"
 
 [[package]]
 name = "automojo-errors"
@@ -74,7 +74,7 @@ pyyaml = "^6.0.2"
 type = "git"
 url = "git@github.com:automationmojo/automojo-foundation.git"
 reference = "main"
-resolved_reference = "35259c1b87e7ded536eb43d63a603d9fd942b199"
+resolved_reference = "63ca9a22d2a08133621497615e7432511a1d5318"
 
 [[package]]
 name = "automojo-interfaces"
@@ -109,12 +109,13 @@ automojo-testbase = {git = "git@github.com:automationmojo/automojo-testbase.git"
 automojo-waiting = {git = "git@github.com:automationmojo/automojo-waiting.git", branch = "main"}
 paramiko = "^3.5.1"
 requests = "^2.32.3"
+rpyc = "^6.0.1"
 
 [package.source]
 type = "git"
 url = "git@github.com:automationmojo/automojo-interop.git"
 reference = "main"
-resolved_reference = "3e495dcd6e6760f57c9edd2f6f707b6d161a1e5a"
+resolved_reference = "7e0b458dde5f3e8c6ef4ad47cc2f1432b505c66b"
 
 [[package]]
 name = "automojo-landscaping"
@@ -140,7 +141,7 @@ automojo-waiting = {git = "git@github.com:automationmojo/automojo-waiting.git", 
 type = "git"
 url = "git@github.com:automationmojo/automojo-landscaping.git"
 reference = "main"
-resolved_reference = "05e66389c3bffdbab88f803eea9d062c65d9bdce"
+resolved_reference = "3da6be9cb8bd897a1ccd6b22366e15fdf6addcb1"
 
 [[package]]
 name = "automojo-networking"
@@ -180,7 +181,7 @@ click = "^8.1.8"
 type = "git"
 url = "git@github.com:automationmojo/automojo-testbase.git"
 reference = "main"
-resolved_reference = "739d457c6e34f46b390be8ba85756f99ec93d3d6"
+resolved_reference = "2090fcbfca82748cf0d0e753d3173c53f8aa6fc9"
 
 [[package]]
 name = "automojo-waiting"
@@ -614,6 +615,26 @@ gssapi = ["gssapi (>=1.4.1)", "pyasn1 (>=0.1.7)", "pywin32 (>=2.1.8)"]
 invoke = ["invoke (>=2.0)"]
 
 [[package]]
+name = "plumbum"
+version = "1.9.0"
+description = "Plumbum: shell combinators library"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "plumbum-1.9.0-py3-none-any.whl", hash = "sha256:9fd0d3b0e8d86e4b581af36edf3f3bbe9d1ae15b45b8caab28de1bcb27aaa7f5"},
+    {file = "plumbum-1.9.0.tar.gz", hash = "sha256:e640062b72642c3873bd5bdc3effed75ba4d3c70ef6b6a7b907357a84d909219"},
+]
+
+[package.dependencies]
+pywin32 = {version = "*", markers = "platform_system == \"Windows\" and platform_python_implementation != \"PyPy\""}
+
+[package.extras]
+dev = ["coverage[toml]", "paramiko", "psutil", "pytest (>=6.0)", "pytest-cov", "pytest-mock", "pytest-timeout"]
+docs = ["sphinx (>=4.0.0)", "sphinx-rtd-theme (>=1.0.0)"]
+ssh = ["paramiko"]
+test = ["coverage[toml]", "paramiko", "psutil", "pytest (>=6.0)", "pytest-cov", "pytest-mock", "pytest-timeout"]
+
+[[package]]
 name = "pycparser"
 version = "2.22"
 description = "C parser in Python"
@@ -649,6 +670,33 @@ cffi = ">=1.4.1"
 [package.extras]
 docs = ["sphinx (>=1.6.5)", "sphinx-rtd-theme"]
 tests = ["hypothesis (>=3.27.0)", "pytest (>=3.2.1,!=3.3.0)"]
+
+[[package]]
+name = "pywin32"
+version = "308"
+description = "Python for Window Extensions"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pywin32-308-cp310-cp310-win32.whl", hash = "sha256:796ff4426437896550d2981b9c2ac0ffd75238ad9ea2d3bfa67a1abd546d262e"},
+    {file = "pywin32-308-cp310-cp310-win_amd64.whl", hash = "sha256:4fc888c59b3c0bef905ce7eb7e2106a07712015ea1c8234b703a088d46110e8e"},
+    {file = "pywin32-308-cp310-cp310-win_arm64.whl", hash = "sha256:a5ab5381813b40f264fa3495b98af850098f814a25a63589a8e9eb12560f450c"},
+    {file = "pywin32-308-cp311-cp311-win32.whl", hash = "sha256:5d8c8015b24a7d6855b1550d8e660d8daa09983c80e5daf89a273e5c6fb5095a"},
+    {file = "pywin32-308-cp311-cp311-win_amd64.whl", hash = "sha256:575621b90f0dc2695fec346b2d6302faebd4f0f45c05ea29404cefe35d89442b"},
+    {file = "pywin32-308-cp311-cp311-win_arm64.whl", hash = "sha256:100a5442b7332070983c4cd03f2e906a5648a5104b8a7f50175f7906efd16bb6"},
+    {file = "pywin32-308-cp312-cp312-win32.whl", hash = "sha256:587f3e19696f4bf96fde9d8a57cec74a57021ad5f204c9e627e15c33ff568897"},
+    {file = "pywin32-308-cp312-cp312-win_amd64.whl", hash = "sha256:00b3e11ef09ede56c6a43c71f2d31857cf7c54b0ab6e78ac659497abd2834f47"},
+    {file = "pywin32-308-cp312-cp312-win_arm64.whl", hash = "sha256:9b4de86c8d909aed15b7011182c8cab38c8850de36e6afb1f0db22b8959e3091"},
+    {file = "pywin32-308-cp313-cp313-win32.whl", hash = "sha256:1c44539a37a5b7b21d02ab34e6a4d314e0788f1690d65b48e9b0b89f31abbbed"},
+    {file = "pywin32-308-cp313-cp313-win_amd64.whl", hash = "sha256:fd380990e792eaf6827fcb7e187b2b4b1cede0585e3d0c9e84201ec27b9905e4"},
+    {file = "pywin32-308-cp313-cp313-win_arm64.whl", hash = "sha256:ef313c46d4c18dfb82a2431e3051ac8f112ccee1a34f29c263c583c568db63cd"},
+    {file = "pywin32-308-cp37-cp37m-win32.whl", hash = "sha256:1f696ab352a2ddd63bd07430080dd598e6369152ea13a25ebcdd2f503a38f1ff"},
+    {file = "pywin32-308-cp37-cp37m-win_amd64.whl", hash = "sha256:13dcb914ed4347019fbec6697a01a0aec61019c1046c2b905410d197856326a6"},
+    {file = "pywin32-308-cp38-cp38-win32.whl", hash = "sha256:5794e764ebcabf4ff08c555b31bd348c9025929371763b2183172ff4708152f0"},
+    {file = "pywin32-308-cp38-cp38-win_amd64.whl", hash = "sha256:3b92622e29d651c6b783e368ba7d6722b1634b8e70bd376fd7610fe1992e19de"},
+    {file = "pywin32-308-cp39-cp39-win32.whl", hash = "sha256:7873ca4dc60ab3287919881a7d4f88baee4a6e639aa6962de25a98ba6b193341"},
+    {file = "pywin32-308-cp39-cp39-win_amd64.whl", hash = "sha256:71b3322d949b4cc20776436a9c9ba0eeedcbc9c650daa536df63f0ff111bb920"},
+]
 
 [[package]]
 name = "pyyaml"
@@ -732,6 +780,20 @@ urllib3 = ">=1.21.1,<3"
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
+
+[[package]]
+name = "rpyc"
+version = "6.0.1"
+description = "Remote Python Call (RPyC) is a transparent and symmetric distributed computing library"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "rpyc-6.0.1-py3-none-any.whl", hash = "sha256:e4124c81e65efc4e498842624394b86305eeee64d9647e0808a2862212bac803"},
+    {file = "rpyc-6.0.1.tar.gz", hash = "sha256:8a60f3c4401f309c0eb6e754fb6c4e0442231203907cebf61ae74615b52cd38a"},
+]
+
+[package.dependencies]
+plumbum = "*"
 
 [[package]]
 name = "urllib3"
