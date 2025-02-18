@@ -27,6 +27,7 @@ automojo-dataprofiles = { git = "git@github.com:automationmojo/automojo-dataprof
 automojo-networking = { git = "git@github.com:automationmojo/automojo-networking.git", branch = "main" }
 automojo-interop = { git = "git@github.com:automationmojo/automojo-interop.git", branch = "main" }
 automojo-landscaping = { git = "git@github.com:automationmojo/automojo-landscaping.git", branch = "main" }
+debugpy = "^1.8.12"
 
 
 [tool.poetry.group.dev.dependencies]

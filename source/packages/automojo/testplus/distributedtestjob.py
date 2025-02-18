@@ -216,11 +216,7 @@ class DistributedTestJob(ContextUser):
                 # associated devices.
                 self.fire_attach_to_framework(tseq)
 
-                # STEP 4: After all the couplings have had the opportunity to plug themselves into
-                # the test framework, we trigger the finalization of the test landscape initialization
-                self.fire_activate_integration()
-
-                # STEP 5: Now that we have collected all the couplings and have a preview of
+                # STEP 4: Now that we have collected all the couplings and have a preview of
                 # the complexity of the automation run encoded into the coupling types collected.
                 # Allow the couplings to attach to the automation environment so they can get
                 # a preview of the parameters and configuration and provide us with an early
@@ -230,6 +226,10 @@ class DistributedTestJob(ContextUser):
                 # we are able to perform this step in the context of the integration code and
                 # outside of the execution of any test code
                 self.fire_attach_to_environment(tseq)
+
+                # STEP 5: After all the couplings have had the opportunity to plug themselves into
+                # the test framework, we trigger the finalization of the test landscape initialization
+                self.fire_activate_integration()
 
                 # STEP 6: All the couplings have had a chance to analyze the configuration
                 # information and provide us with a clear indication if there are any configuration
