@@ -141,7 +141,7 @@ automojo-waiting = {git = "git@github.com:automationmojo/automojo-waiting.git", 
 type = "git"
 url = "git@github.com:automationmojo/automojo-landscaping.git"
 reference = "main"
-resolved_reference = "d46cf572b1051f7699045873daab7e1309083a8f"
+resolved_reference = "e19d58d1057665110c201a6d7f74e15babbd4ffd"
 
 [[package]]
 name = "automojo-networking"
@@ -181,7 +181,7 @@ click = "^8.1.8"
 type = "git"
 url = "git@github.com:automationmojo/automojo-testbase.git"
 reference = "main"
-resolved_reference = "4aac86c48a2a4ce778ad15869cd29e090baab17e"
+resolved_reference = "c512113066bbc4b0bb2cf3ab1abc86fbe34f1ff3"
 
 [[package]]
 name = "automojo-waiting"

@@ -161,10 +161,9 @@ class DistributedTestJob(ContextUser):
         # Dump out a flattened copy of the runtime file to the test output folder so we have a copy
         # of the inputs to the automation run.
         self._runtime_archive = os.path.join(self._test_results_dir, "runtime-declared.yaml")
-        with open(self._runtime_archive, 'w+') as raf:
-            yaml.safe_dump(CONFIGURATION_MAPS.RUNTIME_CONFIGURATION_MAP.flatten(), raf, indent=4)
-        
-        self._result_filename = os.path.join(self._test_results_dir, "testrun_results.jsos")
+
+        self._stream_result_filename = os.path.join(self._test_results_dir, "testrun_results_stream.jsos")
+        self._consolidated_result_filename = os.path.join(self._test_results_dir, "testrun_results.json")
         self._summary_filename = os.path.join(self._test_results_dir, "testrun_summary.json")
         self._summary_template = get_summary_html_template_source()
         self._import_errors_filename = os.path.join(self._test_results_dir, "import_errors.jsos")
@@ -274,7 +273,7 @@ class DistributedTestJob(ContextUser):
                 static_resource_destination = get_summary_static_resource_dest_dir()
                 
                 render_info = RenderInfo(title=title, summary_filename=self._summary_filename, summary_template=self._summary_template,
-                                         result_filename=self._result_filename, static_resource_source=static_resource_source,
+                                         stream_results_filename=self._stream_result_filename, consolidated_results_filename=self._consolidated_result_filename, static_resource_source=static_resource_source,
                                          static_resource_destination=static_resource_destination)
 
                 build_info = BuildInfo(branch=self._branch, build=self._build, flavor=self._flavor,

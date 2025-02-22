@@ -1,4 +1,8 @@
 
+__author__ = "Myron Walker"
+__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__credits__ = []
+
 
 from typing import Generator, List
 
@@ -18,7 +22,6 @@ from automojo.testbase.sequencing.testsequencer import TestSequencer
 from automojo.interop.protocols.tasker.taskernode import TaskerClientNode
 from automojo.interop.protocols.tasker.taskercontroller import ClientTaskerController
 from automojo.interop.protocols.tasker.taskingadapter import TaskingAdapter
-from automojo.interop.protocols.tasker.taskingresultpromise import TaskingResultPromise
 
 from automojo.interop.protocols.tasker.examples.helloworldtasking import HelloWorldTasking
 

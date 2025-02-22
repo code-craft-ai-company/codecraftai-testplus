@@ -9,7 +9,7 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2023, Myron W Walker"
+__copyright__ = "Copyright 2025, Automation Mojo LLC"
 __credits__ = []
 
 
@@ -42,8 +42,9 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
                          is used to execute the tests associated with this entrypoint.
 
     .. note::
-       The `generic_test_entrypoint` is a useful tool to place at the bottom of test files to allow
-       them to easily be run for debugging purposes.
+       The `distributed_test_entrypoint` is a useful tool to place at the bottom of test files to allow them to easily
+       be run for debugging purposes.
+
     """
     from automojo.testplus.initialize import initialize_testplus_runtime, initialize_testplus_results
     initialize_testplus_runtime()

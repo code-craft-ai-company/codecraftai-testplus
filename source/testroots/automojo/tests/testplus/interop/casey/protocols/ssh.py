@@ -1,4 +1,11 @@
 
+
+__author__ = "Myron Walker"
+__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__credits__ = []
+
+
+
 from typing import Generator
 
 from automojo import testplus
