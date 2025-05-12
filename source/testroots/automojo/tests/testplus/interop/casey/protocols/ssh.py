@@ -15,7 +15,7 @@ from automojo.landscaping.includefilters import IncludeDeviceByDeviceType
 
 from automojo.landscaping.clients.linux.linuxclient import LinuxClient
 
-@testplus.factory.resource()
+@testplus.register.resource_factory()
 def each_client(lscape: Landscape, constraints={}) -> Generator[LinuxClient, None, None]:
     
     includes = [IncludeDeviceByDeviceType("network/client-linux")]
@@ -26,7 +26,7 @@ def each_client(lscape: Landscape, constraints={}) -> Generator[LinuxClient, Non
         yield client
 
 
-@testplus.originate.param(each_client, identifier="client")
+@testplus.attach.parameter(each_client, identifier="client")
 def test_ssh_say_hello(client: LinuxClient):
 
     cmd = "echo 'Hello'"

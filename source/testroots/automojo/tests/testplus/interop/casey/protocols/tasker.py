@@ -30,7 +30,7 @@ from automojo.landscaping.includefilters import IncludeDeviceByDeviceType
 from automojo.landscaping.clients.linux.linuxclient import LinuxClient
 
 
-@testplus.factory.resource()
+@testplus.register.resource_factory()
 def create_tasking_adapter(sequencer: TestSequencer, lscape: Landscape, constraints={}) -> Generator[LinuxClient, None, None]:
     
     lcl_output_dir = get_path_for_output()
@@ -82,7 +82,7 @@ def create_tasking_adapter(sequencer: TestSequencer, lscape: Landscape, constrai
             zipf.extractall(lcl_taskings_dir)
 
 
-@testplus.originate.param(create_tasking_adapter, identifier="tadapter")
+@testplus.attach.parameter(create_tasking_adapter, identifier="tadapter")
 def test_tasker_say_hello(tadapter: TaskingAdapter):
 
     with tadapter.create_tasking_group_scope("Hello Group") as hgrp:

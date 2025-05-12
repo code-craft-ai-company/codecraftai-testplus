@@ -25,7 +25,7 @@
                 "--root=${workspaceFolder}/source/testroots/automojo",
                 "--includes=automojo.tests",
                 "--default-configs=credentials",
-                "--default-configs=landscape",
+                "--landscape-name=casey-landscape",
                 "--breakpoint=testrun-start"
             ],
             "console": "integratedTerminal",
