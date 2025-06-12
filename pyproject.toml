@@ -18,16 +18,16 @@ packages = [{include="automojo", from="source/packages"}]
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
 debugpy = "^1.8.12"
-automojo-errors = { git = "git@github.com:automationmojo/automojo-errors.git", branch = "main" }
-automojo-interfaces = { git = "git@github.com:automationmojo/automojo-interfaces.git", branch = "main" }
-automojo-waiting = { git = "git@github.com:automationmojo/automojo-waiting.git", branch = "main" }
-automojo-foundation = { git = "git@github.com:automationmojo/automojo-foundation.git", branch = "main" }
-automojo-testbase = { git = "git@github.com:automationmojo/automojo-testbase.git", branch = "main" }
-automojo-credentials = { git = "git@github.com:automationmojo/automojo-credentials.git", branch = "main" }
-automojo-dataprofiles = { git = "git@github.com:automationmojo/automojo-dataprofiles.git", branch = "main" }
-automojo-networking = { git = "git@github.com:automationmojo/automojo-networking.git", branch = "main" }
-automojo-interop = { git = "git@github.com:automationmojo/automojo-interop.git", branch = "main" }
-automojo-landscaping = { git = "git@github.com:automationmojo/automojo-landscaping.git", branch = "main" }
+automojo-errors = { git = "https://github.com/automationmojo/automojo-errors.git", branch = "main" }
+automojo-interfaces = { git = "https://github.com/automationmojo/automojo-interfaces.git", branch = "main" }
+automojo-waiting = { git = "https://github.com/automationmojo/automojo-waiting.git", branch = "main" }
+automojo-foundation = { git = "https://github.com/automationmojo/automojo-foundation.git", branch = "main" }
+automojo-testbase = { git = "https://github.com/automationmojo/automojo-testbase.git", branch = "main" }
+automojo-credentials = { git = "https://github.com/automationmojo/automojo-credentials.git", branch = "main" }
+automojo-dataprofiles = { git = "https://github.com/automationmojo/automojo-dataprofiles.git", branch = "main" }
+automojo-networking = { git = "https://github.com/automationmojo/automojo-networking.git", branch = "main" }
+automojo-interop = { git = "https://github.com/automationmojo/automojo-interop.git", branch = "main" }
+automojo-landscaping = { git = "https://github.com/automationmojo/automojo-landscaping.git", branch = "main" }
 
 
 
