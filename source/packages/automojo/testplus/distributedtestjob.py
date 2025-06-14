@@ -133,17 +133,39 @@ class DistributedTestJob(ContextUser):
 
 
     def __enter__(self):
+        """
+            Enters the context manager for the test job.
+
+            :returns: The ``DistributedTestJob`` instance.
+        """
+
         self.begin()
         return self
 
 
     def __exit__(self, ex_type, ex_inst, ex_tb):
+        """
+            Exits the context manager for the test job.
+
+            :param ex_type: The exception type if one was raised.
+            :param ex_inst: The exception instance if one was raised.
+            :param ex_tb: The traceback for the exception.
+
+            :returns: ``False`` so any exception is re-raised.
+        """
+
         self.finalize()
         return False
 
 
     @property
     def import_errors(self):
+        """
+            The list of import errors collected during test discovery.
+
+            :returns: A list of file names where import failed.
+        """
+
         return self._import_errors
 
 
@@ -385,7 +407,12 @@ class DistributedTestJob(ContextUser):
 
 
     def fire_activate_configuration(self):
-        
+        """
+            Activates the configuration phase of the landscape.
+
+            :returns: ``None``
+        """
+
         landscape = LandscapeSingleton()
 
         landscape.activate_configuration()
@@ -394,7 +421,12 @@ class DistributedTestJob(ContextUser):
 
 
     def fire_activate_integration(self):
-        
+        """
+            Activates the integration phase of the landscape.
+
+            :returns: ``None``
+        """
+
         landscape = LandscapeSingleton()
 
         landscape.activate_integration()
@@ -403,7 +435,12 @@ class DistributedTestJob(ContextUser):
 
 
     def fire_activate_operations(self):
-        
+        """
+            Activates operational mode for the landscape.
+
+            :returns: ``None``
+        """
+
         landscape = LandscapeSingleton()
 
         landscape.activate_operations()
@@ -412,16 +449,32 @@ class DistributedTestJob(ContextUser):
 
 
     def fire_attach_to_environment(self, tseq: DistributedTestSequencer):
-        
+        """
+            Provides the sequencer with the landscape so integrations can attach
+            to the environment.
+
+            :param tseq: The distributed sequencer controlling the test run.
+
+            :returns: ``None``
+        """
+
         landscape = LandscapeSingleton()
 
         tseq.attach_to_environment(landscape=landscape)
-        
+
         return
 
 
     def fire_attach_to_framework(self, tseq: DistributedTestSequencer):
-        
+        """
+            Provides the sequencer with the landscape so integrations can attach
+            to the automation framework.
+
+            :param tseq: The distributed sequencer controlling the test run.
+
+            :returns: ``None``
+        """
+
         landscape = LandscapeSingleton()
 
         tseq.attach_to_framework(landscape=landscape)
@@ -430,20 +483,43 @@ class DistributedTestJob(ContextUser):
 
 
     def fire_diagnostic_capture_post_testrun(self, tseq: DistributedTestSequencer, level: int=9):
-        
+        """
+            Captures diagnostic information after the test run completes.
+
+            :param tseq: The sequencer executing the tests.
+            :param level: Diagnostic capture level.
+
+            :returns: ``None``
+        """
+
         tseq.diagnostic_capture_post_testrun(level)
-        
+
         return
 
 
     def fire_diagnostic_capture_pre_testrun(self, tseq: DistributedTestSequencer, level: int=9):
-        
+        """
+            Captures diagnostic information before the test run begins.
+
+            :param tseq: The sequencer executing the tests.
+            :param level: Diagnostic capture level.
+
+            :returns: ``None``
+        """
+
         tseq.diagnostic_capture_pre_testrun(level)
-        
+
         return
 
 
     def fire_establish_presence(self, tseq: DistributedTestSequencer):
+        """
+            Establishes persistent presence with the test landscape.
+
+            :param tseq: The sequencer executing the tests.
+
+            :returns: ``None``
+        """
 
         tseq.establish_presence()
 
@@ -459,7 +535,14 @@ class DistributedTestJob(ContextUser):
 
 
     def query(self, format: CommandOutputFormat=CommandOutputFormat.DISPLAY):
-        
+        """
+            Queries the available tests without executing them.
+
+            :param format: The output format for the query results.
+
+            :returns: A dictionary of discovered test references.
+        """
+
         query_results = []
 
         with self._create_sequencer() as tseq:

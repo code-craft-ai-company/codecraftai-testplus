@@ -23,6 +23,13 @@ from automojo.testplus.cli.cmdtree.testing import group_testplus_testing
 @click.group("testplus")
 @click.option('-v', '--verbose', count=True)
 def testplus_root_command(verbose):
+    """
+        Entry point for the ``testplus`` command line interface.
+
+        :param int verbose: Verbosity level specified by ``-v`` or ``--verbose``.
+
+        :returns: ``None``
+    """
 
     from automojo.foundation.runtime.runtimevariables import AM_RUNTIME_VARIABLES
 

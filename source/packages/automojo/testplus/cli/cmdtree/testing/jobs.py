@@ -21,6 +21,12 @@ from automojo.foundation.xlogging.levels import LOG_LEVEL_NAMES
 
 @click.group("jobs", help="Contains commands for working with test jobs.")
 def group_testplus_testing_jobs():
+    """
+        CLI command group for interacting with TestPlus jobs.
+
+        :returns: ``None``
+    """
+
     return
 
 HELP_ROOT = "The root directory to use when scanning for tests."
@@ -40,6 +46,12 @@ HELP_DEBUG = "Output debug information to the console."
 @click.option("--filter", "-f", required=False, help=HELP_FILTER)
 @click.option("--debug", default=False, type=bool, help=HELP_DEBUG)
 def command_testing_jobs_list():
+    """
+        Lists available TestPlus jobs.
+
+        :returns: ``None``
+    """
+
     return
 
 @click.command("show")
@@ -47,6 +59,12 @@ def command_testing_jobs_list():
 @click.option("--job", "-j", required=True, help=HELP_JOB)
 @click.option("--debug", default=False, type=bool, help=HELP_DEBUG)
 def command_testplus_testing_jobs_show():
+    """
+        Displays information about a specific TestPlus job.
+
+        :returns: ``None``
+    """
+
     return
 
 @click.command("run")
@@ -60,6 +78,15 @@ def command_testplus_testing_jobs_show():
 @click.option("--console-level", default=None, required=False, type=click.Choice(LOG_LEVEL_NAMES, case_sensitive=False), help=HELP_CONSOLE_LOG_LEVEL)
 @click.option("--logfile-level", default=None, required=False, type=click.Choice(LOG_LEVEL_NAMES, case_sensitive=False), help=HELP_FILE_LOG_LEVEL)
 def command_testplus_testing_jobs_run(root, job, output, start, branch, build, flavor, console_level, logfile_level):
+    """
+        Executes a specified TestPlus job.
+
+        :param root: Root directory used when scanning for tests.
+        :param job: Fully qualified job identifier.
+        :param output: Directory for test results.
+
+        :returns: ``None``
+    """
 
     # pylint: disable=unused-import,import-outside-toplevel
 
