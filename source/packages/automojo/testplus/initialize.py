@@ -35,6 +35,15 @@ class TestPlusVariables:
     
 
 def initialize_testplus_runtime():
+    """
+        Initializes the TestPlus runtime and loads configuration.
+
+        This sets up the default home directory and registers the TestPlus
+        default type factory so jobs executed via the ``testplus`` command run
+        correctly.
+
+        :returns: ``None``
+    """
 
     if not AM_CONFIGURATION_STATE.INITIALIZED:
         name="automojo"
@@ -44,11 +53,19 @@ def initialize_testplus_runtime():
         # any tests run with the 'testplus' command.
         extension_modules = "automojo.testplus.testplusdefaulttypefactory"
         initialize_configuration(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules)
-        
+
     return
 
 
 def initialize_testplus_results():
+    """
+        Initializes the TestPlus results locations and logging.
+
+        This populates runtime variables describing where static resources and
+        templates are located and ensures logging is configured.
+
+        :returns: ``None``
+    """
 
     dest_static_dir = os.path.join(AM_RUNTIME_VARIABLES.AM_PRESENCE_DIRECTORY, "results", TestPlusVariables.TESTPLUS_RESOURCE_DEST_LEAF)
 
@@ -63,7 +80,7 @@ def initialize_testplus_results():
     ctx.insert(ContextPaths.DIR_RESULTS_RESOURCE_SRC, AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_SRC_DIR)
     ctx.insert(ContextPaths.DIR_RESULTS_RESOURCE_DEST, AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_DEST_DIR)
     ctx.insert(ContextPaths.FILE_RESULTS_TEMPLATE, AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_SUMMARY_TEMPLATE)
-    
+
     logging_initialize()
 
     return

@@ -110,6 +110,15 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
                         topology_files, topology_names, topology_sources, console_level, logfile_level,
                         debugger, breakpoints, prerun_diagnostic, postrun_diagnostic, include_marker_exp,
                         exclude_marker_exp):
+    """
+        Executes a collection of tests using the TestPlus framework.
+
+        :param root: Root directory used when scanning for tests.
+        :param includes: Test inclusion expressions.
+        :param excludes: Test exclusion expressions.
+
+        :returns: ``None``
+    """
 
     if config_name is not None:
         if config_name not in landscape_names:

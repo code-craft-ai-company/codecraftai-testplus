@@ -36,6 +36,15 @@ from automojo.testplus.cli.cmdtree.testing.constants import (
 @click.option("--exclude-marker-exp", required=False, multiple=True, help=HELP_EXCLUDE_MARKER_EXP)
 def command_testplus_testing_query(root, includes, excludes,
     include_marker_exp, exclude_marker_exp):
+    """
+        Queries tests available within a TestPlus environment.
+
+        :param root: Root directory used when scanning for tests.
+        :param includes: Inclusion expressions for tests.
+        :param excludes: Exclusion expressions for tests.
+
+        :returns: ``None``
+    """
     
     # pylint: disable=unused-import,import-outside-toplevel
 

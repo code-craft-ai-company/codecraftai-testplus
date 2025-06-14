@@ -20,6 +20,12 @@ from automojo.testplus.cli.cmdtree.testing.run import command_testplus_testing_r
 
 @click.group("testing", help="Contains command for working with tests and test results.")
 def group_testplus_testing():
+    """
+        Root command group for TestPlus testing related operations.
+
+        :returns: ``None``
+    """
+
     return
 
 group_testplus_testing.add_command(group_testplus_testing_jobs)
