@@ -1,4 +1,12 @@
+"""
+.. module:: testplus
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Top level package for the TestPlus framework which exposes
+               commonly used APIs and decorators from the underlying
+               ``automojo.testbase`` package.
 
+.. moduleauthor:: Myron Walker <myron.walker@gmail.com>
+"""
 
 __author__ = "Myron Walker"
 __copyright__ = "Copyright 2025, Automation Mojo LLC"
