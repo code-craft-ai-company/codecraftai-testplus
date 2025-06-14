@@ -1,3 +1,11 @@
+"""
+.. module:: initialize
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Helper routines used to initialize the TestPlus runtime and
+               test result resources.
+
+.. moduleauthor:: Myron Walker <myron.walker@gmail.com>
+"""
 
 __author__ = "Myron Walker"
 __copyright__ = "Copyright 2025, Automation Mojo LLC"
