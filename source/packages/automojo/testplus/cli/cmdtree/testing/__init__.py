@@ -1,10 +1,10 @@
 """
-.. module:: testing
-    :platform: Darwin, Linux, Unix, Windows
-    :synopsis: CLI group providing commands for interacting with tests and test
-               results.
+    .. module:: testing
+        :platform: Darwin, Linux, Unix, Windows
+        :synopsis: CLI group providing commands for interacting with tests and test
+                   results.
 
-.. moduleauthor:: Myron Walker <myron.walker@gmail.com>
+    .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
 
 __author__ = "Myron Walker"

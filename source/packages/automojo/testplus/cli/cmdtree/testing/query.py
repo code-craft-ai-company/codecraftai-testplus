@@ -1,10 +1,10 @@
 """
-.. module:: query
-    :platform: Darwin, Linux, Unix, Windows
-    :synopsis: CLI command used to query tests available in a TestPlus
-               environment.
+    .. module:: query
+        :platform: Darwin, Linux, Unix, Windows
+        :synopsis: CLI command used to query tests available in a TestPlus
+                   environment.
 
-.. moduleauthor:: Myron Walker <myron.walker@gmail.com>
+    .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
 
 __author__ = "Myron Walker"

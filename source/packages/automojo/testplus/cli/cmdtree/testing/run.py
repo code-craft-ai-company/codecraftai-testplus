@@ -1,10 +1,10 @@
 """
-.. module:: run
-    :platform: Darwin, Linux, Unix, Windows
-    :synopsis: CLI command used to execute collections of tests via the
-               TestPlus framework.
+    .. module:: run
+        :platform: Darwin, Linux, Unix, Windows
+        :synopsis: CLI command used to execute collections of tests via the
+                   TestPlus framework.
 
-.. moduleauthor:: Myron Walker <myron.walker@gmail.com>
+    .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
 
 __author__ = "Myron Walker"

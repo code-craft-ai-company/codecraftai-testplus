@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-.. module:: testplus_command
-    :platform: Darwin, Linux, Unix, Windows
-    :synopsis: The script entrypoint for the 'testplus' command.
+    .. module:: testplus_command
+        :platform: Darwin, Linux, Unix, Windows
+        :synopsis: The script entrypoint for the 'testplus' command.
 
-.. moduleauthor:: Myron Walker <myron.walker@gmail.com>
+    .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
 
 __author__ = "Myron Walker"
