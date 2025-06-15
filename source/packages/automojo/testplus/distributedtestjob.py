@@ -604,7 +604,7 @@ class DistributedTestJob(ContextUser):
 
 class DefaultDistributedTestJob(DistributedTestJob):
     """
-        The :class:`DefautDistributedTestJob` is utilized as a job container when a job was not specified.
+        The :class:`DefaultDistributedTestJob` is utilized as a job container when a job was not specified.
     """
     name = "Test Job"
     description = "Unspecified test job."

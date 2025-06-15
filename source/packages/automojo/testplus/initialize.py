@@ -28,6 +28,12 @@ from automojo import testbase
 TESTBASE_DIR = os.path.dirname(testbase.__file__)
 
 class TestPlusVariables:
+    """
+        Collection of constants used to configure results handling.
+
+        The attributes provide locations for templates and static resources that
+        are consumed by TestPlus.
+    """
     TESTPLUS_TEMPLATES_DIR = os.path.join(TESTBASE_DIR, "templates")
     TESTPLUS_RESOURCE_DEST_LEAF = os.path.join("static", "v2")
     TESTPLUS_RESOURCE_SRC_DIR = os.path.join(TESTPLUS_TEMPLATES_DIR, "v2", "static")

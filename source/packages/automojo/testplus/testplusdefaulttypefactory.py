@@ -22,6 +22,12 @@ from automojo.testbase.testjob import TestJob
 from automojo.testplus.distributedtestjob import DistributedTestJob
 
 class TestPlusDefaultTypeFactory(ExtensionFactory, TestBaseExtensionProtocol):
+    """
+        Provides the default implementations used by TestPlus.
+
+        This factory supplies the default job type when none is explicitly
+        specified.
+    """
 
     PRECEDENCE = 20
 
