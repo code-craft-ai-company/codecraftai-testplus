@@ -1,7 +1,7 @@
 """
     .. module:: constants
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: Constants used by the TestPlus testing command tree.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Constants used by the TestPlus testing command tree.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """

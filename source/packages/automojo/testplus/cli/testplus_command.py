@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
     .. module:: testplus_command
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: The script entrypoint for the 'testplus' command.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: The script entrypoint for the 'testplus' command.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """

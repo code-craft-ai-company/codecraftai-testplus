@@ -1,8 +1,8 @@
 """
     .. module:: query
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: CLI command used to query tests available in a TestPlus
-                   environment.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: CLI command used to query tests available in a TestPlus
+    environment.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
@@ -45,7 +45,7 @@ def command_testplus_testing_query(root, includes, excludes,
 
         :returns: ``None``
     """
-    
+
     # pylint: disable=unused-import,import-outside-toplevel
 
     # We do the imports of the automation framework code inside the action functions because

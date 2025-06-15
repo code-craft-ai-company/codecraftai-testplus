@@ -1,9 +1,9 @@
 """
     .. module:: entrypoints
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: A set of standaridized entry point functions that provide standardized test environment
-                   startup and test run commencement utilizing the :class:`automojo.testbase.testsequencer.TestSequencer`
-                   object.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: A set of standaridized entry point functions that provide standardized test environment
+    startup and test run commencement utilizing the :class:`automojo.testbase.testsequencer.TestSequencer`
+    object.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
@@ -39,11 +39,11 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
         commanline parameters that can be used to run test files as scripts.
 
         :param job_type: The derived 'DistributedTestJob' type that is used to provide configuration information and
-                         is used to execute the tests associated with this entrypoint.
+        is used to execute the tests associated with this entrypoint.
 
-    .. note::
-       The `distributed_test_entrypoint` is a useful tool to place at the bottom of test files to allow them to easily
-       be run for debugging purposes.
+        .. note::
+        The `distributed_test_entrypoint` is a useful tool to place at the bottom of test files to allow them to easily
+        be run for debugging purposes.
 
     """
     from automojo.testplus.initialize import initialize_testplus_runtime, initialize_testplus_results
@@ -58,7 +58,7 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
     from automojo.foundation.configuration.configurationmaps import resolve_configuration_maps
     resolve_configuration_maps(use_credentials=job_type.requires_credentials, use_landscape=job_type.requires_landscape,
                                use_runtime=job_type.requires_runtime, use_topology=job_type.requires_topology)
-    
+
     # Initialize test results and also logging
     initialize_testplus_results()
 
@@ -92,7 +92,7 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
 
     testroot = find_testmodule_root(test_module)
     module_fullname = find_testmodule_fullname(test_module, testroot=testroot)
-    
+
     module_lastdot = module_fullname.rfind('.')
     if module_lastdot > -1:
         # We need to import every module up to the test module
@@ -112,7 +112,7 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
             tcobj_module_name = testclass_obj.__module__
             if tcobj_module_name == "__main__":
                 testclass_obj.__module__ = module_fullname
-        
+
         # Re-map the object function objects from the module over to the module name we just registered
         # the test module under.
         test_func_coll = inspect.getmembers(test_module, inspect.isfunction)

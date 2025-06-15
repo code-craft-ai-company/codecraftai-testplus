@@ -1,8 +1,8 @@
 """
     .. module:: testing
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: CLI group providing commands for interacting with tests and test
-                   results.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: CLI group providing commands for interacting with tests and test
+    results.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """

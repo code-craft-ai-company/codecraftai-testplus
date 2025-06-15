@@ -1,9 +1,9 @@
 """
     .. module:: distributedtestsequencer
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: Module containing the :class:`DistributedTestSequencer` type which is use to control
-            the flow of the automation environment startup and test execution sequence for a distributed
-            automation environment.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Module containing the :class:`DistributedTestSequencer` type which is use to control
+    the flow of the automation environment startup and test execution sequence for a distributed
+    automation environment.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
@@ -43,7 +43,7 @@ class DistributedTestSequencer(TestSequencer):
             :param jobtitle: The name of the test job.
             :param root: The path to the root folder that is the base of the tests.
             :param includes: List of expressions used to determine which tests to include.
-                             (scope):(package).(package)@(module)#(testname)
+            (scope):(package).(package)@(module)#(testname)
             :param excludes: List of expressions used to determine which tests to exclued from the included tests.
             :param metafilters: List of expressions used to filter tests by metadata
         """

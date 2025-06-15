@@ -1,8 +1,8 @@
 """
     .. module:: cmdtree
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: Package defining the command tree structure for the ``testplus``
-                   CLI.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Package defining the command tree structure for the ``testplus``
+    CLI.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """

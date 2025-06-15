@@ -1,7 +1,7 @@
 """
     .. module:: jobs
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: CLI commands for listing, showing and running TestPlus jobs.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: CLI commands for listing, showing and running TestPlus jobs.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
