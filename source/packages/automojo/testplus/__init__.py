@@ -1,9 +1,9 @@
 """
     .. module:: testplus
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: Top level package for the TestPlus framework which exposes
-                   commonly used APIs and decorators from the underlying
-                   ``automojo.testbase`` package.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Top level package for the TestPlus framework which exposes
+    commonly used APIs and decorators from the underlying
+    ``automojo.testbase`` package.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """

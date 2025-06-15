@@ -1,8 +1,8 @@
 """
     .. module:: testjob
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: Module that is contains the :class:`DistributedTestJob` class which is utilized for each test
-            run as the parent container for all test results.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Module that is contains the :class:`DistributedTestJob` class which is utilized for each test
+    run as the parent container for all test results.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
@@ -126,7 +126,7 @@ class DistributedTestJob(ContextUser):
         self._job_type = AM_RUNTIME_VARIABLES.AM_JOB_TYPE
         self._job_venue = AM_RUNTIME_VARIABLES.AM_JOB_VENUE
         self._job_tag = AM_RUNTIME_VARIABLES.AM_JOB_TAG
-        
+
         self._import_errors = []
 
         return
@@ -179,7 +179,7 @@ class DistributedTestJob(ContextUser):
         self._starttime = AM_RUNTIME_VARIABLES.AM_STARTTIME
 
         self._test_results_dir = get_path_for_testresults()
-        
+
         # Dump out a flattened copy of the runtime file to the test output folder so we have a copy
         # of the inputs to the automation run.
         self._runtime_archive = os.path.join(self._test_results_dir, "runtime-declared.yaml")
@@ -190,7 +190,7 @@ class DistributedTestJob(ContextUser):
         self._summary_template = get_summary_html_template_source()
         self._import_errors_filename = os.path.join(self._test_results_dir, "import_errors.jsos")
         self._testrun_sequence_filename = os.path.join(self._test_results_dir, "testrun_sequence.py")
-        
+
         return
 
 
@@ -293,7 +293,7 @@ class DistributedTestJob(ContextUser):
 
                 static_resource_source = get_summary_static_resource_src_dir()
                 static_resource_destination = get_summary_static_resource_dest_dir()
-                
+
                 render_info = RenderInfo(title=title, summary_filename=self._summary_filename, summary_template=self._summary_template,
                                          stream_results_filename=self._stream_result_filename, consolidated_results_filename=self._consolidated_result_filename, static_resource_source=static_resource_source,
                                          static_resource_destination=static_resource_destination)
@@ -307,7 +307,7 @@ class DistributedTestJob(ContextUser):
 
                 job_info = JobInfo(id=self._job_id, name=self._job_name, type=self._job_type, owner=self._job_owner, label=self._job_label,
                                    initiator=self._job_initiator, venue=self._job_venue, tag=self._job_tag)
-                
+
                 self._logger.section("Running Tests")
 
                 # STEP 11: The startup phase is over, up to this point we have mostly been executing
@@ -546,7 +546,7 @@ class DistributedTestJob(ContextUser):
         query_results = []
 
         with self._create_sequencer() as tseq:
-            
+
             count = tseq.discover(test_module=self._test_module)
 
             query_results = tseq.references

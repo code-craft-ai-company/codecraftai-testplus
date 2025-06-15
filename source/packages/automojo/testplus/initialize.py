@@ -1,8 +1,8 @@
 """
     .. module:: initialize
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: Helper routines used to initialize the TestPlus runtime and
-                   test result resources.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Helper routines used to initialize the TestPlus runtime and
+    test result resources.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
@@ -18,7 +18,7 @@ from automojo.foundation.collections.contextpaths import ContextPaths
 from automojo.foundation.collections.wellknown import ContextSingleton
 
 from automojo.foundation.xlogging.foundations import logging_initialize
-    
+
 from automojo.foundation.configuration.initialize import initialize_configuration, AM_CONFIGURATION_STATE
 
 from automojo.foundation.runtime.runtimevariables import AM_RUNTIME_VARIABLES
@@ -38,7 +38,7 @@ class TestPlusVariables:
     TESTPLUS_RESOURCE_DEST_LEAF = os.path.join("static", "v2")
     TESTPLUS_RESOURCE_SRC_DIR = os.path.join(TESTPLUS_TEMPLATES_DIR, "v2", "static")
     TESTPLUS_SUMMARY_TEMPLATE = os.path.join(TESTPLUS_TEMPLATES_DIR, "v2", "testsummary.html")
-    
+
 
 def initialize_testplus_runtime():
     """

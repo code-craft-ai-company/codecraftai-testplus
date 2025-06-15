@@ -1,8 +1,8 @@
 """
     .. module:: cli
-        :platform: Darwin, Linux, Unix, Windows
-        :synopsis: Package containing the command line interface implementation for
-                   the ``testplus`` command.
+    :platform: Darwin, Linux, Unix, Windows
+    :synopsis: Package containing the command line interface implementation for
+    the ``testplus`` command.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
