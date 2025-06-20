@@ -17,7 +17,7 @@ automojo-foundation = {git = "https://github.com/automationmojo/automojo-foundat
 type = "git"
 url = "https://github.com/automationmojo/automojo-credentials.git"
 reference = "main"
-resolved_reference = "70a07e633e332780b0e74f2b2dc6f47eac95e052"
+resolved_reference = "a52339c70021626a9d9c7e8f5f0ba78de5aaa862"
 
 [[package]]
 name = "automojo-dataprofiles"
@@ -38,7 +38,7 @@ automojo-testbase = {git = "https://github.com/automationmojo/automojo-testbase.
 type = "git"
 url = "https://github.com/automationmojo/automojo-dataprofiles.git"
 reference = "main"
-resolved_reference = "5644dd958869ae7519528a8e9f35c0fa41f1637f"
+resolved_reference = "988a15f8bf5320add87a076a39fd6da877ec5238"
 
 [[package]]
 name = "automojo-errors"
@@ -53,7 +53,7 @@ develop = false
 type = "git"
 url = "https://github.com/automationmojo/automojo-errors.git"
 reference = "main"
-resolved_reference = "0f4778d19bea6cf0a9d45c15c13259570e61efb6"
+resolved_reference = "1424cda27ee733391dd0a026db4021103d953e91"
 
 [[package]]
 name = "automojo-foundation"
@@ -75,7 +75,7 @@ pyyaml = "^6.0.2"
 type = "git"
 url = "https://github.com/automationmojo/automojo-foundation.git"
 reference = "main"
-resolved_reference = "366115f03db70505f40dcc8fb8ab7f94aedf5ae4"
+resolved_reference = "45521a79f059e37c5288051468de5b456d533aad"
 
 [[package]]
 name = "automojo-interfaces"
@@ -90,7 +90,7 @@ develop = false
 type = "git"
 url = "https://github.com/automationmojo/automojo-interfaces.git"
 reference = "main"
-resolved_reference = "b4dfb39a110823f5d989656ba45b18fbaac3c14e"
+resolved_reference = "44c6d7d83fcfb0eb2e376622473123faa5fad0cc"
 
 [[package]]
 name = "automojo-interop"
@@ -116,7 +116,7 @@ rpyc = "^6.0.1"
 type = "git"
 url = "https://github.com/automationmojo/automojo-interop.git"
 reference = "main"
-resolved_reference = "c6ce8fbfb35f02722cc74803b03e135e9e344314"
+resolved_reference = "07de02579305276fad8993080cf830885be889be"
 
 [[package]]
 name = "automojo-landscaping"
@@ -142,7 +142,7 @@ automojo-waiting = {git = "https://github.com/automationmojo/automojo-waiting.gi
 type = "git"
 url = "https://github.com/automationmojo/automojo-landscaping.git"
 reference = "main"
-resolved_reference = "d90c377e17c8abdaa32a239c0c0e52dc470c61d2"
+resolved_reference = "7e32a76472b64a5026ad6f8e48e9aa5860bafbca"
 
 [[package]]
 name = "automojo-networking"
@@ -162,7 +162,7 @@ requests = "^2.32.3"
 type = "git"
 url = "https://github.com/automationmojo/automojo-networking.git"
 reference = "main"
-resolved_reference = "564addb8296ac9bb06612f69e67b97cd1e408611"
+resolved_reference = "906444e7c1dadceaef625d32d7cc1aa7e8b1f066"
 
 [[package]]
 name = "automojo-testbase"
@@ -184,7 +184,7 @@ click = "^8.1.8"
 type = "git"
 url = "https://github.com/automationmojo/automojo-testbase.git"
 reference = "main"
-resolved_reference = "b755f46161cd0d5d3a3350e1fbce9ddf12c0ff7b"
+resolved_reference = "239b0f4dafd93909dd3a8a28f3c9f744e72e14e7"
 
 [[package]]
 name = "automojo-waiting"
@@ -199,7 +199,7 @@ develop = false
 type = "git"
 url = "https://github.com/automationmojo/automojo-waiting.git"
 reference = "main"
-resolved_reference = "68d666411e48d99ce183fe11e64e143b1d6472b4"
+resolved_reference = "11a886189ca949a38a09967bc0f17d6fd9ae6b85"
 
 [[package]]
 name = "bcrypt"
@@ -267,13 +267,13 @@ typecheck = ["mypy"]
 
 [[package]]
 name = "certifi"
-version = "2025.4.26"
+version = "2025.6.15"
 description = "Python package for providing Mozilla's CA Bundle."
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 files = [
-    {file = "certifi-2025.4.26-py3-none-any.whl", hash = "sha256:30350364dfe371162649852c63336a15c70c6510c2ad5015b21c2345311805f3"},
-    {file = "certifi-2025.4.26.tar.gz", hash = "sha256:0a816057ea3cdefcef70270d2c515e4506bbc954f417fa5ade2021213bb8f0c6"},
+    {file = "certifi-2025.6.15-py3-none-any.whl", hash = "sha256:2e0c7ce7cb5d8f8634ca55d2ba7e6ec2689a2fd6537d8dec1296a477a4910057"},
+    {file = "certifi-2025.6.15.tar.gz", hash = "sha256:d747aa5a8b9bbbb1bb8c22bb13e22bd1f18e9796defa16bab421f7f7a317323b"},
 ]
 
 [[package]]
@@ -830,13 +830,13 @@ plumbum = "*"
 
 [[package]]
 name = "urllib3"
-version = "2.4.0"
+version = "2.5.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "urllib3-2.4.0-py3-none-any.whl", hash = "sha256:4e16665048960a0900c702d4a66415956a584919c03361cac9f1df5c5dd7e813"},
-    {file = "urllib3-2.4.0.tar.gz", hash = "sha256:414bc6535b787febd7567804cc015fee39daab8ad86268f1310a9250697de466"},
+    {file = "urllib3-2.5.0-py3-none-any.whl", hash = "sha256:e6b01673c0fa6a13e374b50871808eb3bf7046c4b125b216f6bf1cc604cff0dc"},
+    {file = "urllib3-2.5.0.tar.gz", hash = "sha256:3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"},
 ]
 
 [package.extras]
