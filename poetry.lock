@@ -17,7 +17,7 @@ automojo-foundation = {git = "https://github.com/automationmojo/automojo-foundat
 type = "git"
 url = "https://github.com/automationmojo/automojo-credentials.git"
 reference = "main"
-resolved_reference = "8f65da7071bcc097fdbe79be130dffe6252fcca7"
+resolved_reference = "91092c978e3e476cd69795dc3c84b204d1febb22"
 
 [[package]]
 name = "automojo-dataprofiles"
@@ -38,7 +38,7 @@ automojo-testbase = {git = "https://github.com/automationmojo/automojo-testbase.
 type = "git"
 url = "https://github.com/automationmojo/automojo-dataprofiles.git"
 reference = "main"
-resolved_reference = "7c95b6b250dc8dcd5fb770651bbee91b0e6aa4dc"
+resolved_reference = "befda1de07c3c99520e1b35ba6c77bd3c20217db"
 
 [[package]]
 name = "automojo-errors"
@@ -76,7 +76,7 @@ pyyaml = "^6.0.2"
 type = "git"
 url = "https://github.com/automationmojo/automojo-foundation.git"
 reference = "main"
-resolved_reference = "12502903b14b0182e156025794d75886c4b39268"
+resolved_reference = "89e1a2b670afe67ca146026be8771774ea6c0563"
 
 [[package]]
 name = "automojo-interfaces"
@@ -117,7 +117,7 @@ rpyc = "^6.0.1"
 type = "git"
 url = "https://github.com/automationmojo/automojo-interop.git"
 reference = "main"
-resolved_reference = "0a7229570fedf0a8702fec89676ac823d6824da0"
+resolved_reference = "0dcce1bcd55f53802390a01ebe85ffafab7891b9"
 
 [[package]]
 name = "automojo-landscaping"
@@ -143,7 +143,7 @@ automojo-waiting = {git = "https://github.com/automationmojo/automojo-waiting.gi
 type = "git"
 url = "https://github.com/automationmojo/automojo-landscaping.git"
 reference = "main"
-resolved_reference = "e21658b57f70df8ed6b068a7c65a6721174ce762"
+resolved_reference = "40c2d5c0e64c83c0a7f02fef5b4ec2f44fc5a777"
 
 [[package]]
 name = "automojo-networking"
@@ -201,7 +201,7 @@ click = "^8.1.8"
 type = "git"
 url = "https://github.com/automationmojo/automojo-testbase.git"
 reference = "main"
-resolved_reference = "97c0d7b172be67a59e548c5668e58f757395b5b1"
+resolved_reference = "b001086985efccd3bb65be0a6bd6301aa91ec41c"
 
 [[package]]
 name = "automojo-waiting"
