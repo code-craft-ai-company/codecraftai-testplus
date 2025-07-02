@@ -17,7 +17,7 @@ automojo-foundation = {git = "https://github.com/automationmojo/automojo-foundat
 type = "git"
 url = "https://github.com/automationmojo/automojo-credentials.git"
 reference = "main"
-resolved_reference = "91092c978e3e476cd69795dc3c84b204d1febb22"
+resolved_reference = "5363e242fd8af11b0ede573f2a00090605200778"
 
 [[package]]
 name = "automojo-dataprofiles"
@@ -38,7 +38,7 @@ automojo-testbase = {git = "https://github.com/automationmojo/automojo-testbase.
 type = "git"
 url = "https://github.com/automationmojo/automojo-dataprofiles.git"
 reference = "main"
-resolved_reference = "befda1de07c3c99520e1b35ba6c77bd3c20217db"
+resolved_reference = "41dd2a25f719252160e4895b5b20ee60971d30c0"
 
 [[package]]
 name = "automojo-errors"
@@ -76,7 +76,7 @@ pyyaml = "^6.0.2"
 type = "git"
 url = "https://github.com/automationmojo/automojo-foundation.git"
 reference = "main"
-resolved_reference = "89e1a2b670afe67ca146026be8771774ea6c0563"
+resolved_reference = "e12069d943ce6e3f85440ee50a53a667fc9f6233"
 
 [[package]]
 name = "automojo-interfaces"
@@ -117,7 +117,7 @@ rpyc = "^6.0.1"
 type = "git"
 url = "https://github.com/automationmojo/automojo-interop.git"
 reference = "main"
-resolved_reference = "0dcce1bcd55f53802390a01ebe85ffafab7891b9"
+resolved_reference = "6180934ead6f3a121e41623a03fd505dae71b897"
 
 [[package]]
 name = "automojo-landscaping"
@@ -143,7 +143,7 @@ automojo-waiting = {git = "https://github.com/automationmojo/automojo-waiting.gi
 type = "git"
 url = "https://github.com/automationmojo/automojo-landscaping.git"
 reference = "main"
-resolved_reference = "40c2d5c0e64c83c0a7f02fef5b4ec2f44fc5a777"
+resolved_reference = "e9cb9ee1760c233820e42fe50093028883298c47"
 
 [[package]]
 name = "automojo-networking"
@@ -178,7 +178,7 @@ develop = false
 type = "git"
 url = "https://github.com/automationmojo/automojo-presence.git"
 reference = "main"
-resolved_reference = "b2a5144741ce57d0d8d504d0d09fc243ebb3cbb0"
+resolved_reference = "acb18071204876757fa6939e9d9d77a4d25d64f4"
 
 [[package]]
 name = "automojo-testbase"
@@ -201,7 +201,7 @@ click = "^8.1.8"
 type = "git"
 url = "https://github.com/automationmojo/automojo-testbase.git"
 reference = "main"
-resolved_reference = "b001086985efccd3bb65be0a6bd6301aa91ec41c"
+resolved_reference = "0a6b0e2c597c62edbd10fda4b8b6ca0c31a42268"
 
 [[package]]
 name = "automojo-waiting"
