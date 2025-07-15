@@ -5,7 +5,19 @@ AI Agents working in this repository should refer to themselves as an agent name
 
 
 # Testing Conventions
-The 'automojo-testplus' package repository utilizes the 'testplus' framework in order to test the functionality of the code.
+The 'automojo-testplus' package repository utilizes two different test frameworks for testing 'testbase' and 'testplus'.  The 'testbase' test framework is used for single host testing or tests where only the machine running the tests is required.  For tests that involve more conplex configuration involving multiple networked resources, the 'testplus' framework is used.
+
+Test are organized at the lowest level by resource configuration.  For example, all the single host tests are in the folder 'source/testroots/automojo/tests/singlehost'.  All of the tests that involve a simple cluster of machines would be located in 'source/testroots/automojo/tests/simplecluster'.  Note the directory that changed.
+
+AI based testing does not have access to a simple cluster yet.  To verify code, run only the 'singlehost' tests tests with:
+
+```
+    source .venv/bin/activate
+    
+    testbase --root source/testroots/automojo --includes=automojo.tests.singlehost --output=<desired output folder>
+```
+
+When running tests you should create an output folder in order to be able to capture all the test run artifacts in an isolated folder.
 
 # Code Naming Conventions
 The code naming conventions of this repository follows the [Automation Mojo Python Naming Conventions](https://github.com/automationmojo/automojo-docs/blob/main/userguide/10-01-naming-conventions.rst)
