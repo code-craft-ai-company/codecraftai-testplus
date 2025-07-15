@@ -149,7 +149,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
     # STEP 2 - Resolve the configuration variables (Performed by the root command)
 
-    # STEP 3 - Apply any 'Environment' Option Overrides
+    # STEP 3 - Apply any 'Configuration' related option overrides
 
     # We need to default these to 'None' so they do not effect the runtime behavior unless
     # this command explicitly sets them later.
@@ -174,32 +174,6 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
             use_topology = True
 
     from automojo.testbase.markers import MetaFilter, parse_marker_expression
-
-    if branch is not None:
-        AM_RUNTIME_OPTION_OVERRIDES.override_build_branch(branch)
-
-    if build is not None:
-        AM_RUNTIME_OPTION_OVERRIDES.override_build_name(build)
-
-    if flavor is not None:
-        AM_RUNTIME_OPTION_OVERRIDES.override_build_flavor(flavor)
-
-
-    if job_initiator is not None:
-        AM_RUNTIME_OPTION_OVERRIDES.override_job_id(job_id)
-
-    if job_initiator is not None:
-        AM_RUNTIME_OPTION_OVERRIDES.override_job_initiator(job_initiator)
-
-    if job_label is not None:
-        AM_RUNTIME_OPTION_OVERRIDES.override_job_label(job_label)
-
-    if job_name is not None:
-        AM_RUNTIME_OPTION_OVERRIDES.override_job_name(job_name)
-
-    if job_owner is not None:
-        AM_RUNTIME_OPTION_OVERRIDES.override_job_owner(job_owner)
-
 
     if len(credential_files) > 0:
         use_credentials = True
@@ -248,6 +222,49 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     if len(topology_sources) > 0:
         AM_CONFIG_OPTION_OVERRIDES.override_config_topology_sources(topology_sources)
 
+
+    # STEP 4 - Resolve the Configuration Maps
+    from automojo.configuration.configurationmaps import resolve_configuration_maps
+    resolve_configuration_maps(use_credentials=use_credentials, use_landscape=use_landscape,
+                               use_runtime=use_runtime, use_topology=use_topology)
+
+
+    # STEP 5 - The application of the remaining options must happen after we have resolved configuration
+    # maps because some of those settings will get overridden by the options.  So the runtime
+    # needs to be loaded and set first before we apply runtime options 
+
+    ctx = ContextSingleton()
+    if prerun_diagnostic:
+        ctx.insert(ContextPaths.DIAGNOSTICS_PRERUN, {})
+
+    if postrun_diagnostic:
+        ctx.insert(ContextPaths.DIAGNOSTICS_POSTRUN, {})
+
+    if branch is not None:
+        AM_RUNTIME_OPTION_OVERRIDES.override_build_branch(branch)
+
+    if build is not None:
+        AM_RUNTIME_OPTION_OVERRIDES.override_build_name(build)
+
+    if flavor is not None:
+        AM_RUNTIME_OPTION_OVERRIDES.override_build_flavor(flavor)
+
+
+    if job_initiator is not None:
+        AM_RUNTIME_OPTION_OVERRIDES.override_job_id(job_id)
+
+    if job_initiator is not None:
+        AM_RUNTIME_OPTION_OVERRIDES.override_job_initiator(job_initiator)
+
+    if job_label is not None:
+        AM_RUNTIME_OPTION_OVERRIDES.override_job_label(job_label)
+
+    if job_name is not None:
+        AM_RUNTIME_OPTION_OVERRIDES.override_job_name(job_name)
+
+    if job_owner is not None:
+        AM_RUNTIME_OPTION_OVERRIDES.override_job_owner(job_owner)
+
     if console_level is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_loglevel_console(console_level)
 
@@ -273,24 +290,6 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
     if debugger is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_debug_debugger('debugpy')
-
-
-    # STEP 4 - Resolve the Configuration Maps
-    from automojo.configuration.configurationmaps import resolve_configuration_maps
-    resolve_configuration_maps(use_credentials=use_credentials, use_landscape=use_landscape,
-                               use_runtime=use_runtime, use_topology=use_topology)
-
-
-    # STEP 5 - Applying runtime options must happen after we have resolved configuration
-    # maps because some of those settings will get overridden by the options.  So the runtime
-    # needs to be loaded and set first before we apply runtime options    
-
-    ctx = ContextSingleton()
-    if prerun_diagnostic:
-        ctx.insert(ContextPaths.DIAGNOSTICS_PRERUN, {})
-
-    if postrun_diagnostic:
-        ctx.insert(ContextPaths.DIAGNOSTICS_POSTRUN, {})
 
     # TODO: Handle 'root' parameter better
     if root is None:
