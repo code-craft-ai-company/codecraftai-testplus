@@ -18,7 +18,7 @@ from automojo.presence.contextpaths import ContextPaths
 from automojo.presence.wellknown import ContextSingleton
 
 from automojo.runtime.enumerations import ActivationProfile, JobType
-from automojo.runtime.activation import activate_runtime
+from automojo.runtime.activation import activate_profile_job
 
 from automojo.runtime.initialize import initialize_runtime
 
@@ -58,7 +58,7 @@ def initialize_testplus_runtime():
     # Register the testplus default type factory so the default job type will be a distributed test job for
     # any tests run with the 'testplus' command.
     extension_modules = "automojo.testplus.testplusdefaulttypefactory"
-    initialize_runtime(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules)
+    initialize_runtime(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules, log_basename="testrun")
 
     return
 
@@ -87,6 +87,6 @@ def initialize_testplus_results():
     ctx.insert(ContextPaths.DIR_RESULTS_RESOURCE_DEST, AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_DEST_DIR)
     ctx.insert(ContextPaths.FILE_RESULTS_TEMPLATE, AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_SUMMARY_TEMPLATE)
 
-    activate_runtime(profile=ActivationProfile.Job, job_type=JobType.TestRun)
+    activate_profile_job(job_type=JobType.TestRun)
 
     return
