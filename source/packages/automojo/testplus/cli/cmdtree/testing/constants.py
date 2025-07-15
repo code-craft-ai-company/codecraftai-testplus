@@ -13,7 +13,7 @@ __credits__ = []
 
 import os
 
-from automojo.foundation.configuration.normalize import SEPARATOR
+from automojo.configuration.normalize import SEPARATOR
 
 CONFIGURATION_CHOICES = [
     "all",
