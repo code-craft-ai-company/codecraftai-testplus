@@ -17,7 +17,7 @@ import sys
 
 import click
 
-from automojo.foundation.xlogging.levels import LOG_LEVEL_NAMES
+from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
 
 @click.group("jobs", help="Contains commands for working with test jobs.")
 def group_testplus_testing_jobs():
@@ -97,79 +97,90 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     # IMPORTANT: We need to load the context first because it will trigger the loading
     # of the default user configuration
 
-    from automojo.foundation.collections.contextpaths import ContextPaths
-    from automojo.foundation.collections.wellknown import ContextSingleton
+    from automojo.presence.contextpaths import ContextPaths
+    from automojo.presence.wellknown import ContextSingleton
 
-    from automojo.foundation.ximport import import_by_name
-    from automojo.foundation.xpython import prepend_python_path
+    from automojo.xmodules.ximport import import_by_name
+    from automojo.xmodules.xpython import prepend_python_path
 
-    try:
-        ctx = ContextSingleton()
-        ctx.insert(ContextPaths.JOB_TYPE, 'testrun')
+    # STEP 1 - Initialize the Runtime (Performed by the root command)
 
-        test_root = os.path.abspath(os.path.expandvars(os.path.expanduser(root)))
-        if not os.path.isdir(test_root):
-            errmsg = "The specified root folder does not exist. root=%s" % root
-            if test_root != root:
-                errmsg += " expanded=%s" % test_root
-            raise argparse.ArgumentError("--root", errmsg)
+    # STEP 2 - Resolve the configuration variables (Performed by the root command)
 
-        # Make sure we extend PATH to include the test root
-        prepend_python_path(test_root)
+    # STEP 3 - Apply any 'Configuration' related option overrides
 
-        # We perform activation a little later in the testrunner.py file so we can
-        # handle exceptions in the context of testrunner_main function
-        from automojo.foundation.runtime.activation import activate_runtime, ActivationProfile
-        activate_runtime(profile=ActivationProfile.Console)
+    
 
-        from automojo.testplus.initialize import initialize_testplus_results
-        initialize_testplus_results()
+    # STEP 4 - Resolve the Configuration Maps
+    #from automojo.configuration.configurationmaps import resolve_configuration_maps
+    #resolve_configuration_maps(use_credentials=use_credentials, use_landscape=use_landscape,
+    #                           use_runtime=use_runtime, use_topology=use_topology)
+    
+    # STEP 5 - The application of the remaining options must happen after we have resolved configuration
+    # maps because some of those settings will get overridden by the options.  So the runtime
+    # needs to be loaded and set first before we apply runtime options    
 
-        # Initialize logging
-        from automojo.foundation.xlogging.foundations import logging_initialize
-        logging_initialize()
+    # STEP 6 - Initialize the Results Output
 
-        logger = logging.getLogger()
+    # STEP 7 - Create and kick off the job
 
-        tpmod = sys.modules["mojo.testplus"]
-        tpmod.logger = logger
+    ctx = ContextSingleton()
+    ctx.insert(ContextPaths.JOB_TYPE, 'testrun')
 
-        from automojo.foundation.extension.wellknown import ConfiguredSuperFactorySingleton
-        from automojo.testbase.extensionprotocols import TestBaseExtensionProtocol
+    test_root = os.path.abspath(os.path.expandvars(os.path.expanduser(root)))
+    if not os.path.isdir(test_root):
+        errmsg = "The specified root folder does not exist. root=%s" % root
+        if test_root != root:
+            errmsg += " expanded=%s" % test_root
+        raise argparse.ArgumentError("--root", errmsg)
 
-        # At this point in the code, we either lookup an existing test job or we create a test job
-        # from the includes, excludes or test_module
-        sfactory = ConfiguredSuperFactorySingleton()
-        TestJobType = sfactory.get_override_types_by_order(TestBaseExtensionProtocol.get_testbase_default_job_type)
+    # Make sure we extend PATH to include the test root
+    prepend_python_path(test_root)
 
-        if job is not None:
-            job_parts = job.split("@")
-            if len(job_parts) != 2:
-                errmsg = "A --job parameter must be of the form 'package.module@JobClass'"
-                raise click.UsageError(errmsg)
+    # Activation of the runtime happens when we initialize test results
+    from automojo.testplus.initialize import initialize_testplus_results
+    initialize_testplus_results()
 
-            job_package, job_class = job_parts
+    logger = logging.getLogger()
 
-            try:
-                job_mod = import_by_name(job_package)
-            except ImportError as imperr:
-                errmsg = "Failure while importing job package %r"  % job_package
-                raise argparse.ArgumentError("--job", errmsg) from imperr
+    tpmod = sys.modules["mojo.testplus"]
+    tpmod.logger = logger
 
-            if not hasattr(job_mod, job_class):
-                errmsg = "The job package %r does not have a job type %r." % (job_package, job_class)
-                raise argparse.ArgumentError("--job", errmsg)
+    from automojo.presence.wellknown import ConfiguredSuperFactorySingleton
+    from automojo.testbase.extensionprotocols import TestBaseExtensionProtocol
 
-            TestJobType = getattr(job_mod, job_class)
+    # At this point in the code, we either lookup an existing test job or we create a test job
+    # from the includes, excludes or test_module
+    sfactory = ConfiguredSuperFactorySingleton()
+    TestJobType = sfactory.get_override_types_by_order(TestBaseExtensionProtocol.get_testbase_default_job_type)
 
-        result_code = 0
-        with TestJobType(logger, test_root) as tjob:
-            result_code = tjob.execute()
+    if job is not None:
+        job_parts = job.split("@")
+        if len(job_parts) != 2:
+            errmsg = "A --job parameter must be of the form 'package.module@JobClass'"
+            raise click.UsageError(errmsg)
 
-        sys.exit(result_code)
+        job_package, job_class = job_parts
 
-    finally:
-        pass
+        try:
+            job_mod = import_by_name(job_package)
+        except ImportError as imperr:
+            errmsg = "Failure while importing job package %r"  % job_package
+            raise argparse.ArgumentError("--job", errmsg) from imperr
+
+        if not hasattr(job_mod, job_class):
+            errmsg = "The job package %r does not have a job type %r." % (job_package, job_class)
+            raise argparse.ArgumentError("--job", errmsg)
+
+        TestJobType = getattr(job_mod, job_class)
+
+    result_code = 0
+    with TestJobType(logger, test_root) as tjob:
+        result_code = tjob.execute()
+
+    sys.exit(result_code)
+
+
 
     return
 

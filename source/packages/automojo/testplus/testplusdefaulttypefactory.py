@@ -14,14 +14,14 @@ __credits__ = []
 
 from typing import Type
 
-from automojo.foundation.extension.extensionfactory import ExtensionFactory
+from automojo.extension.factory.factoryextension import FactoryExtension
 
 from automojo.testbase.extensionprotocols import TestBaseExtensionProtocol
 from automojo.testbase.testjob import TestJob
 
 from automojo.testplus.distributedtestjob import DistributedTestJob
 
-class TestPlusDefaultTypeFactory(ExtensionFactory, TestBaseExtensionProtocol):
+class TestPlusDefaultTypeFactory(FactoryExtension, TestBaseExtensionProtocol):
     """
         Provides the default implementations used by TestPlus.
 

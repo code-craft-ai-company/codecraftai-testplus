@@ -15,26 +15,26 @@ __credits__ = []
 
 from typing import List, Optional
 
-import yaml
 import os
 import traceback
 
-from automojo.foundation.collections.contextuser import ContextUser
-from automojo.foundation.collections.contextpaths import ContextPaths
+from automojo.xmodules.xcollections.contextuser import ContextUser
+from automojo.presence.contextpaths import ContextPaths
 
-from automojo.foundation.configuration.configurationmaps import CONFIGURATION_MAPS
+from automojo.xmodules.xformatting import CommandOutputFormat
+from automojo.xmodules.debugging import debugger_wellknown_breakpoint_entry
 
-from automojo.foundation.xformatting import CommandOutputFormat
-from automojo.foundation.xdebugger import WELLKNOWN_BREAKPOINTS, debugger_wellknown_breakpoint_entry
+from automojo.presence.wellknown import ContextSingleton
 
-from automojo.foundation.runtime.runtimevariables import AM_RUNTIME_VARIABLES
-from automojo.foundation.runtime.paths import (
+from automojo.runtime.runtimevariables import AM_RUNTIME_VARIABLES
+from automojo.runtime.paths import (
     get_summary_html_template_source,
     get_summary_static_resource_dest_dir,
     get_summary_static_resource_src_dir,
     get_path_for_testresults
 )
 
+from automojo.testbase.breakpoints import WELLKNOWN_BREAKPOINTS
 from automojo.testbase.results.model.buildinfo import BuildInfo
 from automojo.testbase.results.model.jobinfo import JobInfo
 from automojo.testbase.results.model.pipelineinfo import PipelineInfo
@@ -205,7 +205,12 @@ class DistributedTestJob(ContextUser):
             # ordering of these steps ensures that the correct things are happening in the correct
             # order in the automation code and that we provide the ability for configuration
             # issues to be discovered as early as possible.
-            debugger_wellknown_breakpoint_entry(WELLKNOWN_BREAKPOINTS.TEST_DISCOVERY)
+            ctx = ContextSingleton()
+
+            debugger_name = ctx.lookup(ContextPaths.DEBUG_DEBUGGER)
+            configured_breakpoints = ctx.lookup(ContextPaths.DEBUG_BREAKPOINTS)
+            if debugger_name is not None and configured_breakpoints is not None:
+                debugger_wellknown_breakpoint_entry(WELLKNOWN_BREAKPOINTS.TEST_DISCOVERY)
 
             # STEP 1: We discover the tests first so we can build a listing of the
             # Integration and Scope couplings.  We don't want to execute any test code, setup,

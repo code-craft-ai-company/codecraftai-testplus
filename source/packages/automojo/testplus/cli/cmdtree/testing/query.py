@@ -55,28 +55,29 @@ def command_testplus_testing_query(root, includes, excludes,
     # IMPORTANT: We need to load the context first because it will trigger the loading
     # of the default user configuration
 
-    from automojo.foundation.collections.contextpaths import ContextPaths
-    from automojo.foundation.collections.wellknown import ContextSingleton
+    from automojo.presence.contextpaths import ContextPaths
+    from automojo.presence.wellknown import ContextSingleton
 
-    from automojo.foundation.xpython import prepend_python_path
+    from automojo.xmodules.xpython import prepend_python_path
 
-    from automojo.foundation.runtime.activation import activate_runtime, ActivationProfile
-    from automojo.foundation.runtime.runtimevariables import AM_RUNTIME_VARIABLES
+    from automojo.runtime.activation import activate_runtime, ActivationProfile
+    from automojo.runtime.runtimevariables import AM_RUNTIME_VARIABLES
 
     # STEP 2 - Resolve the configuration variables (performed by the root command)
 
-    # STEP 3 - Activate the runtime for the given activation class
-
-    # We perform activation a little later in the testrunner.py file so we can
-    # handle exceptions in the context of testrunner_main function
-    activate_runtime(profile=ActivationProfile.Console)
+    # STEP 3 - Apply the configuration related options
 
     ctx = ContextSingleton()
     env = ctx.lookup("/environment")
 
-    # STEP 4 - Apply any Option Overrides
+    # STEP 4 - Resolve the Configuration Maps
+    from automojo.configuration.configurationmaps import resolve_configuration_maps
+    resolve_configuration_maps(use_credentials=False, use_landscape=False,
+                               use_runtime=False, use_topology=False)
 
-    from automojo.foundation.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
+    # STEP 5 - Apply any Option Overrides
+
+    from automojo.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
 
     from automojo.testbase.markers import MetaFilter, parse_marker_expression
 
@@ -98,10 +99,6 @@ def command_testplus_testing_query(root, includes, excludes,
 
     AM_RUNTIME_OPTION_OVERRIDES.override_testroot(root)
 
-    from automojo.testplus.initialize import initialize_testplus_results
-
-    initialize_testplus_results()
-
     # Make sure we extend PATH to include the test roots parent folder so imports will
     # work properly.
     test_root_parent = os.path.dirname(test_root)
@@ -120,15 +117,20 @@ def command_testplus_testing_query(root, includes, excludes,
         mfilter = parse_marker_expression("-" + imexp)
         metafilters.append(mfilter)
 
-    # STEP 6 - Resolve the Configuration Maps
+    
+    # STEP 6 - Initialize the Results Output
 
-    from automojo.foundation.configuration.configurationmaps import resolve_configuration_maps
-    resolve_configuration_maps(use_credentials=False, use_landscape=False,
-                               use_runtime=False, use_topology=False)
+    # Initialize testplus results and logging
+    from automojo.testplus.initialize import initialize_testplus_results
+
+    initialize_testplus_results()
+
+
+    # STEP 7 - Kick off the query
 
     logger = logging.getLogger()
 
-    from automojo.foundation.extension.wellknown import ConfiguredSuperFactorySingleton
+    from automojo.presence.wellknown import ConfiguredSuperFactorySingleton
     from automojo.testbase.extensionprotocols import TestBaseExtensionProtocol
 
     sfactory = ConfiguredSuperFactorySingleton()

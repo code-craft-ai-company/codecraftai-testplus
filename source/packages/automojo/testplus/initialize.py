@@ -14,14 +14,15 @@ __credits__ = []
 
 import os
 
-from automojo.foundation.collections.contextpaths import ContextPaths
-from automojo.foundation.collections.wellknown import ContextSingleton
+from automojo.presence.contextpaths import ContextPaths
+from automojo.presence.wellknown import ContextSingleton
 
-from automojo.foundation.xlogging.foundations import logging_initialize
+from automojo.runtime.enumerations import ActivationProfile, JobType
+from automojo.runtime.activation import activate_runtime
 
-from automojo.foundation.configuration.initialize import initialize_configuration, AM_CONFIGURATION_STATE
+from automojo.runtime.initialize import initialize_runtime
 
-from automojo.foundation.runtime.runtimevariables import AM_RUNTIME_VARIABLES
+from automojo.runtime.runtimevariables import AM_RUNTIME_VARIABLES
 
 from automojo import testbase
 
@@ -51,14 +52,13 @@ def initialize_testplus_runtime():
         :returns: ``None``
     """
 
-    if not AM_CONFIGURATION_STATE.INITIALIZED:
-        name="automojo"
-        home_dir = os.path.join(os.path.expanduser("~"), name)
+    name="automojo"
+    home_dir = os.path.join(os.path.expanduser("~"), name)
 
-        # Register the testplus default type factory so the default job type will be a distributed test job for
-        # any tests run with the 'testplus' command.
-        extension_modules = "automojo.testplus.testplusdefaulttypefactory"
-        initialize_configuration(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules)
+    # Register the testplus default type factory so the default job type will be a distributed test job for
+    # any tests run with the 'testplus' command.
+    extension_modules = "automojo.testplus.testplusdefaulttypefactory"
+    initialize_runtime(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules)
 
     return
 
@@ -87,6 +87,6 @@ def initialize_testplus_results():
     ctx.insert(ContextPaths.DIR_RESULTS_RESOURCE_DEST, AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_DEST_DIR)
     ctx.insert(ContextPaths.FILE_RESULTS_TEMPLATE, AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_SUMMARY_TEMPLATE)
 
-    logging_initialize()
+    activate_runtime(ActivationProfile.Job, JobType.TestRun)
 
     return

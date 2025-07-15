@@ -20,7 +20,7 @@ import sys
 import click
 
 from automojo.interfaces.itestjob import ITestJob
-from automojo.foundation.xlogging.levels import LOG_LEVEL_NAMES
+from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
 
 from automojo.testbase.cli.cmdtree.testing.constants import (
     HELP_ROOT,
@@ -135,28 +135,21 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     # IMPORTANT: We need to load the context first because it will trigger the loading
     # of the default user configuration
 
-    from automojo.foundation.collections.contextpaths import ContextPaths
-    from automojo.foundation.collections.wellknown import ContextSingleton
+    from automojo.presence.contextpaths import ContextPaths
+    from automojo.presence.wellknown import ContextSingleton
 
-    from automojo.foundation.xpython import prepend_python_path
+    from automojo.xmodules.xpython import prepend_python_path
 
-    from automojo.foundation.runtime.activation import activate_runtime, ActivationProfile
-    from automojo.foundation.runtime.runtimevariables import AM_RUNTIME_VARIABLES
+    from automojo.runtime.runtimevariables import AM_RUNTIME_VARIABLES
 
-    from automojo.foundation.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
-    from automojo.foundation.configuration.optionoverrides import AM_CONFIG_OPTION_OVERRIDES
+    from automojo.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
+    from automojo.configuration.optionoverrides import AM_CONFIG_OPTION_OVERRIDES
 
     # STEP 1 - Initialize the Runtime (Performed by the root command)
 
     # STEP 2 - Resolve the configuration variables (Performed by the root command)
 
-    # STEP 3 - Activate the runtime for the given activation class (Could be done by a parent command or self)
-    activate_runtime(profile=ActivationProfile.TestRun)
-
-    ctx = ContextSingleton()
-
-
-    # STEP 4 - Apply any 'Environment' Option Overrides
+    # STEP 3 - Apply any 'Environment' Option Overrides
 
     # We need to default these to 'None' so they do not effect the runtime behavior unless
     # this command explicitly sets them later.
@@ -270,19 +263,6 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     if runid is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_run_id(runid)
 
-
-    # STEP 5 - Resolve the Configuration Maps
-    from automojo.foundation.configuration.configurationmaps import resolve_configuration_maps
-    resolve_configuration_maps(use_credentials=use_credentials, use_landscape=use_landscape,
-                               use_runtime=use_runtime, use_topology=use_topology)
-
-
-    # STEP 6 - Applying runtime options must happen after we have resolved configuration
-    # maps because some of those settings will get overridden by the options.  So the runtime
-    # needs to be loaded and set first before we apply runtime options
-
-    # Process the commandline args here and then set the variables on the environment
-    # as necessary.  We need to do this before we import activate.
     if breakpoints is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_debug_breakpoints(breakpoints)
 
@@ -294,12 +274,25 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     if debugger is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_debug_debugger('debugpy')
 
+
+    # STEP 4 - Resolve the Configuration Maps
+    from automojo.configuration.configurationmaps import resolve_configuration_maps
+    resolve_configuration_maps(use_credentials=use_credentials, use_landscape=use_landscape,
+                               use_runtime=use_runtime, use_topology=use_topology)
+
+
+    # STEP 5 - Applying runtime options must happen after we have resolved configuration
+    # maps because some of those settings will get overridden by the options.  So the runtime
+    # needs to be loaded and set first before we apply runtime options    
+
+    ctx = ContextSingleton()
     if prerun_diagnostic:
         ctx.insert(ContextPaths.DIAGNOSTICS_PRERUN, {})
 
     if postrun_diagnostic:
         ctx.insert(ContextPaths.DIAGNOSTICS_POSTRUN, {})
 
+    # TODO: Handle 'root' parameter better
     if root is None:
         if AM_RUNTIME_VARIABLES.AM_TESTROOT is not None:
             root = AM_RUNTIME_VARIABLES.AM_TESTROOT
@@ -336,7 +329,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
         metafilters.append(mfilter)
 
 
-    # STEP 7 - Initialize the Results Output
+    # STEP 6 - Initialize the Results Output
 
     # Initialize testplus results and logging
     from automojo.testplus.initialize import initialize_testplus_results
@@ -346,9 +339,9 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     logger = logging.getLogger()
 
 
-    # STEP 8 - Create and kick off the job
+    # STEP 7 - Create and kick off the job
 
-    from automojo.foundation.extension.wellknown import ConfiguredSuperFactorySingleton
+    from automojo.presence.wellknown import ConfiguredSuperFactorySingleton
     from automojo.testbase.extensionprotocols import TestBaseExtensionProtocol
 
     # At this point in the code, we either lookup an existing test job or we create a test job

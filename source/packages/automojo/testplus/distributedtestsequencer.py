@@ -20,7 +20,7 @@ import json
 import os
 import sys
 
-from automojo.foundation.runtime.paths import get_path_for_output
+from automojo.runtime.paths import get_path_for_output
 
 from automojo.testbase.coupling.integrationcoupling import IntegrationCoupling
 from automojo.testbase.markers import MetaFilter
