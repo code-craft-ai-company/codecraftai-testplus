@@ -16,12 +16,12 @@ from typing import Type
 
 from automojo.extension.factory.factoryextension import FactoryExtension
 
-from automojo.testbase.extensionprotocols import TestBaseExtensionProtocol
+from automojo.testbase.factoryprotocols import TestBaseFactoryProtocol
 from automojo.testbase.testjob import TestJob
 
 from automojo.testplus.distributedtestjob import DistributedTestJob
 
-class TestPlusDefaultTypeFactory(FactoryExtension, TestBaseExtensionProtocol):
+class TestPlusDefaultTypeFactory(FactoryExtension, TestBaseFactoryProtocol):
     """
         Provides the default implementations used by TestPlus.
 
