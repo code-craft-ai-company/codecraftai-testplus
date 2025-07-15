@@ -49,13 +49,14 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
     from automojo.testplus.initialize import initialize_testplus_runtime, initialize_testplus_results
     initialize_testplus_runtime()
 
-    from automojo.foundation.runtime.activation import activate_runtime, ActivationProfile
+    from automojo.runtime.enumerations import ActivationProfile, JobType
+    from automojo.runtime.activation import activate_runtime
 
-    activate_runtime(profile=ActivationProfile.TestRun)
+    activate_runtime(ActivationProfile.Job, JobType.TestRun)
 
     # Test job types that inherit from 'DistributedTestJob' can set the requires_credentials, requires_landscape, requires_topology,
     # and requires_runtime to indicate that the test framework must load the appropriate configuration maps.
-    from automojo.foundation.configuration.configurationmaps import resolve_configuration_maps
+    from automojo.configuration.configurationmaps import resolve_configuration_maps
     resolve_configuration_maps(use_credentials=job_type.requires_credentials, use_landscape=job_type.requires_landscape,
                                use_runtime=job_type.requires_runtime, use_topology=job_type.requires_topology)
 
