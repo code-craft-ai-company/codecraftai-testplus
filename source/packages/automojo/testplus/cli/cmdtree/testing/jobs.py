@@ -18,6 +18,7 @@ import sys
 import click
 
 from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
+from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 
 @click.group("jobs", help="Contains commands for working with test jobs.")
 def group_testplus_testing_jobs():
@@ -141,7 +142,7 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     from automojo.testplus.initialize import initialize_testplus_results
     initialize_testplus_results()
 
-    logger = logging.getLogger()
+    logger = getEnhancedLogger()
 
     tpmod = sys.modules["mojo.testplus"]
     tpmod.logger = logger

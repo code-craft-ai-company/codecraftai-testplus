@@ -18,6 +18,7 @@ from typing import Optional, Type
 import argparse
 import inspect
 import logging
+from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 import os
 import sys
 
@@ -63,7 +64,7 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
     # Initialize test results and also logging
     initialize_testplus_results()
 
-    logger = logging.getLogger()
+    logger = getEnhancedLogger()
 
     # We must exit with a result code, initialize it to 0 here
     result_code = 0
