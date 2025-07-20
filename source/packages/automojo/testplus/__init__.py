@@ -13,9 +13,11 @@ __copyright__ = "Copyright 2025, Automation Mojo LLC"
 __credits__ = []
 
 
-from logging import Logger, getLogger
-
-logger: Logger = getLogger()
+from automojo.xmodules.xlogging.enhancedloggers import (
+    EnhancedLogger,
+    getEnhancedLogger
+)
+logger: EnhancedLogger = getEnhancedLogger()
 
 
 from automojo.testbase.declaration import registrations as register

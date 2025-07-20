@@ -21,6 +21,7 @@ import click
 
 from automojo.interfaces.itestjob import ITestJob
 from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
+from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 
 from automojo.testbase.cli.cmdtree.testing.constants import (
     HELP_ROOT,
@@ -335,7 +336,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
     initialize_testplus_results()
 
-    logger = logging.getLogger()
+    logger = getEnhancedLogger()
 
 
     # STEP 7 - Create and kick off the job

@@ -15,6 +15,7 @@ __credits__ = []
 from typing import List
 
 import logging
+from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 import os
 import sys
 
@@ -128,7 +129,7 @@ def command_testplus_testing_query(root, includes, excludes,
 
     # STEP 7 - Kick off the query
 
-    logger = logging.getLogger()
+    logger = getEnhancedLogger()
 
     from automojo.presence.wellknown import ConfiguredSuperFactorySingleton
     from automojo.testbase.extensionprotocols import TestBaseExtensionProtocol
