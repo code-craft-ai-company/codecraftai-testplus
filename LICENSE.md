@@ -1,7 +1,7 @@
 # Automation Mojo - Dual License - Software Services Agency License
 Version 1.0, November 2024
 
-Copyright (C) 2024, Automation Mojo LLC
+Copyright (C) 2025, Automation Mojo LLC
 
 Everyone is permitted to copy and distribute verbatim copies of *This License* document, but changing it is not allowed.
 
