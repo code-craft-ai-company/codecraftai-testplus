@@ -24,7 +24,7 @@ pymongo = ["pymongo (>=4.13.2,<5.0.0)"]
 type = "git"
 url = "https://github.com/automationmojo/automojo-configuration.git"
 reference = "main"
-resolved_reference = "4be86a87cd1bdbda5dc1f27b9930cb89ad50e800"
+resolved_reference = "d7186d8e8245973f61b7b50b09204850cadaf90b"
 
 [[package]]
 name = "automojo-credentials"
@@ -44,7 +44,7 @@ automojo-xmodules = {git = "https://github.com/automationmojo/automojo-xmodules.
 type = "git"
 url = "https://github.com/automationmojo/automojo-credentials.git"
 reference = "main"
-resolved_reference = "4fa53e70eec1098a15725ed5bb01c7ea4e11d551"
+resolved_reference = "610f166165e7651365cf7212c97c76d36b50e0dd"
 
 [[package]]
 name = "automojo-dataprofiles"
@@ -65,7 +65,7 @@ automojo-xmodules = {git = "https://github.com/automationmojo/automojo-xmodules.
 type = "git"
 url = "https://github.com/automationmojo/automojo-dataprofiles.git"
 reference = "main"
-resolved_reference = "fadd308e4535ae7e7967b970b37fcd4a5ccd50b9"
+resolved_reference = "6f191fb1baed7efa13f0ee1134bb889d5a318049"
 
 [[package]]
 name = "automojo-errors"
@@ -137,7 +137,7 @@ rpyc = "^6.0.1"
 type = "git"
 url = "https://github.com/automationmojo/automojo-interop.git"
 reference = "main"
-resolved_reference = "c2bffecc55c3bf2e1d7d4d5f098a107b19ea10fe"
+resolved_reference = "6bf662d845421ab0fbb7a53232f6a7d660165810"
 
 [[package]]
 name = "automojo-landscaping"
@@ -162,7 +162,7 @@ automojo-waiting = {git = "https://github.com/automationmojo/automojo-waiting.gi
 type = "git"
 url = "https://github.com/automationmojo/automojo-landscaping.git"
 reference = "main"
-resolved_reference = "445f2dde0f4c8f68d22f4739e5035ac36db11c04"
+resolved_reference = "894a78b183dae4e7c0bfd9fe6338e20eb61b8ccd"
 
 [[package]]
 name = "automojo-networking"
@@ -182,7 +182,7 @@ requests = "^2.32.3"
 type = "git"
 url = "https://github.com/automationmojo/automojo-networking.git"
 reference = "main"
-resolved_reference = "947a0374a5adaf4d0f87aae9f83372888570df23"
+resolved_reference = "13fa0ff43c7b2d6b02eca409cf1d2dd9234dcce3"
 
 [[package]]
 name = "automojo-presence"
@@ -202,7 +202,7 @@ automojo-xmodules = {git = "https://github.com/automationmojo/automojo-xmodules.
 type = "git"
 url = "https://github.com/automationmojo/automojo-presence.git"
 reference = "main"
-resolved_reference = "0c6e73d212ab6fc4c9b90e3cf0076577f077defc"
+resolved_reference = "06a73d4eedfd2c15337cbd95dd6d73eca600d5d7"
 
 [[package]]
 name = "automojo-runtime"
@@ -225,7 +225,7 @@ debugpy = "^1.8.12"
 type = "git"
 url = "https://github.com/automationmojo/automojo-runtime.git"
 reference = "main"
-resolved_reference = "2d633d862242d220f358236d3cb6fbc1aff60ebc"
+resolved_reference = "e1c0d5dc07c10c79c957583cd738a33b838e2e9c"
 
 [[package]]
 name = "automojo-testbase"
@@ -250,7 +250,7 @@ click = "^8.1.8"
 type = "git"
 url = "https://github.com/automationmojo/automojo-testbase.git"
 reference = "main"
-resolved_reference = "92f435e6be3756d29ef116f87477d2cfde99d0f1"
+resolved_reference = "e4be7a9fb89b6b505a372c7b838c04110bb596c6"
 
 [[package]]
 name = "automojo-waiting"
@@ -285,7 +285,7 @@ debugpy = "^1.8.14"
 type = "git"
 url = "https://github.com/automationmojo/automojo-xmodules.git"
 reference = "main"
-resolved_reference = "0c0f404da06e1102ce2fbb9ce4f39141108c52c7"
+resolved_reference = "e6dc24e1449ff1bdbf24ede6e4012a59741116fd"
 
 [[package]]
 name = "bcrypt"
