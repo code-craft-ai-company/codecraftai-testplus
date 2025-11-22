@@ -58,6 +58,7 @@ def initialize_testplus_runtime():
     # Register the testplus default type factory so the default job type will be a distributed test job for
     # any tests run with the 'testplus' command.
     extension_modules = "automojo.testplus.testplusdefaulttypefactory"
+    
     initialize_runtime(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules, log_basename="testrun")
 
     return

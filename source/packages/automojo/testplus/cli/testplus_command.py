@@ -46,6 +46,7 @@ def testplus_root_command(verbose):
             AM_RUNTIME_VARIABLES.AM_LOG_LEVEL_CONSOLE = "NOTSET"
 
     from automojo.testplus.initialize import initialize_testplus_runtime
+    
     initialize_testplus_runtime()
 
     return
