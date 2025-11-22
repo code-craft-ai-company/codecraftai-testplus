@@ -23,7 +23,7 @@
                 "testing",
                 "run",
                 "--root=${workspaceFolder}/source/testroots/automojo",
-                "--includes=automojo.tests.singlehost",
+                "--includes=automojo.tests.testplus.singlehost",
                 "--default-configs=credentials",
                 "--landscape-name=casey-landscape",
                 "--breakpoint=testrun-start"

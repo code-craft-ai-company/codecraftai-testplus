@@ -210,7 +210,7 @@ class DistributedTestJob(ContextUser):
             debugger_name = ctx.lookup(ContextPaths.DEBUG_DEBUGGER)
             configured_breakpoints = ctx.lookup(ContextPaths.DEBUG_BREAKPOINTS)
             if debugger_name is not None and configured_breakpoints is not None:
-                debugger_wellknown_breakpoint_entry(WELLKNOWN_BREAKPOINTS.TEST_DISCOVERY)
+                debugger_wellknown_breakpoint_entry(debugger_name, WELLKNOWN_BREAKPOINTS.TEST_DISCOVERY, configured_breakpoints)
 
             # STEP 1: We discover the tests first so we can build a listing of the
             # Integration and Scope couplings.  We don't want to execute any test code, setup,
