@@ -148,12 +148,12 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     tpmod.logger = logger
 
     from automojo.presence.wellknown import ConfiguredSuperFactorySingleton
-    from automojo.testbase.extensionprotocols import TestBaseExtensionProtocol
+    from automojo.testbase.extensionprotocols import TestBaseFactoryProtocol
 
     # At this point in the code, we either lookup an existing test job or we create a test job
     # from the includes, excludes or test_module
     sfactory = ConfiguredSuperFactorySingleton()
-    TestJobType = sfactory.get_override_types_by_order(TestBaseExtensionProtocol.get_testbase_default_job_type)
+    TestJobType = sfactory.get_override_types_by_order(TestBaseFactoryProtocol.get_testbase_default_job_type)
 
     if job is not None:
         job_parts = job.split("@")

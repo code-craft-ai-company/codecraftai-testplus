@@ -342,12 +342,12 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     # STEP 7 - Create and kick off the job
 
     from automojo.presence.wellknown import ConfiguredSuperFactorySingleton
-    from automojo.testbase.extensionprotocols import TestBaseExtensionProtocol
+    from automojo.testbase.factoryprotocols import TestBaseFactoryProtocol
 
     # At this point in the code, we either lookup an existing test job or we create a test job
     # from the includes, excludes or test_module
     sfactory = ConfiguredSuperFactorySingleton()
-    TestJobType = sfactory.get_override_types_by_order(TestBaseExtensionProtocol.get_testbase_default_job_type)
+    TestJobType = sfactory.get_override_types_by_order(TestBaseFactoryProtocol.get_testbase_default_job_type)
 
     tjob: ITestJob
 

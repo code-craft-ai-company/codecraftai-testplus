@@ -132,10 +132,10 @@ def command_testplus_testing_query(root, includes, excludes,
     logger = getEnhancedLogger()
 
     from automojo.presence.wellknown import ConfiguredSuperFactorySingleton
-    from automojo.testbase.extensionprotocols import TestBaseExtensionProtocol
+    from automojo.testbase.extensionprotocols import TestBaseFactoryProtocol
 
     sfactory = ConfiguredSuperFactorySingleton()
-    TestJobType = sfactory.get_override_types_by_order(TestBaseExtensionProtocol.get_testplus_default_job_type)
+    TestJobType = sfactory.get_override_types_by_order(TestBaseFactoryProtocol.get_testplus_default_job_type)
 
     # At this point in the code, we either lookup an existing test job or we create a test job
     # from the includes, excludes or test_module
