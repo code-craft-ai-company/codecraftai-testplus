@@ -95,7 +95,7 @@ develop = false
 type = "git"
 url = "https://github.com/automationmojo/automojo-extension.git"
 reference = "main"
-resolved_reference = "29bb2b3b20ed4e0639fad75a6db65177be866960"
+resolved_reference = "628eedf1422015cfaec9c578fc331bf76c2c202d"
 
 [[package]]
 name = "automojo-interfaces"
@@ -162,7 +162,7 @@ automojo-waiting = {git = "https://github.com/automationmojo/automojo-waiting.gi
 type = "git"
 url = "https://github.com/automationmojo/automojo-landscaping.git"
 reference = "main"
-resolved_reference = "894a78b183dae4e7c0bfd9fe6338e20eb61b8ccd"
+resolved_reference = "ce72ab06372b0d0959a4755a50147ee35faaf447"
 
 [[package]]
 name = "automojo-networking"
@@ -250,7 +250,7 @@ click = "^8.1.8"
 type = "git"
 url = "https://github.com/automationmojo/automojo-testbase.git"
 reference = "main"
-resolved_reference = "e4be7a9fb89b6b505a372c7b838c04110bb596c6"
+resolved_reference = "5480075daca7b496744ac7ad5f86ae2caed81151"
 
 [[package]]
 name = "automojo-waiting"
