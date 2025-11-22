@@ -55,6 +55,6 @@ jobs:
         run: |
           source ./.venv/bin/activate
     
-          testbase testing run --root=./source/testroots/automojo --includes=automojo.tests.testlab.singlehost
+          testbase testing run --root=./source/testroots/automojo --includes=automojo.tests.testplus.singlehost
 
           deactivate
