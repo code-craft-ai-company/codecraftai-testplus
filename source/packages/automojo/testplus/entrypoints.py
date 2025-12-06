@@ -22,11 +22,12 @@ from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 import os
 import sys
 
-
-from automojo.presence.wellknown import ContextSingleton
-from automojo.runtime.paths import get_path_for_testresults
 from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
 from automojo.xmodules.ximport import import_by_name
+
+from automojo.thisapp.wellknown import ThisApplicationSingleton
+
+from automojo.runtime.paths import get_path_for_testresults
 
 from automojo.testbase.injection.injectionregistry import InjectionRegistry
 
@@ -50,10 +51,10 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
     from automojo.testplus.initialize import initialize_testplus_runtime, initialize_testplus_results
     initialize_testplus_runtime()
 
-    from automojo.runtime.enumerations import ActivationProfile, JobType
-    from automojo.runtime.activation import activate_runtime
+    from automojo.runtime.enumerations import JobType
+    from automojo.runtime.activation import activate_profile_job
 
-    activate_runtime(ActivationProfile.Job, JobType.TestRun)
+    activate_profile_job(JobType.TestRun)
 
     # Test job types that inherit from 'DistributedTestJob' can set the requires_credentials, requires_landscape, requires_topology,
     # and requires_runtime to indicate that the test framework must load the appropriate configuration maps.
@@ -78,8 +79,8 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
 
     test_module = sys.modules["__main__"]
 
-    ctx = ContextSingleton()
-    env = ctx.lookup("/environment")
+    this_app = ThisApplicationSingleton()
+    env = this_app.context.lookup("/environment")
 
     # Set the jobtype
     env["jobtype"] = "testrun"

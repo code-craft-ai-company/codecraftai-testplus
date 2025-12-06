@@ -56,20 +56,19 @@ def command_testplus_testing_query(root, includes, excludes,
     # IMPORTANT: We need to load the context first because it will trigger the loading
     # of the default user configuration
 
-    from automojo.presence.contextpaths import ContextPaths
-    from automojo.presence.wellknown import ContextSingleton
+    from automojo.thisapp.contextpaths import ContextPaths
+    from automojo.thisapp.wellknown import ThisApplicationSingleton
 
     from automojo.xmodules.xpython import prepend_python_path
 
     from automojo.runtime.activation import activate_runtime, ActivationProfile
-    from automojo.runtime.runtimevariables import AM_RUNTIME_VARIABLES
+    from automojo.runtime.runtimevariables import RuntimeVariables
 
     # STEP 2 - Resolve the configuration variables (performed by the root command)
 
     # STEP 3 - Apply the configuration related options
 
-    ctx = ContextSingleton()
-    env = ctx.lookup("/environment")
+    this_app = ThisApplicationSingleton()
 
     # STEP 4 - Resolve the Configuration Maps
     from automojo.configuration.configurationmaps import resolve_configuration_maps
@@ -84,10 +83,8 @@ def command_testplus_testing_query(root, includes, excludes,
 
     # Setup the Test Root
     if root is None:
-        if AM_RUNTIME_VARIABLES.AM_TESTROOT is not None:
-            root = AM_RUNTIME_VARIABLES.AM_TESTROOT
-        elif ctx.lookup(ContextPaths.TESTROOT) is not None:
-            root = ctx.lookup(ContextPaths.TESTROOT)
+        if RuntimeVariables.AM_TESTROOT is not None:
+            root = RuntimeVariables.AM_TESTROOT
         else:
             root = "."
 
@@ -131,11 +128,11 @@ def command_testplus_testing_query(root, includes, excludes,
 
     logger = getEnhancedLogger()
 
-    from automojo.presence.wellknown import ConfiguredSuperFactorySingleton
-    from automojo.testbase.extensionprotocols import TestBaseFactoryProtocol
+    from automojo.thisapp.wellknown import ConfiguredSuperFactorySingleton
+    from automojo.testbase.factoryprotocols import TestBaseFactoryProtocol
 
     sfactory = ConfiguredSuperFactorySingleton()
-    TestJobType = sfactory.get_override_types_by_order(TestBaseFactoryProtocol.get_testplus_default_job_type)
+    TestJobType = sfactory.get_override_types_by_order(TestBaseFactoryProtocol.get_testbase_default_job_type)
 
     # At this point in the code, we either lookup an existing test job or we create a test job
     # from the includes, excludes or test_module

@@ -13,7 +13,6 @@ __credits__ = []
 
 from typing import List
 
-import logging
 import os
 import sys
 
@@ -136,21 +135,23 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     # IMPORTANT: We need to load the context first because it will trigger the loading
     # of the default user configuration
 
-    from automojo.presence.contextpaths import ContextPaths
-    from automojo.presence.wellknown import ContextSingleton
+    from automojo.thisapp.contextpaths import ContextPaths
+    from automojo.thisapp.wellknown import ThisApplicationSingleton
 
     from automojo.xmodules.xpython import prepend_python_path
 
-    from automojo.runtime.runtimevariables import AM_RUNTIME_VARIABLES
+    from automojo.runtime.runtimevariables import RuntimeVariables, RuntimeVariablesDesc
 
     from automojo.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
-    from automojo.configuration.optionoverrides import AM_CONFIG_OPTION_OVERRIDES
+    from automojo.configuration.optionoverrides import ConfigOptionOverrides
 
     # STEP 1 - Initialize the Runtime (Performed by the root command)
-
+    
     # STEP 2 - Resolve the configuration variables (Performed by the root command)
 
     # STEP 3 - Apply any 'Configuration' related option overrides
+
+    this_app = ThisApplicationSingleton()
 
     # We need to default these to 'None' so they do not effect the runtime behavior unless
     # this command explicitly sets them later.
@@ -178,50 +179,50 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
     if len(credential_files) > 0:
         use_credentials = True
-        AM_CONFIG_OPTION_OVERRIDES.override_config_credentials_files(credential_files)
+        ConfigOptionOverrides.override_config_credentials_files(credential_files)
 
     if len(credential_names) > 0:
         use_credentials = True
-        AM_CONFIG_OPTION_OVERRIDES.override_config_credentials_names(credential_names)
+        ConfigOptionOverrides.override_config_credentials_names(credential_names)
 
     if len(credential_sources) > 0:
-        AM_CONFIG_OPTION_OVERRIDES.override_config_credentials_sources(credential_sources)
+        ConfigOptionOverrides.override_config_credentials_sources(credential_sources)
 
 
     if len(landscape_files) > 0:
         use_landscape = True
-        AM_CONFIG_OPTION_OVERRIDES.override_config_landscape_files(landscape_files)
+        ConfigOptionOverrides.override_config_landscape_files(landscape_files)
 
     if len(landscape_names) > 0:
         use_landscape = True
-        AM_CONFIG_OPTION_OVERRIDES.override_config_landscape_names(landscape_names)
+        ConfigOptionOverrides.override_config_landscape_names(landscape_names)
 
     if len(landscape_sources) > 0:
-        AM_CONFIG_OPTION_OVERRIDES.override_config_landscape_sources(landscape_sources)
+        ConfigOptionOverrides.override_config_landscape_sources(landscape_sources)
 
 
     if len(runtime_files) > 0:
         use_runtime = True
-        AM_CONFIG_OPTION_OVERRIDES.override_config_runtime_files(runtime_files)
+        ConfigOptionOverrides.override_config_runtime_files(runtime_files)
 
     if len(runtime_names) > 0:
         use_runtime = True
-        AM_CONFIG_OPTION_OVERRIDES.override_config_runtime_names(runtime_names)
+        ConfigOptionOverrides.override_config_runtime_names(runtime_names)
 
     if len(runtime_sources) > 0:
-        AM_CONFIG_OPTION_OVERRIDES.override_config_runtime_sources(runtime_sources)
+        ConfigOptionOverrides.override_config_runtime_sources(runtime_sources)
 
 
     if len(topology_files) > 0:
         use_topology = True
-        AM_CONFIG_OPTION_OVERRIDES.override_config_topology_files(topology_files)
+        ConfigOptionOverrides.override_config_topology_files(topology_files)
 
     if len(topology_names) > 0:
         use_topology = True
-        AM_CONFIG_OPTION_OVERRIDES.override_config_topology_names(topology_names)
+        ConfigOptionOverrides.override_config_topology_names(topology_names)
 
     if len(topology_sources) > 0:
-        AM_CONFIG_OPTION_OVERRIDES.override_config_topology_sources(topology_sources)
+        ConfigOptionOverrides.override_config_topology_sources(topology_sources)
 
 
     # STEP 4 - Resolve the Configuration Maps
@@ -234,12 +235,11 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     # maps because some of those settings will get overridden by the options.  So the runtime
     # needs to be loaded and set first before we apply runtime options 
 
-    ctx = ContextSingleton()
     if prerun_diagnostic:
-        ctx.insert(ContextPaths.DIAGNOSTICS_PRERUN, {})
+        this_app.override_variable_value(RuntimeVariablesDesc.AM_DIAGNOSTICS_PRERUN, {})
 
     if postrun_diagnostic:
-        ctx.insert(ContextPaths.DIAGNOSTICS_POSTRUN, {})
+        this_app.override_variable_value(RuntimeVariablesDesc.AM_DIAGNOSTICS_POSTRUN, {})
 
     if branch is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_build_branch(branch)
@@ -294,10 +294,8 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
     # TODO: Handle 'root' parameter better
     if root is None:
-        if AM_RUNTIME_VARIABLES.AM_TESTROOT is not None:
-            root = AM_RUNTIME_VARIABLES.AM_TESTROOT
-        elif ctx.lookup(ContextPaths.TESTROOT) is not None:
-            root = ctx.lookup(ContextPaths.TESTROOT)
+        if RuntimeVariables.AM_TESTROOT is not None:
+            root = RuntimeVariables.AM_TESTROOT
         else:
             root = "."
 
@@ -341,7 +339,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
     # STEP 7 - Create and kick off the job
 
-    from automojo.presence.wellknown import ConfiguredSuperFactorySingleton
+    from automojo.thisapp.wellknown import ConfiguredSuperFactorySingleton
     from automojo.testbase.factoryprotocols import TestBaseFactoryProtocol
 
     # At this point in the code, we either lookup an existing test job or we create a test job

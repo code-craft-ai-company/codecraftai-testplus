@@ -14,15 +14,15 @@ __credits__ = []
 
 import os
 
-from automojo.presence.contextpaths import ContextPaths
-from automojo.presence.wellknown import ContextSingleton
+from automojo.thisapp.persona import establish_app_persona
+from automojo.thisapp.wellknown import ThisApplicationSingleton
+from automojo.thisapp.contextpaths import ContextPaths
 
 from automojo.runtime.enumerations import ActivationProfile, JobType
 from automojo.runtime.activation import activate_profile_job
 
-from automojo.runtime.initialize import initialize_runtime
 
-from automojo.runtime.runtimevariables import AM_RUNTIME_VARIABLES
+from automojo.runtime.runtimevariables import RuntimeVariables
 
 from automojo import testbase
 
@@ -59,7 +59,7 @@ def initialize_testplus_runtime():
     # any tests run with the 'testplus' command.
     extension_modules = "automojo.testplus.testplusdefaulttypefactory"
     
-    initialize_runtime(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules, log_basename="testrun")
+    establish_app_persona(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules, log_basename="testrun")
 
     return
 
@@ -74,19 +74,20 @@ def initialize_testplus_results():
         :returns: ``None``
     """
 
-    dest_static_dir = os.path.join(AM_RUNTIME_VARIABLES.AM_PRESENCE_DIRECTORY, "results", TestPlusVariables.TESTPLUS_RESOURCE_DEST_LEAF)
+    dest_static_dir = os.path.join(RuntimeVariables.AM_PRESENCE_DIR, "results", TestPlusVariables.TESTPLUS_RESOURCE_DEST_LEAF)
 
-    if AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_SRC_DIR is None:
-        AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_SRC_DIR = TestPlusVariables.TESTPLUS_RESOURCE_SRC_DIR
-    if AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_DEST_DIR is None:
-        AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_DEST_DIR = dest_static_dir
-    if AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_SUMMARY_TEMPLATE is None:
-        AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_SUMMARY_TEMPLATE = TestPlusVariables.TESTPLUS_SUMMARY_TEMPLATE
+    if RuntimeVariables.AM_RESULTS_STATIC_RESOURCE_SRC_DIR is None:
+        RuntimeVariables.AM_RESULTS_STATIC_RESOURCE_SRC_DIR = TestPlusVariables.TESTPLUS_RESOURCE_SRC_DIR
+    if RuntimeVariables.AM_RESULTS_STATIC_RESOURCE_DEST_DIR is None:
+        RuntimeVariables.AM_RESULTS_STATIC_RESOURCE_DEST_DIR = dest_static_dir
+    if RuntimeVariables.AM_RESULTS_STATIC_SUMMARY_TEMPLATE is None:
+        RuntimeVariables.AM_RESULTS_STATIC_SUMMARY_TEMPLATE = TestPlusVariables.TESTPLUS_SUMMARY_TEMPLATE
 
-    ctx = ContextSingleton()
-    ctx.insert(ContextPaths.DIR_RESULTS_RESOURCE_SRC, AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_SRC_DIR)
-    ctx.insert(ContextPaths.DIR_RESULTS_RESOURCE_DEST, AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_RESOURCE_DEST_DIR)
-    ctx.insert(ContextPaths.FILE_RESULTS_TEMPLATE, AM_RUNTIME_VARIABLES.AM_RESULTS_STATIC_SUMMARY_TEMPLATE)
+    this_app = ThisApplicationSingleton()
+    ctx = this_app.context
+    ctx.insert(ContextPaths.DIR_RESULTS_RESOURCE_SRC, RuntimeVariables.AM_RESULTS_STATIC_RESOURCE_SRC_DIR)
+    ctx.insert(ContextPaths.DIR_RESULTS_RESOURCE_DEST, RuntimeVariables.AM_RESULTS_STATIC_RESOURCE_DEST_DIR)
+    ctx.insert(ContextPaths.FILE_RESULTS_TEMPLATE, RuntimeVariables.AM_RESULTS_STATIC_SUMMARY_TEMPLATE)
 
     activate_profile_job(job_type=JobType.TestRun)
 

@@ -98,9 +98,6 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     # IMPORTANT: We need to load the context first because it will trigger the loading
     # of the default user configuration
 
-    from automojo.presence.contextpaths import ContextPaths
-    from automojo.presence.wellknown import ContextSingleton
-
     from automojo.xmodules.ximport import import_by_name
     from automojo.xmodules.xpython import prepend_python_path
 
@@ -124,9 +121,9 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     # STEP 6 - Initialize the Results Output
 
     # STEP 7 - Create and kick off the job
+    from automojo.runtime.activation import activate_profile_job, JobType
+    activate_profile_job(JobType.TestRun)
 
-    ctx = ContextSingleton()
-    ctx.insert(ContextPaths.JOB_TYPE, 'testrun')
 
     test_root = os.path.abspath(os.path.expandvars(os.path.expanduser(root)))
     if not os.path.isdir(test_root):
@@ -147,8 +144,8 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     tpmod = sys.modules["mojo.testplus"]
     tpmod.logger = logger
 
-    from automojo.presence.wellknown import ConfiguredSuperFactorySingleton
-    from automojo.testbase.extensionprotocols import TestBaseFactoryProtocol
+    from automojo.thisapp.wellknown import ConfiguredSuperFactorySingleton
+    from automojo.testbase.factoryprotocols import TestBaseFactoryProtocol
 
     # At this point in the code, we either lookup an existing test job or we create a test job
     # from the includes, excludes or test_module
@@ -180,8 +177,6 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
         result_code = tjob.execute()
 
     sys.exit(result_code)
-
-
 
     return
 

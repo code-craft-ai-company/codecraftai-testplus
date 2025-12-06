@@ -14,11 +14,16 @@ __credits__ = []
 
 import click
 
+from automojo.thisapp.wellknown import ThisApplicationSingleton
+
+from automojo.runtime.runtimevariables import RuntimeVariablesDesc
+
 from automojo.testbase.cli.cmdtree.services import group_testbase_services
 from automojo.testbase.cli.cmdtree.utilities import group_testbase_utilities
 
 from automojo.testplus.cli.cmdtree.testing import group_testplus_testing
 
+from automojo.testplus.initialize import initialize_testplus_runtime
 
 @click.group("testplus")
 @click.option('-v', '--verbose', count=True)
@@ -31,23 +36,27 @@ def testplus_root_command(verbose):
         :returns: ``None``
     """
 
-    from automojo.runtime.runtimevariables import AM_RUNTIME_VARIABLES
+    initialize_testplus_runtime()
+    
+    interactive_console = False
+    log_level_console = "WARNING"
 
     if verbose == 0:
-        AM_RUNTIME_VARIABLES.AM_INTERACTIVE_CONSOLE = True
+        interactive_console = True
     else:
-        AM_RUNTIME_VARIABLES.AM_INTERACTIVE_CONSOLE = False
+        interactive_console = False
 
         if verbose == 1:
-            AM_RUNTIME_VARIABLES.AM_LOG_LEVEL_CONSOLE = "INFO"
+            log_level_console = "INFO"
         elif verbose == 2:
-            AM_RUNTIME_VARIABLES.AM_LOG_LEVEL_CONSOLE = "DEBUG"
+            log_level_console = "DEBUG"
         elif verbose > 2:
-            AM_RUNTIME_VARIABLES.AM_LOG_LEVEL_CONSOLE = "NOTSET"
+            log_level_console = "NOTSET"
 
-    from automojo.testplus.initialize import initialize_testplus_runtime
-    
-    initialize_testplus_runtime()
+    this_app = ThisApplicationSingleton()
+
+    this_app.override_variable_value(RuntimeVariablesDesc.AM_INTERACTIVE_CONSOLE, interactive_console)
+    this_app.override_variable_value(RuntimeVariablesDesc.AM_LOG_LEVEL_CONSOLE, log_level_console)
 
     return
 
