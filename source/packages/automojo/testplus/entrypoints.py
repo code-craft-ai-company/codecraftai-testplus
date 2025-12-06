@@ -17,21 +17,21 @@ from typing import Optional, Type
 
 import argparse
 import inspect
-import logging
-from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
+
 import os
 import sys
 
 from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
 from automojo.xmodules.ximport import import_by_name
+from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 
 from automojo.thisapp.wellknown import ThisApplicationSingleton
 
 from automojo.runtime.paths import get_path_for_testresults
 
 from automojo.testbase.injection.injectionregistry import InjectionRegistry
-
 from automojo.testbase.utilities import find_testmodule_root, find_testmodule_fullname
+
 from automojo.testplus.distributedtestjob import DistributedTestJob, DefaultDistributedTestJob
 
 

@@ -18,7 +18,7 @@ from automojo.thisapp.persona import establish_app_persona
 from automojo.thisapp.wellknown import ThisApplicationSingleton
 from automojo.thisapp.contextpaths import ContextPaths
 
-from automojo.runtime.enumerations import ActivationProfile, JobType
+from automojo.runtime.enumerations import JobType
 from automojo.runtime.activation import activate_profile_job
 
 
