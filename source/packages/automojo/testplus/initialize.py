@@ -22,7 +22,9 @@ from automojo.runtime.enumerations import JobType
 from automojo.runtime.activation import activate_profile_job
 
 
-from automojo.runtime.runtimevariables import RuntimeVariables
+from automojo.runtime.runtimevariables import RuntimeVariables, resolve_runtime_variables
+
+from automojo.configuration.configurationvariables import resolve_configuration_variables
 
 from automojo import testbase
 
@@ -60,6 +62,10 @@ def initialize_testplus_runtime():
     extension_modules = "automojo.testplus.testplusdefaulttypefactory"
     
     establish_app_persona(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules, log_basename="testrun")
+
+    resolve_runtime_variables()
+
+    resolve_configuration_variables()
 
     return
 
