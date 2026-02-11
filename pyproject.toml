@@ -21,6 +21,7 @@ debugpy = "^1.8.12"
 automojo-errors = { git = "https://github.com/automationmojo/automojo-errors.git", branch = "main" }
 automojo-interfaces = { git = "https://github.com/automationmojo/automojo-interfaces.git", branch = "main" }
 automojo-waiting = { git = "https://github.com/automationmojo/automojo-waiting.git", branch = "main" }
+automojo-arcli = { git = "https://github.com/automationmojo/automojo-arcli.git", branch = "main" }
 automojo-runtime = { git = "https://github.com/automationmojo/automojo-runtime.git", branch = "main" }
 automojo-testbase = { git = "https://github.com/automationmojo/automojo-testbase.git", branch = "main" }
 automojo-credentials = { git = "https://github.com/automationmojo/automojo-credentials.git", branch = "main" }
