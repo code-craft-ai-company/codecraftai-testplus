@@ -4,12 +4,13 @@
     :synopsis: Reusable option groups for the TestPlus CLI.
 """
 
-from typing import Type
+from typing import Type, List, Any
 
 from automojo.arcli.decorators import option
 from automojo.arcli.model.fields.optionfield import OptionMode
 from automojo.arcli.model.parameters.booleanparameter import BooleanParameter
 from automojo.arcli.model.parameters.stringparameter import StringParameter
+from automojo.arcli.model.parameters.listofstringparameter import ListOfStringParameter
 from automojo.arcli.model.parameters.validators import Choice
 
 from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
@@ -57,6 +58,45 @@ from automojo.testplus.cli.cmdtree.testing.constants import (
     HELP_TOPOLOGY_SOURCES,
 )
 
+def ListOfChoice(choices: List[Any], case_sensitive: bool = True) -> Type[ListOfStringParameter]:
+    """
+    Factory that returns a parameter type for restricting input to a set of valid values for a list parameter.
+    """
+    class ListOfChoiceParameter(ListOfStringParameter):
+        _choices = choices
+        _case_sensitive = case_sensitive
+
+        def get_value(self) -> List[str]:
+            values = super().get_value()
+            if values is None:
+                return None
+
+            validated_values = []
+
+            valid_choices = self._choices
+            if not self._case_sensitive:
+                valid_choices = [str(c).lower() for c in self._choices]
+
+            for val in values:
+                check_val = val
+                if not self._case_sensitive:
+                    check_val = str(check_val).lower()
+
+                if check_val not in valid_choices:
+                    errmsg = f"Invalid value '{val}'. Allowed values are: {', '.join(map(str, self._choices))}"
+                    raise ValueError(errmsg)
+
+                # Return the original casing from the choices list if case insensitive match found
+                if not self._case_sensitive:
+                    idx = valid_choices.index(check_val)
+                    validated_values.append(self._choices[idx])
+                else:
+                    validated_values.append(val)
+
+            return validated_values
+
+    return ListOfChoiceParameter
+
 def with_job_identity_options(f):
     f = option("--job-id", default=None, required=False, help=HELP_JOB_ID, group="Job Identity")(f)
     f = option("--job-initiator", default=None, required=False, help=HELP_JOB_INITIATOR, group="Job Identity")(f)
@@ -66,7 +106,7 @@ def with_job_identity_options(f):
     return f
 
 def with_configuration_options(f):
-    f = option("--default-configs", "default_configs", mode=OptionMode.Multiple, default=None, required=False, ptype=Choice(CONFIGURATION_CHOICES), help=HELP_DEFAULT_CONFIGS, group="Configuration")(f)
+    f = option("--default-configs", "default_configs", mode=OptionMode.Multiple, default=None, required=False, ptype=ListOfChoice(CONFIGURATION_CHOICES), help=HELP_DEFAULT_CONFIGS, group="Configuration")(f)
     f = option("--config-name", "config_name", default=None, required=False, help=HELP_CONFIG_NAME, group="Configuration")(f)
 
     f = option("--credential", "credential_files", mode=OptionMode.Multiple, default=None, required=False, help=HELP_CREDENTIAL, group="Configuration")(f)
@@ -93,7 +133,7 @@ def with_logging_options(f):
 
 def with_debugging_options(f):
     f = option("--debugger", default=None, required=False, ptype=Choice(['pdb', 'debugpy']), help=HELP_DEBUGGER, group="Debugging")(f)
-    f = option("--breakpoint", "breakpoints", default=None, required=False, mode=OptionMode.Multiple, ptype=Choice(['test-discovery', 'testrun-start']), help=HELP_BREAKPOINT, group="Debugging")(f)
+    f = option("--breakpoint", "breakpoints", default=None, required=False, mode=OptionMode.Multiple, ptype=ListOfChoice(['test-discovery', 'testrun-start']), help=HELP_BREAKPOINT, group="Debugging")(f)
     return f
 
 def with_diagnostic_options(f):
