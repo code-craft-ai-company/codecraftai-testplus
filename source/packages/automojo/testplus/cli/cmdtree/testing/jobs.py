@@ -15,12 +15,19 @@ import logging
 import os
 import sys
 
-import click
+from automojo.arcli.decorators import group, command, option
+from automojo.arcli.model.parameters.booleanparameter import BooleanParameter
 
 from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
 from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 
-@click.group("jobs", help="Contains commands for working with test jobs.")
+from automojo.testplus.cli.options import (
+    with_logging_options,
+    with_common_build_options,
+    HELP_ROOT, HELP_JOB, HELP_FILTER, HELP_OUTPUT, HELP_START, HELP_DEBUG
+)
+
+@group("jobs")
 def group_testplus_testing_jobs():
     """
         CLI command group for interacting with TestPlus jobs.
@@ -30,23 +37,11 @@ def group_testplus_testing_jobs():
 
     return
 
-HELP_ROOT = "The root directory to use when scanning for tests."
-HELP_JOB = "The identifier of the job to run."
-HELP_FILTER = "Add a job filter expression."
-HELP_OUTPUT = "The output directory where results and artifacts are collected."
-HELP_START = r"A time stamp to associate with the start of the run. Example: 2020-10-17T15:30:11.989120  Bash: date +%Y-%m-%dT%H:%M:%S.%N"
-HELP_BRANCH = "The name of the branch to associate with the test run results."
-HELP_BUILD = "The name of the build to associate with the test run results."
-HELP_FLAVOR = "The name of the flavor to associate with the test run results."
-HELP_CONSOLE_LOG_LEVEL = "The logging level for console output."
-HELP_FILE_LOG_LEVEL = "The logging level for logfile output."
-HELP_DEBUG = "Output debug information to the console."
-
-@click.command("list")
-@click.option("--root", default=".", type=str, help=HELP_ROOT)
-@click.option("--filter", "-f", required=False, help=HELP_FILTER)
-@click.option("--debug", default=False, type=bool, help=HELP_DEBUG)
-def command_testing_jobs_list():
+@option("--debug", default=False, ptype=BooleanParameter, help=HELP_DEBUG)
+@option("--filter", "-f", required=False, help=HELP_FILTER)
+@option("--root", default=".", help=HELP_ROOT)
+@command("list")
+def command_testing_jobs_list(root, filter, debug):
     """
         Lists available TestPlus jobs.
 
@@ -55,11 +50,11 @@ def command_testing_jobs_list():
 
     return
 
-@click.command("show")
-@click.option("--root", default=".", type=str, help=HELP_ROOT)
-@click.option("--job", "-j", required=True, help=HELP_JOB)
-@click.option("--debug", default=False, type=bool, help=HELP_DEBUG)
-def command_testplus_testing_jobs_show():
+@option("--debug", default=False, ptype=BooleanParameter, help=HELP_DEBUG)
+@option("--job", "-j", required=True, help=HELP_JOB)
+@option("--root", default=".", help=HELP_ROOT)
+@command("show")
+def command_testplus_testing_jobs_show(root, job, debug):
     """
         Displays information about a specific TestPlus job.
 
@@ -68,16 +63,13 @@ def command_testplus_testing_jobs_show():
 
     return
 
-@click.command("run")
-@click.option("--root", default=".", type=str, help=HELP_ROOT)
-@click.option("--job", "-j", required=True, help=HELP_JOB)
-@click.option("--output", "-o", required=False, help=HELP_OUTPUT)
-@click.option("--start", default=None, required=False, help=HELP_START)
-@click.option("--branch", default=None, required=False, help=HELP_BRANCH)
-@click.option("--build", default=None, required=False, help=HELP_BUILD)
-@click.option("--flavor", default=None, required=False, help=HELP_FLAVOR)
-@click.option("--console-level", default=None, required=False, type=click.Choice(LOG_LEVEL_NAMES, case_sensitive=False), help=HELP_CONSOLE_LOG_LEVEL)
-@click.option("--logfile-level", default=None, required=False, type=click.Choice(LOG_LEVEL_NAMES, case_sensitive=False), help=HELP_FILE_LOG_LEVEL)
+@with_logging_options
+@with_common_build_options
+@option("--start", default=None, required=False, help=HELP_START)
+@option("--output", "-o", required=False, help=HELP_OUTPUT)
+@option("--job", "-j", required=True, help=HELP_JOB)
+@option("--root", default=".", help=HELP_ROOT)
+@command("run")
 def command_testplus_testing_jobs_run(root, job, output, start, branch, build, flavor, console_level, logfile_level):
     """
         Executes a specified TestPlus job.
@@ -156,7 +148,7 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
         job_parts = job.split("@")
         if len(job_parts) != 2:
             errmsg = "A --job parameter must be of the form 'package.module@JobClass'"
-            raise click.UsageError(errmsg)
+            raise ValueError(errmsg)
 
         job_package, job_class = job_parts
 

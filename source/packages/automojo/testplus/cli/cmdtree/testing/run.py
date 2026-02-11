@@ -16,94 +16,32 @@ from typing import List
 import os
 import sys
 
-import click
+from automojo.arcli.decorators import command, option
 
 from automojo.interfaces.itestjob import ITestJob
 from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
 from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 
-from automojo.testbase.cli.cmdtree.testing.constants import (
-    HELP_ROOT,
-    HELP_EXCLUDES,
-    HELP_INCLUDES,
-    HELP_OUTPUT,
-    HELP_START,
-    HELP_BRANCH,
-    HELP_BUILD,
-    HELP_FLAVOR,
-    HELP_JOB_ID,
-    HELP_JOB_INITIATOR,
-    HELP_JOB_LABEL,
-    HELP_JOB_NAME,
-    HELP_JOB_OWNER,
-    HELP_RUNID,
-    HELP_CONSOLE_LOG_LEVEL,
-    HELP_FILE_LOG_LEVEL,
-    HELP_DEBUGGER,
-    HELP_BREAKPOINT,
-    HELP_PRERUN_DIAGNOSTIC,
-    HELP_POSTRUN_DIAGNOSTIC,
-    HELP_INCLUDE_MARKER_EXP,
-    HELP_EXCLUDE_MARKER_EXP
+from automojo.testplus.cli.options import (
+    with_run_context_options,
+    with_job_identity_options,
+    with_configuration_options,
+    with_logging_options,
+    with_debugging_options,
+    with_diagnostic_options,
+    with_filtering_options,
+    HELP_ROOT
 )
 
-from automojo.testplus.cli.cmdtree.testing.constants import (
-    HELP_CONFIG_NAME,
-    HELP_CREDENTIAL,
-    HELP_CREDENTIAL_NAMES,
-    HELP_CREDENTIAL_SOURCES,
-    HELP_DEFAULT_CONFIGS,
-    HELP_LANDSCAPE,
-    HELP_LANDSCAPE_NAMES,
-    HELP_LANDSCAPE_SOURCES,
-    HELP_RUNTIME,
-    HELP_RUNTIME_NAMES,
-    HELP_RUNTIME_SOURCES,
-    HELP_TOPOLOGY,
-    HELP_TOPOLOGY_NAMES,
-    HELP_TOPOLOGY_SOURCES,
-    HELP_PRERUN_DIAGNOSTIC,
-    HELP_POSTRUN_DIAGNOSTIC,
-    CONFIGURATION_CHOICES
-)
 
-@click.command("run", help="Command used to run collections of tests.")
-@click.option("--root", default=None,  type=str, required=False, help=HELP_ROOT)
-@click.option("--excludes", "-x", multiple=True, required=False, help=HELP_EXCLUDES)
-@click.option("--includes", "-i", multiple=True, help=HELP_INCLUDES)
-@click.option("--output", "-o", default=None, required=False, help=HELP_OUTPUT)
-@click.option("--start", default=None, required=False, help=HELP_START)
-@click.option("--runid", default=None, required=False, help=HELP_RUNID)
-@click.option("--branch", default=None, required=False, help=HELP_BRANCH)
-@click.option("--build", default=None, required=False, help=HELP_BUILD)
-@click.option("--flavor", default=None, required=False, help=HELP_FLAVOR)
-@click.option("--job-id", default=None, required=False, help=HELP_JOB_ID)
-@click.option("--job-initiator", default=None, required=False, help=HELP_JOB_INITIATOR)
-@click.option("--job-label", default=None, required=False, help=HELP_JOB_LABEL)
-@click.option("--job-name", default=None, required=False, help=HELP_JOB_NAME)
-@click.option("--job-owner", default=None, required=False, help=HELP_JOB_OWNER)
-@click.option("--default-configs", "default_configs", multiple=True, default=None, required=False, type=click.Choice(CONFIGURATION_CHOICES), help=HELP_DEFAULT_CONFIGS)
-@click.option("--config-name", "config_name", multiple=False, default=None, required=False, help=HELP_CONFIG_NAME)
-@click.option("--credential", "credential_files", multiple=True, default=None, required=False, help=HELP_CREDENTIAL)
-@click.option("--credential-name", "credential_names", multiple=True, default=None, required=False, help=HELP_CREDENTIAL_NAMES)
-@click.option("--credential-source", "credential_sources", multiple=True, default=None, required=False, help=HELP_CREDENTIAL_SOURCES)
-@click.option("--landscape", "landscape_files", multiple=True, default=None, required=False, help=HELP_LANDSCAPE)
-@click.option("--landscape-name", "landscape_names", multiple=True, default=None, required=False, help=HELP_LANDSCAPE_NAMES)
-@click.option("--landscape-source", "landscape_sources", multiple=True, default=None, required=False, help=HELP_LANDSCAPE_SOURCES)
-@click.option("--runtime", "runtime_files", multiple=True, default=None, required=False, help=HELP_RUNTIME)
-@click.option("--runtime-name", "runtime_names", multiple=True, default=None, required=False, help=HELP_RUNTIME_NAMES)
-@click.option("--runtime-source", "runtime_sources", multiple=True, default=None, required=False, help=HELP_RUNTIME_SOURCES)
-@click.option("--topology", "topology_files", multiple=True, default=None, required=False, help=HELP_TOPOLOGY)
-@click.option("--topology-name", "topology_names", multiple=True, default=None, required=False, help=HELP_TOPOLOGY_NAMES)
-@click.option("--topology-source", "topology_sources", multiple=True, default=None, required=False, help=HELP_TOPOLOGY_SOURCES)
-@click.option("--console-level", default=None, required=False, type=click.Choice(LOG_LEVEL_NAMES, case_sensitive=False), help=HELP_CONSOLE_LOG_LEVEL)
-@click.option("--logfile-level", default=None, required=False, type=click.Choice(LOG_LEVEL_NAMES, case_sensitive=False), help=HELP_FILE_LOG_LEVEL)
-@click.option("--debugger", default=None, required=False, type=click.Choice(['pdb', 'debugpy']), help=HELP_DEBUGGER)
-@click.option("--breakpoint", "breakpoints", default=None, required=False, multiple=True, type=click.Choice(['test-discovery', 'testrun-start']), help=HELP_BREAKPOINT)
-@click.option("--prerun-diagnostic", is_flag=True, default=False, required=False, help=HELP_PRERUN_DIAGNOSTIC)
-@click.option("--postrun-diagnostic", is_flag=True, default=False, required=False, help=HELP_POSTRUN_DIAGNOSTIC)
-@click.option("--include-marker-exp", required=False, multiple=True, help=HELP_INCLUDE_MARKER_EXP)
-@click.option("--exclude-marker-exp", required=False, multiple=True, help=HELP_EXCLUDE_MARKER_EXP)
+@with_filtering_options
+@with_diagnostic_options
+@with_debugging_options
+@with_logging_options
+@with_configuration_options
+@with_job_identity_options
+@with_run_context_options
+@command("run")
 def command_testplus_testing_run(root, includes, excludes, output, start, runid, branch, build, flavor, job_id, job_initiator,
                         job_label, job_name, job_owner, default_configs, config_name, credential_files, credential_names, credential_sources,
                         landscape_files, landscape_names, landscape_sources, runtime_files, runtime_names, runtime_sources,
@@ -119,6 +57,27 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
         :returns: ``None``
     """
+
+    if includes is None: includes = []
+    if excludes is None: excludes = []
+    if include_marker_exp is None: include_marker_exp = []
+    if exclude_marker_exp is None: exclude_marker_exp = []
+
+    if default_configs is None: default_configs = []
+    if credential_files is None: credential_files = []
+    if credential_names is None: credential_names = []
+    if credential_sources is None: credential_sources = []
+    if landscape_files is None: landscape_files = []
+    if landscape_names is None: landscape_names = []
+    if landscape_sources is None: landscape_sources = []
+    if runtime_files is None: runtime_files = []
+    if runtime_names is None: runtime_names = []
+    if runtime_sources is None: runtime_sources = []
+    if topology_files is None: topology_files = []
+    if topology_names is None: topology_names = []
+    if topology_sources is None: topology_sources = []
+
+    if breakpoints is None: breakpoints = []
 
     if config_name is not None:
         if config_name not in landscape_names:
@@ -281,7 +240,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     if runid is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_run_id(runid)
 
-    if breakpoints is not None:
+    if len(breakpoints) > 0:
         AM_RUNTIME_OPTION_OVERRIDES.override_debug_breakpoints(breakpoints)
 
         # If a breakpoint was passed bug the debugger was not, use 'debugpy' for the
@@ -304,7 +263,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
         errmsg = "The specified root folder does not exist. root=%s" % root
         if test_root != root:
             errmsg += " expanded=%s" % test_root
-        raise click.BadParameter(errmsg)
+        raise ValueError(errmsg)
 
     AM_RUNTIME_OPTION_OVERRIDES.override_testroot(root)
 

@@ -62,3 +62,6 @@ HELP_PRERUN_DIAGNOSTIC = "Flag indicating that a pre run diagnostic should be pe
 HELP_POSTRUN_DIAGNOSTIC = "Flag indicating that a post run diagnostic should be performed."
 HELP_INCLUDE_MARKER_EXP = "Allows the specification of a marker expression that if matched will include a test."
 HELP_EXCLUDE_MARKER_EXP = "Allows the specification of a marker expression that if matched will exclude a test."
+
+HELP_JOB = "The identifier of the job to run."
+HELP_FILTER = "Add a job filter expression."

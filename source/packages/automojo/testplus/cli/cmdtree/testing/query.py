@@ -19,22 +19,13 @@ from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 import os
 import sys
 
-import click
+from automojo.arcli.decorators import command, option
 
-from automojo.testplus.cli.cmdtree.testing.constants import (
-    HELP_ROOT,
-    HELP_EXCLUDES,
-    HELP_INCLUDES,
-    HELP_EXCLUDE_MARKER_EXP,
-    HELP_INCLUDE_MARKER_EXP
-)
+from automojo.testplus.cli.options import with_filtering_options, HELP_ROOT
 
-@click.command("query", help="Command used to query information about tests.")
-@click.option("--root", default=None, type=str, help=HELP_ROOT)
-@click.option("--excludes", "-x", multiple=True, help=HELP_EXCLUDES)
-@click.option("--includes", "-i", multiple=True, help=HELP_INCLUDES)
-@click.option("--include-marker-exp", required=False, multiple=True, help=HELP_INCLUDE_MARKER_EXP)
-@click.option("--exclude-marker-exp", required=False, multiple=True, help=HELP_EXCLUDE_MARKER_EXP)
+@with_filtering_options
+@option("--root", default=None, help=HELP_ROOT)
+@command("query")
 def command_testplus_testing_query(root, includes, excludes,
     include_marker_exp, exclude_marker_exp):
     """
@@ -46,6 +37,15 @@ def command_testplus_testing_query(root, includes, excludes,
 
         :returns: ``None``
     """
+
+    if includes is None:
+        includes = []
+    if excludes is None:
+        excludes = []
+    if include_marker_exp is None:
+        include_marker_exp = []
+    if exclude_marker_exp is None:
+        exclude_marker_exp = []
 
     # pylint: disable=unused-import,import-outside-toplevel
 
@@ -93,7 +93,7 @@ def command_testplus_testing_query(root, includes, excludes,
         errmsg = "The specified root folder does not exist. root=%s" % root
         if test_root != root:
             errmsg += " expanded=%s" % test_root
-        raise click.BadParameter(errmsg)
+        raise ValueError(errmsg)
 
     AM_RUNTIME_OPTION_OVERRIDES.override_testroot(root)
 

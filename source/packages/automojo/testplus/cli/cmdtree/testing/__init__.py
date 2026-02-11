@@ -12,15 +12,17 @@ __copyright__ = "Copyright 2025, Automation Mojo LLC"
 __credits__ = []
 __version__ = "1.0.0"
 
-import click
+from automojo.arcli.decorators import group
 
 from automojo.testplus.cli.cmdtree.testing.jobs import group_testplus_testing_jobs
 from automojo.testplus.cli.cmdtree.testing.query import command_testplus_testing_query
 from automojo.testplus.cli.cmdtree.testing.run import command_testplus_testing_run
 
-@click.group("testing", help="Contains command for working with tests and test results.")
+@group("testing")
 def group_testplus_testing():
     """
+        Contains command for working with tests and test results.
+
         Root command group for TestPlus testing related operations.
 
         :returns: ``None``

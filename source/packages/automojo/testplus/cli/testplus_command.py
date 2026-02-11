@@ -12,7 +12,9 @@ __copyright__ = "Copyright 2025, Automation Mojo LLC"
 __credits__ = []
 
 
-import click
+from automojo.arcli.decorators import entry, option
+from automojo.arcli.model.fields.optionfield import OptionMode
+from automojo.arcli.model.parameters.integerparameter import IntegerParameter
 
 from automojo.thisapp.wellknown import ThisApplicationSingleton
 
@@ -25,8 +27,8 @@ from automojo.testplus.cli.cmdtree.testing import group_testplus_testing
 
 from automojo.testplus.initialize import initialize_testplus_runtime
 
-@click.group("testplus")
-@click.option('-v', '--verbose', count=True)
+@option('-v', '--verbose', mode=OptionMode.Counter, default=0, ptype=IntegerParameter, help="Verbosity level")
+@entry("testplus")
 def testplus_root_command(verbose):
     """
         Entry point for the ``testplus`` command line interface.
