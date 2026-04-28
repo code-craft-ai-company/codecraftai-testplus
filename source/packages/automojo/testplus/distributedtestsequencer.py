@@ -36,7 +36,7 @@ class DistributedTestSequencer(TestSequencer):
         that the steps of the test flow are consistent between runs.
     """
 
-    def __init__(self, jobtitle: str, root: str, includes: Sequence[str], excludes: Sequence[str], metafilters: List[MetaFilter]):
+    def __init__(self, jobtitle: str, root: str, includes: Sequence[str], excludes: Sequence[str], metafilters: List[MetaFilter], job_seed: int = None):
         """
             Creates a 'TestSequencer' object which is used to discover the tests and control the flow of a test run.
 
@@ -46,8 +46,10 @@ class DistributedTestSequencer(TestSequencer):
             (scope):(package).(package)@(module)#(testname)
             :param excludes: List of expressions used to determine which tests to exclued from the included tests.
             :param metafilters: List of expressions used to filter tests by metadata
+            :param job_seed: Job-level seed forwarded to the parent :class:`TestSequencer` for
+                             reproducible property-based testing.
         """
-        super().__init__(jobtitle=jobtitle, root=root, includes=includes, excludes=excludes, metafilters=metafilters)
+        super().__init__(jobtitle=jobtitle, root=root, includes=includes, excludes=excludes, metafilters=metafilters, job_seed=job_seed)
 
         self._landscape = None
         return

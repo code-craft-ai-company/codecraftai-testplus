@@ -134,10 +134,7 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
     if len(includes) == 0:
         includes.append("*")
 
-    result_code = 0
     with job_type(logger, testroot, includes=includes, excludes=excludes, test_module=test_module) as tjob:
         result_code = tjob.execute()
 
     sys.exit(result_code)
-
-    return

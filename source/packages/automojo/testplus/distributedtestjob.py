@@ -18,13 +18,15 @@ from typing import List, Optional
 import os
 import traceback
 
+from datetime import datetime
+
 from automojo.xmodules.xformatting import CommandOutputFormat
 from automojo.xmodules.debugging import debugger_wellknown_breakpoint_entry
 from automojo.xmodules.xlogging.enhancedloggers import EnhancedLogger
 
 from automojo.thisapp.wellknown import ThisApplicationSingleton
 
-from automojo.runtime.runtimevariables import RuntimeVariables
+from automojo.runtime.runtimevariables import RuntimeVariables, DefaultValue
 from automojo.runtime.paths import (
     get_summary_html_template_source,
     get_summary_static_resource_dest_dir,
@@ -167,6 +169,25 @@ class DistributedTestJob:
         return self._import_errors
 
 
+    @property
+    def job_seed(self) -> str:
+        """
+            Returns the job-level seed for reproducible property-based testing.
+
+            Mirrors :attr:`automojo.testbase.testjob.TestJob.job_seed`.  The seed is
+            a string (typically a UUID) read from ``AM_JOB_SEED``.  If no seed was
+            set, a random UUID is generated on first access and cached for the
+            duration of the job so subsequent property-test runs are reproducible.
+
+            :returns: A string seed value (UUID).
+        """
+        import uuid
+
+        if self._job_seed is None or self._job_seed == DefaultValue.NotSet:
+            self._job_seed = str(uuid.uuid4())
+        return str(self._job_seed)
+
+
     def begin(self):
         """
             Called at the beginning of a test job in order to setup the recording of test results.
@@ -290,7 +311,11 @@ class DistributedTestJob:
 
                 title = self.title
                 runid = self._run_id
-                start = str(self._starttime)
+                # Pass the datetime object directly — JsonResultRecorder expects
+                # ``start: datetime`` (matching the parent ``TestJob`` contract).
+                # The previous ``str(...)`` conversion broke datetime arithmetic
+                # downstream in the recorder.
+                start = self._starttime
 
                 static_resource_source = get_summary_static_resource_src_dir()
                 static_resource_destination = get_summary_static_resource_dest_dir()
@@ -559,7 +584,7 @@ class DistributedTestJob:
         return
 
 
-    def _create_recorder(self, runid: str, start: str, render_info: RenderInfo, build_info: BuildInfo,
+    def _create_recorder(self, runid: str, start: datetime, render_info: RenderInfo, build_info: BuildInfo,
                          pipeline_info: PipelineInfo, job_info: JobInfo) -> ResultRecorder:
         """
             Simple hook function to make it possible to overload the type of ResultRecorder that is created for
@@ -576,7 +601,7 @@ class DistributedTestJob:
             Simple hook function to make it possible to overload the type of the DistributedTestSequencer that is created
             for jobs.
         """
-        inst = DistributedTestSequencer(self.title, self._testroot, includes=self.includes, excludes=self.excludes, metafilters=self.metafilters)
+        inst = DistributedTestSequencer(self.title, self._testroot, includes=self.includes, excludes=self.excludes, metafilters=self.metafilters, job_seed=self.job_seed)
         return inst
 
 
