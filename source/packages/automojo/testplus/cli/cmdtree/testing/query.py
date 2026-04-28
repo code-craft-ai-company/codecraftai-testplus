@@ -111,8 +111,8 @@ def command_testplus_testing_query(root, includes, excludes,
 
     for exmexp in exclude_marker_exp:
         exmexp = exmexp.strip("\"")
-        imexp = imexp.strip("'")
-        mfilter = parse_marker_expression("-" + imexp)
+        exmexp = exmexp.strip("'")
+        mfilter = parse_marker_expression("-" + exmexp)
         metafilters.append(mfilter)
 
     

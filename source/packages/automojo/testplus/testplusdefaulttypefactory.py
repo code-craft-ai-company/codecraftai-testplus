@@ -31,9 +31,17 @@ class TestPlusDefaultTypeFactory(FactoryExtension, TestBaseFactoryProtocol):
 
     PRECEDENCE = 20
 
-    def get_testbase_default_job_type() -> Type[TestJob]:
+    @classmethod
+    def get_testbase_default_job_type(cls) -> Type[TestJob]:
         """
             Used to lookup and return the most relevant default job type as determined
             by the super factory search path.
+
+            Mirrors the parent contract on
+            :class:`automojo.testbase.factoryprotocols.TestBaseFactoryProtocol`,
+            which declares this as a classmethod.  Without ``@classmethod`` the
+            override fails to satisfy the protocol — it would be either an
+            unbound function (no ``self`` / ``cls``) that crashes at call time,
+            or an instance method whose signature differs from the parent's.
         """
         return DistributedTestJob

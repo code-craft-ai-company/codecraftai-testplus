@@ -385,28 +385,6 @@ class DistributedTestJob:
         return result_code
 
 
-    def fire_attach_to_environment(self, tseq: DistributedTestSequencer):
-        """
-            Goes through all the integrations and provides them with an opportunity to
-            attach to the test environment.
-        """
-
-        tseq.attach_to_environment()
-
-        return
-
-
-    def fire_attach_to_framework(self, tseq: DistributedTestSequencer):
-        """
-            Goes through all the integrations and provides them with an opportunity to
-            attach to the test environment.
-        """
-
-        tseq.attach_to_framework()
-
-        return
-
-
     def fire_activate_configuration(self):
         """
             Activates the configuration phase of the landscape.

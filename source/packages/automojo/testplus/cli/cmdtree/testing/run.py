@@ -186,6 +186,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
         ConfigOptionOverrides.override_config_credentials_names(credential_names)
 
     if len(credential_sources) > 0:
+        use_credentials = True
         ConfigOptionOverrides.override_config_credentials_sources(credential_sources)
 
 
@@ -198,6 +199,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
         ConfigOptionOverrides.override_config_landscape_names(landscape_names)
 
     if len(landscape_sources) > 0:
+        use_landscape = True
         ConfigOptionOverrides.override_config_landscape_sources(landscape_sources)
 
 
@@ -210,6 +212,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
         ConfigOptionOverrides.override_config_runtime_names(runtime_names)
 
     if len(runtime_sources) > 0:
+        use_runtime = True
         ConfigOptionOverrides.override_config_runtime_sources(runtime_sources)
 
 
@@ -222,6 +225,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
         ConfigOptionOverrides.override_config_topology_names(topology_names)
 
     if len(topology_sources) > 0:
+        use_topology = True
         ConfigOptionOverrides.override_config_topology_sources(topology_sources)
 
 
@@ -251,7 +255,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
         AM_RUNTIME_OPTION_OVERRIDES.override_build_flavor(flavor)
 
 
-    if job_initiator is not None:
+    if job_id is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_job_id(job_id)
 
     if job_initiator is not None:
@@ -284,13 +288,13 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     if breakpoints is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_debug_breakpoints(breakpoints)
 
-        # If a breakpoint was passed bug the debugger was not, use 'debugpy' for the
-        # default debugger.
+        # If a breakpoint was passed but the debugger was not, fall back to
+        # 'debugpy' as the default debugger.
         if debugger is None:
             AM_RUNTIME_OPTION_OVERRIDES.override_debug_debugger('debugpy')
 
     if debugger is not None:
-        AM_RUNTIME_OPTION_OVERRIDES.override_debug_debugger('debugpy')
+        AM_RUNTIME_OPTION_OVERRIDES.override_debug_debugger(debugger)
 
     # TODO: Handle 'root' parameter better
     if root is None:
@@ -322,8 +326,8 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
     for exmexp in exclude_marker_exp:
         exmexp = exmexp.strip("\"")
-        imexp = imexp.strip("'")
-        mfilter = parse_marker_expression("-" + imexp)
+        exmexp = exmexp.strip("'")
+        mfilter = parse_marker_expression("-" + exmexp)
         metafilters.append(mfilter)
 
 

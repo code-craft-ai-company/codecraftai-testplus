@@ -24,8 +24,8 @@ CONFIGURATION_CHOICES = [
 ]
 
 HELP_ROOT = "The root directory to use when scanning for tests."
-HELP_EXCLUDES = "Add a test inclusion expression."
-HELP_INCLUDES = "Add a test exclusion expression."
+HELP_INCLUDES = "Add a test inclusion expression."
+HELP_EXCLUDES = "Add a test exclusion expression."
 HELP_OUTPUT = "The output directory where results and artifacts are collected."
 HELP_START = r"A time stamp to associate with the start of the run. Example: 2020-10-17T15:30:11.989120  Bash: date +%Y-%m-%dT%H:%M:%S.%N"
 HELP_BRANCH = "The name of the branch to associate with the test run results."

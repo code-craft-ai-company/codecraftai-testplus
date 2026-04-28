@@ -141,7 +141,7 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
 
     logger = getEnhancedLogger()
 
-    tpmod = sys.modules["mojo.testplus"]
+    tpmod = sys.modules["automojo.testplus"]
     tpmod.logger = logger
 
     from automojo.thisapp.wellknown import ConfiguredSuperFactorySingleton
@@ -180,5 +180,6 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
 
     return
 
+group_testplus_testing_jobs.add_command(command_testing_jobs_list)
 group_testplus_testing_jobs.add_command(command_testplus_testing_jobs_show)
 group_testplus_testing_jobs.add_command(command_testplus_testing_jobs_run)
