@@ -28,7 +28,11 @@ class DistributedTestJob(InteropLibraryTestJob):
         Layered inheritance:
 
         * :class:`automojo.testbase.testjob.TestJob` — single-host base
-          (lifecycle, recorder, sequencer factory, properties, ``execute``).
+          (lifecycle, recorder, sequencer factory, properties, ``execute``);
+          standalone-default seams (stdout recorder).
+        * :class:`automojo.integrationruntime.integratedtestjob.IntegratedTestJob` —
+          integration tier: JSOS/HTML/presence-folder result recording and run
+          metadata sourced from ``RuntimeVariables``.
         * :class:`automojo.interop.testing.testjob.InteropLibraryTestJob` —
           adds the landscape-activation hooks (``fire_attach_to_environment``,
           ``fire_attach_to_framework``, ``fire_activate_configuration``,

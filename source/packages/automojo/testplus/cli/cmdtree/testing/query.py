@@ -61,8 +61,8 @@ def command_testplus_testing_query(root, includes, excludes,
 
     from automojo.xmodules.xpython import prepend_python_path
 
-    from automojo.runtime.activation import activate_runtime, ActivationProfile
-    from automojo.runtime.runtimevariables import RuntimeVariables
+    from automojo.thisapp.activation import activate_runtime, ActivationProfile
+    from automojo.thisapp.runtimevariables import RuntimeVariables
 
     # STEP 2 - Resolve the configuration variables (performed by the root command)
 

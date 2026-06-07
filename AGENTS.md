@@ -33,6 +33,15 @@ including the `DistributedTestJob` parent-container abstraction, a distributed
 test sequencer, and a default type factory used to materialise shared resources
 across hosts.
 
+`DistributedTestJob` sits at the bottom of the `TestJob` inheritance chain. As
+built today, `IntegratedTestJob` (from `automojo-integration-runtime`) and
+`InteropLibraryTestJob` both extend `TestJob` directly as siblings. The in-flight
+target is to insert an `IntegratedTestJob` layer — which adds integration result
+recording — between `TestJob` and `InteropLibraryTestJob`, giving the chain
+`TestJob -> IntegratedTestJob -> InteropLibraryTestJob -> DistributedTestJob`; the
+re-parent of `InteropLibraryTestJob` onto `IntegratedTestJob` is what remains in
+flight.
+
 The package also ships a `testplus` CLI (entry point `testplus_command`) with a
 command tree under `cli/cmdtree/testing/` that mirrors the `testbase` CLI surface
 (`run`, `jobs`, `query`) for distributed runs. It is intended to be used together

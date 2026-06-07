@@ -24,10 +24,12 @@ automojo-waiting = { git = "https://github.com/automationmojo/automojo-waiting.g
 automojo-arcli = { git = "https://github.com/automationmojo/automojo-arcli.git", branch = "main" }
 automojo-runtime = { git = "https://github.com/automationmojo/automojo-runtime.git", branch = "main" }
 automojo-testbase = { git = "https://github.com/automationmojo/automojo-testbase.git", branch = "main" }
+automojo-this-app = { git = "https://github.com/automationmojo/automojo-this-app.git", branch = "main" }
 automojo-credentials = { git = "https://github.com/automationmojo/automojo-credentials.git", branch = "main" }
 automojo-dataprofiles = { git = "https://github.com/automationmojo/automojo-dataprofiles.git", branch = "main" }
 automojo-networking = { git = "https://github.com/automationmojo/automojo-networking.git", branch = "main" }
 automojo-interop = { git = "https://github.com/automationmojo/automojo-interop.git", branch = "main" }
+automojo-integration-runtime = { git = "https://github.com/automationmojo/automojo-integration-runtime.git", branch = "main" }
 automojo-landscaping = { git = "https://github.com/automationmojo/automojo-landscaping.git", branch = "main" }
 automojo-xmodules = { git = "https://github.com/automationmojo/automojo-xmodules.git", branch = "main" }
 

@@ -16,7 +16,7 @@ import click
 
 from automojo.thisapp.wellknown import ThisApplicationSingleton
 
-from automojo.runtime.runtimevariables import RuntimeVariablesDesc
+from automojo.thisapp.runtimevariables import RuntimeVariablesDesc
 
 from automojo.testbase.cli.cmdtree.services import group_testbase_services
 from automojo.testbase.cli.cmdtree.utilities import group_testbase_utilities

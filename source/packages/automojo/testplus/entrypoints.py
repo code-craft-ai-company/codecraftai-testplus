@@ -27,7 +27,7 @@ from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 
 from automojo.thisapp.wellknown import ThisApplicationSingleton
 
-from automojo.runtime.paths import get_path_for_testresults
+from automojo.thisapp.paths import get_path_for_testresults
 
 from automojo.testbase.injection.injectionregistry import InjectionRegistry
 from automojo.testbase.utilities import find_testmodule_root, find_testmodule_fullname
@@ -51,8 +51,8 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
     from automojo.testplus.initialize import initialize_testplus_runtime, initialize_testplus_results
     initialize_testplus_runtime()
 
-    from automojo.runtime.enumerations import JobType
-    from automojo.runtime.activation import activate_profile_job
+    from automojo.thisapp.enumerations import JobType
+    from automojo.thisapp.activation import activate_profile_job
 
     activate_profile_job(JobType.TestRun)
 

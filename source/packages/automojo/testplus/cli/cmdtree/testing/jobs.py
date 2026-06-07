@@ -121,7 +121,7 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     # STEP 6 - Initialize the Results Output
 
     # STEP 7 - Create and kick off the job
-    from automojo.runtime.activation import activate_profile_job, JobType
+    from automojo.thisapp.activation import activate_profile_job, JobType
     activate_profile_job(JobType.TestRun)
 
 

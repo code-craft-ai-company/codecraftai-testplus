@@ -18,11 +18,11 @@ from automojo.thisapp.persona import establish_app_persona
 from automojo.thisapp.wellknown import ThisApplicationSingleton
 from automojo.thisapp.contextpaths import ContextPaths
 
-from automojo.runtime.enumerations import JobType
-from automojo.runtime.activation import activate_profile_job
+from automojo.thisapp.enumerations import JobType
+from automojo.thisapp.activation import activate_profile_job
 
 
-from automojo.runtime.runtimevariables import RuntimeVariables, resolve_runtime_variables
+from automojo.thisapp.runtimevariables import RuntimeVariables, resolve_runtime_variables
 
 from automojo.configuration.configurationvariables import resolve_configuration_variables
 

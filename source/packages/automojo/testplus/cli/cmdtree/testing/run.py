@@ -140,7 +140,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
     from automojo.xmodules.xpython import prepend_python_path
 
-    from automojo.runtime.runtimevariables import RuntimeVariables, RuntimeVariablesDesc
+    from automojo.thisapp.runtimevariables import RuntimeVariables, RuntimeVariablesDesc
 
     from automojo.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
     from automojo.configuration.optionoverrides import ConfigOptionOverrides
