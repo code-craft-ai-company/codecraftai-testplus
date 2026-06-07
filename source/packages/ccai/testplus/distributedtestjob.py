@@ -8,17 +8,17 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
 from typing import Any
 
-from automojo.interop.testing.testjob import InteropLibraryTestJob
+from ccai.interop.testing.testjob import InteropLibraryTestJob
 
-from automojo.landscaping.wellknown import LandscapeSingleton
+from ccai.landscaping.wellknown import LandscapeSingleton
 
-from automojo.testplus.distributedtestsequencer import DistributedTestSequencer
+from ccai.testplus.distributedtestsequencer import DistributedTestSequencer
 
 
 class DistributedTestJob(InteropLibraryTestJob):
@@ -27,13 +27,13 @@ class DistributedTestJob(InteropLibraryTestJob):
 
         Layered inheritance:
 
-        * :class:`automojo.testbase.testjob.TestJob` — single-host base
+        * :class:`ccai.testbase.testjob.TestJob` — single-host base
           (lifecycle, recorder, sequencer factory, properties, ``execute``);
           standalone-default seams (stdout recorder).
-        * :class:`automojo.integrationruntime.integratedtestjob.IntegratedTestJob` —
+        * :class:`ccai.integrationruntime.integratedtestjob.IntegratedTestJob` —
           integration tier: JSOS/HTML/presence-folder result recording and run
           metadata sourced from ``RuntimeVariables``.
-        * :class:`automojo.interop.testing.testjob.InteropLibraryTestJob` —
+        * :class:`ccai.interop.testing.testjob.InteropLibraryTestJob` —
           adds the landscape-activation hooks (``fire_attach_to_environment``,
           ``fire_attach_to_framework``, ``fire_activate_configuration``,
           ``fire_activate_integration``, ``fire_activate_operations``).

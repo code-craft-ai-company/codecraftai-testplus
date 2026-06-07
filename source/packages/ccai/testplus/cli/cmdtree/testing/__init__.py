@@ -8,15 +8,15 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 __version__ = "1.0.0"
 
 import click
 
-from automojo.testplus.cli.cmdtree.testing.jobs import group_testplus_testing_jobs
-from automojo.testplus.cli.cmdtree.testing.query import command_testplus_testing_query
-from automojo.testplus.cli.cmdtree.testing.run import command_testplus_testing_run
+from ccai.testplus.cli.cmdtree.testing.jobs import group_testplus_testing_jobs
+from ccai.testplus.cli.cmdtree.testing.query import command_testplus_testing_query
+from ccai.testplus.cli.cmdtree.testing.run import command_testplus_testing_run
 
 @click.group("testing", help="Contains command for working with tests and test results.")
 def group_testplus_testing():

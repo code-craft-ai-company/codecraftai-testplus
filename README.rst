@@ -1,8 +1,8 @@
 ==========================
-Automation Mojo TestPlus
+Code Craft AI TestPlus
 ==========================
 
-The ``automojo-testplus`` package extends the ``automojo-testbase`` test framework with support for distributed and multi-host test jobs. Where ``testbase`` focuses on single-host test runs, ``testplus`` adds the pieces required to coordinate tests across a cluster of machines drawn from an ``automojo-landscaping`` landscape, including the ``DistributedTestJob`` parent-container abstraction, a distributed test sequencer, and a default type factory used to materialise shared resources across hosts.
+The ``codecraftai-testplus`` package extends the ``codecraftai-testbase`` test framework with support for distributed and multi-host test jobs. Where ``testbase`` focuses on single-host test runs, ``testplus`` adds the pieces required to coordinate tests across a cluster of machines drawn from an ``codecraftai-landscaping`` landscape, including the ``DistributedTestJob`` parent-container abstraction, a distributed test sequencer, and a default type factory used to materialise shared resources across hosts.
 
 Highlights
 ==========
@@ -11,7 +11,7 @@ Highlights
 - Distributed test sequencer for coordinating execution across hosts.
 - Default type factory for materialising shared resources across a cluster.
 - ``testplus`` CLI (entry point ``testplus_command``) with ``run``, ``jobs``, and ``query`` subcommands mirroring the ``testbase`` surface.
-- Designed to be used alongside ``automojo-testbase`` and ``automojo-landscaping``.
+- Designed to be used alongside ``codecraftai-testbase`` and ``codecraftai-landscaping``.
 
 Repository Structure
 ====================
@@ -19,7 +19,7 @@ Repository Structure
 - ``development/`` - Runtime environment scripts.
 - ``repository-setup/`` - Repository homing and setup scripts.
 - ``source/packages/`` - Package source code.
-- ``source/testroots/automojo/`` - TestBase test roots.
+- ``source/testroots/ccai/`` - TestBase test roots.
 - ``specs/`` - Requirements, design, and task documentation.
 - ``userguide/`` - Standards, conventions, and documentation.
 
@@ -52,7 +52,7 @@ Run the single-host test suite:
 
 .. code-block:: bash
 
-   testbase testing run --root source/testroots/automojo --includes=automojo.tests.testplus.singlehost --output=./.output
+   testbase testing run --root source/testroots/ccai --includes=ccai.tests.testplus.singlehost --output=./.output
 
 Standards and Conventions
 =========================

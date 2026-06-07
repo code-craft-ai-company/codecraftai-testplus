@@ -8,22 +8,22 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
 import click
 
-from automojo.thisapp.wellknown import ThisApplicationSingleton
+from ccai.thisapp.wellknown import ThisApplicationSingleton
 
-from automojo.thisapp.runtimevariables import RuntimeVariablesDesc
+from ccai.thisapp.runtimevariables import RuntimeVariablesDesc
 
-from automojo.testbase.cli.cmdtree.services import group_testbase_services
-from automojo.testbase.cli.cmdtree.utilities import group_testbase_utilities
+from ccai.testbase.cli.cmdtree.services import group_testbase_services
+from ccai.testbase.cli.cmdtree.utilities import group_testbase_utilities
 
-from automojo.testplus.cli.cmdtree.testing import group_testplus_testing
+from ccai.testplus.cli.cmdtree.testing import group_testplus_testing
 
-from automojo.testplus.initialize import initialize_testplus_runtime
+from ccai.testplus.initialize import initialize_testplus_runtime
 
 @click.group("testplus")
 @click.option('-v', '--verbose', count=True)

@@ -7,13 +7,13 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
 import os
 
-from automojo.configuration.normalize import SEPARATOR
+from ccai.configuration.normalize import SEPARATOR
 
 CONFIGURATION_CHOICES = [
     "all",

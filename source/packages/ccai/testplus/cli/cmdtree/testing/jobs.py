@@ -7,7 +7,7 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 import argparse
@@ -17,8 +17,8 @@ import sys
 
 import click
 
-from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
-from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
+from ccai.xmodules.xlogging.levels import LOG_LEVEL_NAMES
+from ccai.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 
 @click.group("jobs", help="Contains commands for working with test jobs.")
 def group_testplus_testing_jobs():
@@ -98,8 +98,8 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     # IMPORTANT: We need to load the context first because it will trigger the loading
     # of the default user configuration
 
-    from automojo.xmodules.ximport import import_by_name
-    from automojo.xmodules.xpython import prepend_python_path
+    from ccai.xmodules.ximport import import_by_name
+    from ccai.xmodules.xpython import prepend_python_path
 
     # STEP 1 - Initialize the Runtime (Performed by the root command)
 
@@ -110,7 +110,7 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     
 
     # STEP 4 - Resolve the Configuration Maps
-    #from automojo.configuration.configurationmaps import resolve_configuration_maps
+    #from ccai.configuration.configurationmaps import resolve_configuration_maps
     #resolve_configuration_maps(use_credentials=use_credentials, use_landscape=use_landscape,
     #                           use_runtime=use_runtime, use_topology=use_topology)
     
@@ -121,7 +121,7 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     # STEP 6 - Initialize the Results Output
 
     # STEP 7 - Create and kick off the job
-    from automojo.thisapp.activation import activate_profile_job, JobType
+    from ccai.thisapp.activation import activate_profile_job, JobType
     activate_profile_job(JobType.TestRun)
 
 
@@ -136,16 +136,16 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
     prepend_python_path(test_root)
 
     # Activation of the runtime happens when we initialize test results
-    from automojo.testplus.initialize import initialize_testplus_results
+    from ccai.testplus.initialize import initialize_testplus_results
     initialize_testplus_results()
 
     logger = getEnhancedLogger()
 
-    tpmod = sys.modules["automojo.testplus"]
+    tpmod = sys.modules["ccai.testplus"]
     tpmod.logger = logger
 
-    from automojo.thisapp.wellknown import ConfiguredSuperFactorySingleton
-    from automojo.testbase.factoryprotocols import TestBaseFactoryProtocol
+    from ccai.thisapp.wellknown import ConfiguredSuperFactorySingleton
+    from ccai.testbase.factoryprotocols import TestBaseFactoryProtocol
 
     # At this point in the code, we either lookup an existing test job or we create a test job
     # from the includes, excludes or test_module

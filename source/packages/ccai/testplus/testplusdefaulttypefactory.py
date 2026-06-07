@@ -8,18 +8,18 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
 from typing import Type
 
-from automojo.extension.factory.factoryextension import FactoryExtension
+from ccai.extension.factory.factoryextension import FactoryExtension
 
-from automojo.testbase.factoryprotocols import TestBaseFactoryProtocol
-from automojo.testbase.testjob import TestJob
+from ccai.testbase.factoryprotocols import TestBaseFactoryProtocol
+from ccai.testbase.testjob import TestJob
 
-from automojo.testplus.distributedtestjob import DistributedTestJob
+from ccai.testplus.distributedtestjob import DistributedTestJob
 
 class TestPlusDefaultTypeFactory(FactoryExtension, TestBaseFactoryProtocol):
     """
@@ -38,7 +38,7 @@ class TestPlusDefaultTypeFactory(FactoryExtension, TestBaseFactoryProtocol):
             by the super factory search path.
 
             Mirrors the parent contract on
-            :class:`automojo.testbase.factoryprotocols.TestBaseFactoryProtocol`,
+            :class:`ccai.testbase.factoryprotocols.TestBaseFactoryProtocol`,
             which declares this as a classmethod.  Without ``@classmethod`` the
             override fails to satisfy the protocol — it would be either an
             unbound function (no ``self`` / ``cls``) that crashes at call time,

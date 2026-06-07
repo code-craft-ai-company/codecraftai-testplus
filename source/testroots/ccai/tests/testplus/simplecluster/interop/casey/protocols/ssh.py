@@ -1,19 +1,19 @@
 
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
 
 from typing import Generator
 
-from automojo import testplus
+from ccai import testplus
 
-from automojo.landscaping.landscape import Landscape
-from automojo.landscaping.includefilters import IncludeDeviceByDeviceType
+from ccai.landscaping.landscape import Landscape
+from ccai.landscaping.includefilters import IncludeDeviceByDeviceType
 
-from automojo.landscaping.clients.linux.linuxclient import LinuxClient
+from ccai.landscaping.clients.linux.linuxclient import LinuxClient
 
 @testplus.register.resource_factory()
 def each_client(lscape: Landscape, constraints={}) -> Generator[LinuxClient, None, None]:

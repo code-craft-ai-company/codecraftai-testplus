@@ -8,20 +8,20 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
 from typing import List
 
 import logging
-from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
+from ccai.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 import os
 import sys
 
 import click
 
-from automojo.testplus.cli.cmdtree.testing.constants import (
+from ccai.testplus.cli.cmdtree.testing.constants import (
     HELP_ROOT,
     HELP_EXCLUDES,
     HELP_INCLUDES,
@@ -56,13 +56,13 @@ def command_testplus_testing_query(root, includes, excludes,
     # IMPORTANT: We need to load the context first because it will trigger the loading
     # of the default user configuration
 
-    from automojo.thisapp.contextpaths import ContextPaths
-    from automojo.thisapp.wellknown import ThisApplicationSingleton
+    from ccai.thisapp.contextpaths import ContextPaths
+    from ccai.thisapp.wellknown import ThisApplicationSingleton
 
-    from automojo.xmodules.xpython import prepend_python_path
+    from ccai.xmodules.xpython import prepend_python_path
 
-    from automojo.thisapp.activation import activate_runtime, ActivationProfile
-    from automojo.thisapp.runtimevariables import RuntimeVariables
+    from ccai.thisapp.activation import activate_runtime, ActivationProfile
+    from ccai.thisapp.runtimevariables import RuntimeVariables
 
     # STEP 2 - Resolve the configuration variables (performed by the root command)
 
@@ -71,15 +71,15 @@ def command_testplus_testing_query(root, includes, excludes,
     this_app = ThisApplicationSingleton()
 
     # STEP 4 - Resolve the Configuration Maps
-    from automojo.configuration.configurationmaps import resolve_configuration_maps
+    from ccai.configuration.configurationmaps import resolve_configuration_maps
     resolve_configuration_maps(use_credentials=False, use_landscape=False,
                                use_runtime=False, use_topology=False)
 
     # STEP 5 - Apply any Option Overrides
 
-    from automojo.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
+    from ccai.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
 
-    from automojo.testbase.markers import MetaFilter, parse_marker_expression
+    from ccai.testbase.markers import MetaFilter, parse_marker_expression
 
     # Setup the Test Root
     if root is None:
@@ -119,7 +119,7 @@ def command_testplus_testing_query(root, includes, excludes,
     # STEP 6 - Initialize the Results Output
 
     # Initialize testplus results and logging
-    from automojo.testplus.initialize import initialize_testplus_results
+    from ccai.testplus.initialize import initialize_testplus_results
 
     initialize_testplus_results()
 
@@ -128,8 +128,8 @@ def command_testplus_testing_query(root, includes, excludes,
 
     logger = getEnhancedLogger()
 
-    from automojo.thisapp.wellknown import ConfiguredSuperFactorySingleton
-    from automojo.testbase.factoryprotocols import TestBaseFactoryProtocol
+    from ccai.thisapp.wellknown import ConfiguredSuperFactorySingleton
+    from ccai.testbase.factoryprotocols import TestBaseFactoryProtocol
 
     sfactory = ConfiguredSuperFactorySingleton()
     TestJobType = sfactory.get_override_types_by_order(TestBaseFactoryProtocol.get_testbase_default_job_type)

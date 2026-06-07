@@ -1,7 +1,7 @@
 
-from automojo import testplus
+from ccai import testplus
 
-from automojo.landscaping.factories import create_landscape, create_linux_client_coordinator_coupling
+from ccai.landscaping.factories import create_landscape, create_linux_client_coordinator_coupling
 
 testplus.originate.parameter(create_linux_client_coordinator_coupling, identifier="lc_coupling")
 
