@@ -2,14 +2,14 @@
     .. module:: entrypoints
     :platform: Darwin, Linux, Unix, Windows
     :synopsis: A set of standaridized entry point functions that provide standardized test environment
-    startup and test run commencement utilizing the :class:`automojo.testbase.testsequencer.TestSequencer`
+    startup and test run commencement utilizing the :class:`ccai.testbase.testsequencer.TestSequencer`
     object.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
@@ -21,18 +21,18 @@ import inspect
 import os
 import sys
 
-from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
-from automojo.xmodules.ximport import import_by_name
-from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
+from ccai.xmodules.xlogging.levels import LOG_LEVEL_NAMES
+from ccai.xmodules.ximport import import_by_name
+from ccai.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 
-from automojo.thisapp.wellknown import ThisApplicationSingleton
+from ccai.thisapp.wellknown import ThisApplicationSingleton
 
-from automojo.thisapp.paths import get_path_for_testresults
+from ccai.thisapp.paths import get_path_for_testresults
 
-from automojo.testbase.injection.injectionregistry import InjectionRegistry
-from automojo.testbase.utilities import find_testmodule_root, find_testmodule_fullname
+from ccai.testbase.injection.injectionregistry import InjectionRegistry
+from ccai.testbase.utilities import find_testmodule_root, find_testmodule_fullname
 
-from automojo.testplus.distributedtestjob import DistributedTestJob, DefaultDistributedTestJob
+from ccai.testplus.distributedtestjob import DistributedTestJob, DefaultDistributedTestJob
 
 
 def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = DefaultDistributedTestJob):
@@ -48,17 +48,17 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
         be run for debugging purposes.
 
     """
-    from automojo.testplus.initialize import initialize_testplus_runtime, initialize_testplus_results
+    from ccai.testplus.initialize import initialize_testplus_runtime, initialize_testplus_results
     initialize_testplus_runtime()
 
-    from automojo.thisapp.enumerations import JobType
-    from automojo.thisapp.activation import activate_profile_job
+    from ccai.thisapp.enumerations import JobType
+    from ccai.thisapp.activation import activate_profile_job
 
     activate_profile_job(JobType.TestRun)
 
     # Test job types that inherit from 'DistributedTestJob' can set the requires_credentials, requires_landscape, requires_topology,
     # and requires_runtime to indicate that the test framework must load the appropriate configuration maps.
-    from automojo.configuration.configurationmaps import resolve_configuration_maps
+    from ccai.configuration.configurationmaps import resolve_configuration_maps
     resolve_configuration_maps(use_credentials=job_type.requires_credentials, use_landscape=job_type.requires_landscape,
                                use_runtime=job_type.requires_runtime, use_topology=job_type.requires_topology)
 
@@ -90,7 +90,7 @@ def distributed_test_entrypoint(job_type: Optional[Type[DistributedTestJob]] = D
         os.makedirs(test_results_dir)
     env["output_directory"] = test_results_dir
 
-    tpmod = sys.modules["automojo.testbase"]
+    tpmod = sys.modules["ccai.testbase"]
     tpmod.logger = logger
 
     testroot = find_testmodule_root(test_module)

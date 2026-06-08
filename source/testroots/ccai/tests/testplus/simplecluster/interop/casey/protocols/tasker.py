@@ -1,6 +1,6 @@
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
@@ -11,23 +11,23 @@ import tempfile
 import time
 import zipfile
 
-from automojo import testplus
+from ccai import testplus
 
 
-from automojo.foundation.runtime.paths import get_path_for_output
+from ccai.foundation.runtime.paths import get_path_for_output
 
-from automojo.testbase.results.model.taskingresult import TaskingResult
-from automojo.testbase.sequencing.testsequencer import TestSequencer
+from ccai.testbase.results.model.taskingresult import TaskingResult
+from ccai.testbase.sequencing.testsequencer import TestSequencer
 
-from automojo.interop.protocols.tasker.taskernode import TaskerClientNode
-from automojo.interop.protocols.tasker.taskercontroller import ClientTaskerController
-from automojo.interop.protocols.tasker.taskingadapter import TaskingAdapter
+from ccai.interop.protocols.tasker.taskernode import TaskerClientNode
+from ccai.interop.protocols.tasker.taskercontroller import ClientTaskerController
+from ccai.interop.protocols.tasker.taskingadapter import TaskingAdapter
 
-from automojo.interop.protocols.tasker.examples.helloworldtasking import HelloWorldTasking
+from ccai.interop.protocols.tasker.examples.helloworldtasking import HelloWorldTasking
 
-from automojo.landscaping.landscape import Landscape
-from automojo.landscaping.includefilters import IncludeDeviceByDeviceType
-from automojo.landscaping.clients.linux.linuxclient import LinuxClient
+from ccai.landscaping.landscape import Landscape
+from ccai.landscaping.includefilters import IncludeDeviceByDeviceType
+from ccai.landscaping.clients.linux.linuxclient import LinuxClient
 
 
 @testplus.register.resource_factory()

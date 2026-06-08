@@ -8,25 +8,25 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
 import os
 
-from automojo.thisapp.persona import establish_app_persona
-from automojo.thisapp.wellknown import ThisApplicationSingleton
-from automojo.thisapp.contextpaths import ContextPaths
+from ccai.thisapp.persona import establish_app_persona
+from ccai.thisapp.wellknown import ThisApplicationSingleton
+from ccai.thisapp.contextpaths import ContextPaths
 
-from automojo.thisapp.enumerations import JobType
-from automojo.thisapp.activation import activate_profile_job
+from ccai.thisapp.enumerations import JobType
+from ccai.thisapp.activation import activate_profile_job
 
 
-from automojo.thisapp.runtimevariables import RuntimeVariables, resolve_runtime_variables
+from ccai.thisapp.runtimevariables import RuntimeVariables, resolve_runtime_variables
 
-from automojo.configuration.configurationvariables import resolve_configuration_variables
+from ccai.configuration.configurationvariables import resolve_configuration_variables
 
-from automojo import testbase
+from ccai import testbase
 
 TESTBASE_DIR = os.path.dirname(testbase.__file__)
 
@@ -54,12 +54,12 @@ def initialize_testplus_runtime():
         :returns: ``None``
     """
 
-    name="automojo"
+    name="ccai"
     home_dir = os.path.join(os.path.expanduser("~"), name)
 
     # Register the testplus default type factory so the default job type will be a distributed test job for
     # any tests run with the 'testplus' command.
-    extension_modules = "automojo.testplus.testplusdefaulttypefactory"
+    extension_modules = "ccai.testplus.testplusdefaulttypefactory"
     
     establish_app_persona(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules, log_basename="testrun")
 

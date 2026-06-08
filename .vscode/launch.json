@@ -17,13 +17,13 @@
             "name": "Python: Internal Tests - Run",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/source/packages/automojo/testplus/cli/testplus_command.py",
+            "program": "${workspaceFolder}/source/packages/ccai/testplus/cli/testplus_command.py",
             "envFile": "${workspaceFolder}/.env",
             "args": [
                 "testing",
                 "run",
-                "--root=${workspaceFolder}/source/testroots/automojo",
-                "--includes=automojo.tests.testplus.singlehost",
+                "--root=${workspaceFolder}/source/testroots/ccai",
+                "--includes=ccai.tests.testplus.singlehost",
                 "--default-configs=credentials",
                 "--landscape-name=casey-landscape",
                 "--breakpoint=testrun-start"
@@ -35,7 +35,7 @@
             "name": "Python: Test Results",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/source/packages/automojo/testplus/cli/testplus_command.py",
+            "program": "${workspaceFolder}/source/packages/ccai/testplus/cli/testplus_command.py",
             "envFile": "${workspaceFolder}/.env",
             "args": [
                 "services",

@@ -8,7 +8,7 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 from typing import List
@@ -18,11 +18,11 @@ import sys
 
 import click
 
-from automojo.interfaces.itestjob import ITestJob
-from automojo.xmodules.xlogging.levels import LOG_LEVEL_NAMES
-from automojo.xmodules.xlogging.enhancedloggers import getEnhancedLogger
+from ccai.interfaces.itestjob import ITestJob
+from ccai.xmodules.xlogging.levels import LOG_LEVEL_NAMES
+from ccai.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 
-from automojo.testbase.cli.cmdtree.testing.constants import (
+from ccai.testbase.cli.cmdtree.testing.constants import (
     HELP_ROOT,
     HELP_EXCLUDES,
     HELP_INCLUDES,
@@ -47,7 +47,7 @@ from automojo.testbase.cli.cmdtree.testing.constants import (
     HELP_EXCLUDE_MARKER_EXP
 )
 
-from automojo.testplus.cli.cmdtree.testing.constants import (
+from ccai.testplus.cli.cmdtree.testing.constants import (
     HELP_CONFIG_NAME,
     HELP_CREDENTIAL,
     HELP_CREDENTIAL_NAMES,
@@ -135,15 +135,15 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     # IMPORTANT: We need to load the context first because it will trigger the loading
     # of the default user configuration
 
-    from automojo.thisapp.contextpaths import ContextPaths
-    from automojo.thisapp.wellknown import ThisApplicationSingleton
+    from ccai.thisapp.contextpaths import ContextPaths
+    from ccai.thisapp.wellknown import ThisApplicationSingleton
 
-    from automojo.xmodules.xpython import prepend_python_path
+    from ccai.xmodules.xpython import prepend_python_path
 
-    from automojo.thisapp.runtimevariables import RuntimeVariables, RuntimeVariablesDesc
+    from ccai.thisapp.runtimevariables import RuntimeVariables, RuntimeVariablesDesc
 
-    from automojo.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
-    from automojo.configuration.optionoverrides import ConfigOptionOverrides
+    from ccai.runtime.optionoverrides import AM_RUNTIME_OPTION_OVERRIDES
+    from ccai.configuration.optionoverrides import ConfigOptionOverrides
 
     # STEP 1 - Initialize the Runtime (Performed by the root command)
     
@@ -175,7 +175,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
         if "topology" in default_configs:
             use_topology = True
 
-    from automojo.testbase.markers import MetaFilter, parse_marker_expression
+    from ccai.testbase.markers import MetaFilter, parse_marker_expression
 
     if len(credential_files) > 0:
         use_credentials = True
@@ -230,7 +230,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
 
     # STEP 4 - Resolve the Configuration Maps
-    from automojo.configuration.configurationmaps import resolve_configuration_maps
+    from ccai.configuration.configurationmaps import resolve_configuration_maps
     resolve_configuration_maps(use_credentials=use_credentials, use_landscape=use_landscape,
                                use_runtime=use_runtime, use_topology=use_topology)
 
@@ -334,7 +334,7 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     # STEP 6 - Initialize the Results Output
 
     # Initialize testplus results and logging
-    from automojo.testplus.initialize import initialize_testplus_results
+    from ccai.testplus.initialize import initialize_testplus_results
 
     initialize_testplus_results()
 
@@ -343,8 +343,8 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
     # STEP 7 - Create and kick off the job
 
-    from automojo.thisapp.wellknown import ConfiguredSuperFactorySingleton
-    from automojo.testbase.factoryprotocols import TestBaseFactoryProtocol
+    from ccai.thisapp.wellknown import ConfiguredSuperFactorySingleton
+    from ccai.testbase.factoryprotocols import TestBaseFactoryProtocol
 
     # At this point in the code, we either lookup an existing test job or we create a test job
     # from the includes, excludes or test_module

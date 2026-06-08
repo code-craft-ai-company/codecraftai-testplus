@@ -9,7 +9,7 @@
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
@@ -20,14 +20,14 @@ import json
 import os
 import sys
 
-from automojo.thisapp.paths import get_path_for_output
+from ccai.thisapp.paths import get_path_for_output
 
-from automojo.testbase.coupling.integrationcoupling import IntegrationCoupling
-from automojo.testbase.markers import MetaFilter
+from ccai.testbase.coupling.integrationcoupling import IntegrationCoupling
+from ccai.testbase.markers import MetaFilter
 
-from automojo.landscaping.landscape import Landscape
+from ccai.landscaping.landscape import Landscape
 
-from automojo.testbase.sequencing.testsequencer import TestSequencer
+from ccai.testbase.sequencing.testsequencer import TestSequencer
 
 
 class DistributedTestSequencer(TestSequencer):

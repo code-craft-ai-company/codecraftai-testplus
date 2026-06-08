@@ -133,7 +133,7 @@ Two-phase initialization for runtime and results:
 
 ### 1. Programmatic Entry Point
 ```python
-from automojo.testplus.entrypoints import distributed_test_entrypoint
+from ccai.testplus.entrypoints import distributed_test_entrypoint
 distributed_test_entrypoint(job_type=CustomTestJob)
 ```
 
@@ -198,10 +198,10 @@ if __name__ == "__main__":
 ## Dependencies and Integration
 
 ### Core Dependencies
-- `automojo.testbase` - Base testing framework
-- `automojo.landscaping` - Distributed environment management
-- `automojo.runtime` - Runtime configuration and variables
-- `automojo.configuration` - Configuration management system
+- `ccai.testbase` - Base testing framework
+- `ccai.landscaping` - Distributed environment management
+- `ccai.runtime` - Runtime configuration and variables
+- `ccai.configuration` - Configuration management system
 
 ### External Integrations
 - Click framework for CLI

@@ -3,28 +3,28 @@
     :platform: Darwin, Linux, Unix, Windows
     :synopsis: Top level package for the TestPlus framework which exposes
     commonly used APIs and decorators from the underlying
-    ``automojo.testbase`` package.
+    ``ccai.testbase`` package.
 
     .. moduleauthor:: Myron Walker <myron.walker@gmail.com>
 """
 
 __author__ = "Myron Walker"
-__copyright__ = "Copyright 2025, Automation Mojo LLC"
+__copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
-from automojo.xmodules.xlogging.enhancedloggers import (
+from ccai.xmodules.xlogging.enhancedloggers import (
     EnhancedLogger,
     getEnhancedLogger
 )
 logger: EnhancedLogger = getEnhancedLogger()
 
 
-from automojo.testbase.declaration import registrations as register
-from automojo.testbase.declaration import originations as originate
-from automojo.testbase.declaration import attachments as attach
+from ccai.testbase.declaration import registrations as register
+from ccai.testbase.declaration import originations as originate
+from ccai.testbase.declaration import attachments as attach
 
-from automojo.testbase.verification import (
+from ccai.testbase.verification import (
     assert_dict_response_has_keys,
     assert_dict_response_has_paths,
     assert_equal,
@@ -37,7 +37,7 @@ from automojo.testbase.verification import (
     assert_type
 )
 
-from automojo.testbase.markers import (
+from ccai.testbase.markers import (
     mark_categories,
     mark_keywords,
     mark_priority,
@@ -46,11 +46,11 @@ from automojo.testbase.markers import (
     mark_descendent_priority
 )
 
-from automojo.testbase.results.model.taskingresult import (
+from ccai.testbase.results.model.taskingresult import (
     verify_tasking_results
 )
 
-from automojo.testbase.constraints import (
+from ccai.testbase.constraints import (
     Constraints,
     ConstraintsCatalog,
     FeatureConstraints
