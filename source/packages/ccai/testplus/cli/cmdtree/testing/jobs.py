@@ -10,7 +10,6 @@ __author__ = "Myron Walker"
 __copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
-import argparse
 import logging
 import os
 import sys
@@ -46,12 +45,18 @@ HELP_DEBUG = "Output debug information to the console."
 @click.option("--root", default=".", type=str, help=HELP_ROOT)
 @click.option("--filter", "-f", required=False, help=HELP_FILTER)
 @click.option("--debug", default=False, type=bool, help=HELP_DEBUG)
-def command_testing_jobs_list():
+def command_testing_jobs_list(root, filter, debug):
     """
         Lists available TestPlus jobs.
 
+        :param root: Root directory used when scanning for jobs.
+        :param filter: Optional job filter expression.
+        :param debug: Whether to emit debug output.
+
         :returns: ``None``
     """
+
+    click.echo("The 'jobs list' command is not yet implemented.", err=True)
 
     return
 
@@ -59,12 +64,18 @@ def command_testing_jobs_list():
 @click.option("--root", default=".", type=str, help=HELP_ROOT)
 @click.option("--job", "-j", required=True, help=HELP_JOB)
 @click.option("--debug", default=False, type=bool, help=HELP_DEBUG)
-def command_testplus_testing_jobs_show():
+def command_testplus_testing_jobs_show(root, job, debug):
     """
         Displays information about a specific TestPlus job.
 
+        :param root: Root directory used when scanning for jobs.
+        :param job: The identifier of the job to show.
+        :param debug: Whether to emit debug output.
+
         :returns: ``None``
     """
+
+    click.echo("The 'jobs show' command is not yet implemented.", err=True)
 
     return
 
@@ -130,7 +141,7 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
         errmsg = "The specified root folder does not exist. root=%s" % root
         if test_root != root:
             errmsg += " expanded=%s" % test_root
-        raise argparse.ArgumentError("--root", errmsg)
+        raise click.BadParameter(errmsg, param_hint="--root")
 
     # Make sure we extend PATH to include the test root
     prepend_python_path(test_root)
@@ -164,11 +175,11 @@ def command_testplus_testing_jobs_run(root, job, output, start, branch, build, f
             job_mod = import_by_name(job_package)
         except ImportError as imperr:
             errmsg = "Failure while importing job package %r"  % job_package
-            raise argparse.ArgumentError("--job", errmsg) from imperr
+            raise click.BadParameter(errmsg, param_hint="--job") from imperr
 
         if not hasattr(job_mod, job_class):
             errmsg = "The job package %r does not have a job type %r." % (job_package, job_class)
-            raise argparse.ArgumentError("--job", errmsg)
+            raise click.BadParameter(errmsg, param_hint="--job")
 
         TestJobType = getattr(job_mod, job_class)
 

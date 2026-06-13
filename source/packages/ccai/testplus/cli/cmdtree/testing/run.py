@@ -22,7 +22,7 @@ from ccai.interfaces.itestjob import ITestJob
 from ccai.xmodules.xlogging.levels import LOG_LEVEL_NAMES
 from ccai.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 
-from ccai.testbase.cli.cmdtree.testing.constants import (
+from ccai.testplus.cli.cmdtree.testing.constants import (
     HELP_ROOT,
     HELP_EXCLUDES,
     HELP_INCLUDES,
@@ -119,6 +119,11 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
 
         :returns: ``None``
     """
+
+    # The click options below are declared multiple=True, so these arrive as
+    # immutable tuples; copy them into lists before appending the config name.
+    landscape_names = list(landscape_names)
+    topology_names = list(topology_names)
 
     if config_name is not None:
         if config_name not in landscape_names:

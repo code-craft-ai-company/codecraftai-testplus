@@ -14,7 +14,7 @@ import zipfile
 from ccai import testplus
 
 
-from ccai.foundation.runtime.paths import get_path_for_output
+from ccai.thisapp.paths import get_path_for_output
 
 from ccai.testbase.results.model.taskingresult import TaskingResult
 from ccai.testbase.sequencing.testsequencer import TestSequencer

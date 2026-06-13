@@ -50,6 +50,14 @@ class DistributedTestJob(InteropLibraryTestJob):
         packs across distributed infrastructure.
     """
 
+    # Derived jobs set these to indicate that the test framework must load the
+    # corresponding configuration maps before the run (opt-in; default False).
+    # ``distributed_test_entrypoint`` reads them to call ``resolve_configuration_maps``.
+    requires_credentials = False
+    requires_landscape = False
+    requires_runtime = False
+    requires_topology = False
+
     def _get_landscape(self) -> Any:
         """
             Returns the singleton :class:`Landscape` instance for the
