@@ -83,12 +83,13 @@ class DistributedTestJob(InteropLibraryTestJob):
                       property-based testing.
         """
         inst = DistributedTestSequencer(
-            self.title,
+            self._title,
             self._testroot,
             includes=self.includes,
             excludes=self.excludes,
             metafilters=self.metafilters,
             job_seed=self.job_seed,
+            output_context=self._output_context,
         )
         return inst
 

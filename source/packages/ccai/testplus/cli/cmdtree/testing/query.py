@@ -61,7 +61,6 @@ def command_testplus_testing_query(root, includes, excludes,
 
     from ccai.xmodules.xpython import prepend_python_path
 
-    from ccai.thisapp.activation import activate_runtime, ActivationProfile
     from ccai.thisapp.runtimevariables import RuntimeVariables
 
     # STEP 2 - Resolve the configuration variables (performed by the root command)

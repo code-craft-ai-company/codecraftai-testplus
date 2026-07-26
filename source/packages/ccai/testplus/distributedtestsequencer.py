@@ -13,7 +13,7 @@ __copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
-from typing import List,Sequence
+from typing import List, Optional, Sequence
 
 import collections
 import json
@@ -27,6 +27,7 @@ from ccai.testbase.markers import MetaFilter
 
 from ccai.landscaping.landscape import Landscape
 
+from ccai.testbase.output.outputcontext import IOutputContext
 from ccai.testbase.sequencing.testsequencer import TestSequencer
 
 
@@ -36,7 +37,8 @@ class DistributedTestSequencer(TestSequencer):
         that the steps of the test flow are consistent between runs.
     """
 
-    def __init__(self, jobtitle: str, root: str, includes: Sequence[str], excludes: Sequence[str], metafilters: List[MetaFilter], job_seed: int = None):
+    def __init__(self, jobtitle: str, root: str, includes: Sequence[str], excludes: Sequence[str], metafilters: List[MetaFilter], job_seed: int = None,
+                 output_context: Optional[IOutputContext] = None):
         """
             Creates a 'TestSequencer' object which is used to discover the tests and control the flow of a test run.
 
@@ -48,8 +50,11 @@ class DistributedTestSequencer(TestSequencer):
             :param metafilters: List of expressions used to filter tests by metadata
             :param job_seed: Job-level seed forwarded to the parent :class:`TestSequencer` for
                              reproducible property-based testing.
+            :param output_context: The :class:`IOutputContext` forwarded to the parent
+                                   :class:`TestSequencer` for resolving artefact directories.
         """
-        super().__init__(jobtitle=jobtitle, root=root, includes=includes, excludes=excludes, metafilters=metafilters, job_seed=job_seed)
+        super().__init__(jobtitle=jobtitle, root=root, includes=includes, excludes=excludes, metafilters=metafilters, job_seed=job_seed,
+                         output_context=output_context)
 
         self._landscape = None
         return

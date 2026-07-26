@@ -26,21 +26,24 @@ from ccai.thisapp.runtimevariables import RuntimeVariables, resolve_runtime_vari
 
 from ccai.configuration.configurationvariables import resolve_configuration_variables
 
-from ccai import testbase
+from ccai.integrationruntime.initialize import IntegrationResultResources
 
-TESTBASE_DIR = os.path.dirname(testbase.__file__)
 
 class TestPlusVariables:
     """
         Collection of constants used to configure results handling.
 
         The attributes provide locations for templates and static resources that
-        are consumed by TestPlus.
+        are consumed by TestPlus. The HTML summary template and static render
+        resources relocated from ``codecraftai-testbase`` to
+        ``codecraftai-integration-runtime`` in the Phase 3 results split, so
+        these now alias :class:`IntegrationResultResources` -- testplus and the
+        integration runtime must always render from the same resources.
     """
-    TESTPLUS_TEMPLATES_DIR = os.path.join(TESTBASE_DIR, "templates")
-    TESTPLUS_RESOURCE_DEST_LEAF = os.path.join("static", "v2")
-    TESTPLUS_RESOURCE_SRC_DIR = os.path.join(TESTPLUS_TEMPLATES_DIR, "v2", "static")
-    TESTPLUS_SUMMARY_TEMPLATE = os.path.join(TESTPLUS_TEMPLATES_DIR, "v2", "testsummary.html")
+    TESTPLUS_TEMPLATES_DIR = IntegrationResultResources.TEMPLATES_DIR
+    TESTPLUS_RESOURCE_DEST_LEAF = IntegrationResultResources.RESOURCE_DEST_LEAF
+    TESTPLUS_RESOURCE_SRC_DIR = IntegrationResultResources.RESOURCE_SRC_DIR
+    TESTPLUS_SUMMARY_TEMPLATE = IntegrationResultResources.SUMMARY_TEMPLATE
 
 
 def initialize_testplus_runtime():
@@ -61,7 +64,7 @@ def initialize_testplus_runtime():
     # any tests run with the 'testplus' command.
     extension_modules = "ccai.testplus.testplusdefaulttypefactory"
     
-    establish_app_persona(name=name, home_dir=home_dir, logger_name="TP", extension_modules=extension_modules, log_basename="testrun")
+    establish_app_persona(name=name, presence_dir=home_dir, logger_name="TP", extensions=extension_modules, log_basename="testrun")
 
     resolve_runtime_variables()
 
