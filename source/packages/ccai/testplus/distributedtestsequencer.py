@@ -106,6 +106,6 @@ class DistributedTestSequencer(TestSequencer):
         integ_type: IntegrationCoupling
 
         for _, integ_type in self._integrations.items():
-            integ_type.attach_to_environment(landscape)
+            integ_type.attach_to_environment(landscape=landscape)
 
         return

@@ -12,16 +12,12 @@ __copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
-from typing import Any
-
-from ccai.interop.testing.testjob import InteropLibraryTestJob
-
-from ccai.landscaping.wellknown import LandscapeSingleton
+from ccai.landscaping.testing.testjob import LandscapeTestJob
 
 from ccai.testplus.distributedtestsequencer import DistributedTestSequencer
 
 
-class DistributedTestJob(InteropLibraryTestJob):
+class DistributedTestJob(LandscapeTestJob):
     """
         TestPlus parent container for a distributed test run.
 
@@ -33,12 +29,13 @@ class DistributedTestJob(InteropLibraryTestJob):
         * :class:`ccai.integrationruntime.integratedtestjob.IntegratedTestJob` —
           integration tier: JSOS/HTML/presence-folder result recording and run
           metadata sourced from ``RuntimeVariables``.
-        * :class:`ccai.interop.testing.testjob.InteropLibraryTestJob` —
-          adds the landscape-activation hooks (``fire_attach_to_environment``,
-          ``fire_attach_to_framework``, ``fire_activate_configuration``,
-          ``fire_activate_integration``, ``fire_activate_operations``).
-        * :class:`DistributedTestJob` (this class) — supplies the concrete
-          landscape via :meth:`_get_landscape` and constructs a
+        * :class:`ccai.landscaping.testing.testjob.LandscapeTestJob` —
+          the landscaping tier: supplies the landscape singleton and carries
+          the landscape-activation lifecycle on the two attachment hooks
+          (``activate_configuration`` / ``activate_integration`` /
+          ``activate_operations``, ``collect_resources``,
+          ``establish_presence``).
+        * :class:`DistributedTestJob` (this class) — constructs a
           :class:`DistributedTestSequencer` so the sequencer's
           ``attach_to_environment`` / ``attach_to_framework`` methods accept
           the landscape and so distributed-test scheduling primitives become
@@ -58,16 +55,6 @@ class DistributedTestJob(InteropLibraryTestJob):
     requires_runtime = False
     requires_topology = False
 
-    def _get_landscape(self) -> Any:
-        """
-            Returns the singleton :class:`Landscape` instance for the
-            distributed test environment.
-
-            :returns: The active :class:`Landscape`.
-        """
-        landscape = LandscapeSingleton()
-        return landscape
-
     def _create_sequencer(self) -> DistributedTestSequencer:
         """
             Hook used by :meth:`TestJob.execute` to construct the test
@@ -75,7 +62,7 @@ class DistributedTestJob(InteropLibraryTestJob):
             :class:`DistributedTestSequencer` so the sequencer's
             ``attach_to_environment`` / ``attach_to_framework`` methods
             accept the landscape supplied by
-            :class:`InteropLibraryTestJob`.
+            :class:`LandscapeTestJob`.
 
             :returns: A :class:`DistributedTestSequencer` configured with
                       this job's title, test root, includes / excludes,
