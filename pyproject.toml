@@ -19,20 +19,20 @@ packages = [{include="ccai", from="source/packages"}]
 python = ">=3.10,<4.0"
 click = "^8.1.3"
 debugpy = "^1.8.12"
-codecraftai-errors = { git = "https://github.com/automationmojo/codecraftai-errors.git", branch = "main" }
-codecraftai-interfaces = { git = "https://github.com/automationmojo/codecraftai-interfaces.git", branch = "main" }
-codecraftai-waiting = { git = "https://github.com/automationmojo/codecraftai-waiting.git", branch = "main" }
-codecraftai-arcli = { git = "https://github.com/automationmojo/codecraftai-arcli.git", branch = "main" }
-codecraftai-runtime = { git = "https://github.com/automationmojo/codecraftai-runtime.git", branch = "main" }
-codecraftai-testbase = { git = "https://github.com/automationmojo/codecraftai-testbase.git", branch = "main" }
-codecraftai-this-app = { git = "https://github.com/automationmojo/codecraftai-this-app.git", branch = "main" }
-codecraftai-credentials = { git = "https://github.com/automationmojo/codecraftai-credentials.git", branch = "main" }
-codecraftai-dataprofiles = { git = "https://github.com/automationmojo/codecraftai-dataprofiles.git", branch = "main" }
-codecraftai-networking = { git = "https://github.com/automationmojo/codecraftai-networking.git", branch = "main" }
-codecraftai-interop = { git = "https://github.com/automationmojo/codecraftai-interop.git", branch = "main" }
-codecraftai-integration-runtime = { git = "https://github.com/automationmojo/codecraftai-integration-runtime.git", branch = "main" }
-codecraftai-landscaping = { git = "https://github.com/automationmojo/codecraftai-landscaping.git", branch = "main" }
-codecraftai-xmodules = { git = "https://github.com/automationmojo/codecraftai-xmodules.git", branch = "main" }
+codecraftai-errors = { git = "https://github.com/code-craft-ai-company/codecraftai-errors.git", branch = "main" }
+codecraftai-interfaces = { git = "https://github.com/code-craft-ai-company/codecraftai-interfaces.git", branch = "main" }
+codecraftai-waiting = { git = "https://github.com/code-craft-ai-company/codecraftai-waiting.git", branch = "main" }
+codecraftai-arcli = { git = "https://github.com/code-craft-ai-company/codecraftai-arcli.git", branch = "main" }
+codecraftai-runtime = { git = "https://github.com/code-craft-ai-company/codecraftai-runtime.git", branch = "main" }
+codecraftai-testbase = { git = "https://github.com/code-craft-ai-company/codecraftai-testbase.git", branch = "main" }
+codecraftai-this-app = { git = "https://github.com/code-craft-ai-company/codecraftai-this-app.git", branch = "main" }
+codecraftai-credentials = { git = "https://github.com/code-craft-ai-company/codecraftai-credentials.git", branch = "main" }
+codecraftai-dataprofiles = { git = "https://github.com/code-craft-ai-company/codecraftai-dataprofiles.git", branch = "main" }
+codecraftai-networking = { git = "https://github.com/code-craft-ai-company/codecraftai-networking.git", branch = "main" }
+codecraftai-interop = { git = "https://github.com/code-craft-ai-company/codecraftai-interop.git", branch = "main" }
+codecraftai-integration-runtime = { git = "https://github.com/code-craft-ai-company/codecraftai-integration-runtime.git", branch = "main" }
+codecraftai-landscaping = { git = "https://github.com/code-craft-ai-company/codecraftai-landscaping.git", branch = "main" }
+codecraftai-xmodules = { git = "https://github.com/code-craft-ai-company/codecraftai-xmodules.git", branch = "main" }
 
 [tool.poetry.scripts]
 testplus = "ccai.testplus.cli.testplus_command:testplus_root_command"
