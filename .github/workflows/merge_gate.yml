@@ -67,6 +67,9 @@ jobs:
         run: |
           source ./.venv/bin/activate
     
-          testbase testing run --root=./source/testroots/ccai --includes=ccai.tests.testplus.singlehost
+          # testplus jobs are DistributedTestJobs: run them through testplus' own
+          # CLI so the landscape lifecycle is wired (testbase's runner has no
+          # landscape and the landscaping couplings need one).
+          testplus testing run --root=./source/testroots/ccai --includes=ccai.tests.testplus
 
           deactivate
