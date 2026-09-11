@@ -290,7 +290,11 @@ def command_testplus_testing_run(root, includes, excludes, output, start, runid,
     if runid is not None:
         AM_RUNTIME_OPTION_OVERRIDES.override_run_id(runid)
 
-    if breakpoints is not None:
+    # The '--breakpoint' option is declared multiple=True, so click delivers an
+    # empty tuple rather than None when it is not given.  Only a non-empty
+    # selection is a request to break, so only then override the breakpoints
+    # and fall back to a default debugger.
+    if breakpoints is not None and len(breakpoints) > 0:
         AM_RUNTIME_OPTION_OVERRIDES.override_debug_breakpoints(breakpoints)
 
         # If a breakpoint was passed but the debugger was not, fall back to
