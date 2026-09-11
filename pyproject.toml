@@ -33,11 +33,6 @@ dependencies = [
 [project.scripts]
 testplus = "ccai.testplus.cli.testplus_command:testplus_root_command"
 
-[dependency-groups]
-dev = [
-    "pytest>=9.0.2,<10.0.0",
-]
-
 [tool.poetry]
 packages = [{include="ccai", from="source/packages"}]
 
