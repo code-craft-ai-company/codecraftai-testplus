@@ -15,7 +15,7 @@ __credits__ = []
 import contextlib
 import os
 
-from typing import Any, Optional
+from typing import Optional
 from unittest.mock import patch
 
 from ccai.integrationruntime.initialize import IntegrationResultResources

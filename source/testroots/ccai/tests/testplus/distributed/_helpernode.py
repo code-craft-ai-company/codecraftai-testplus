@@ -51,6 +51,7 @@ def _handle(conn, node_id: str, stop: threading.Event) -> None:
         else:
             conn.send({"ok": False, "node": node_id, "error": "unknown op {!r}".format(op)})
     except EOFError:
+        # The client closed the connection before sending a request; there is nothing to answer.
         pass
     finally:
         conn.close()

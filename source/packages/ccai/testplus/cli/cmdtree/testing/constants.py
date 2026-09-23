@@ -11,8 +11,6 @@ __copyright__ = "Copyright 2025, Code Craft AI LLC"
 __credits__ = []
 
 
-import os
-
 from ccai.configuration.normalize import SEPARATOR
 
 CONFIGURATION_CHOICES = [

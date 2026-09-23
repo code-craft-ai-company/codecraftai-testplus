@@ -213,7 +213,7 @@ def test_entrypoint_passes_parsed_includes_and_excludes_to_the_job() -> None:
     """
     job_type = make_stub_job_type()
 
-    harness, _exit_code = _run_entrypoint(["-i", "#test_a", "--include", "#test_b", "-x", "#test_c"], job_type=job_type)
+    _run_entrypoint(["-i", "#test_a", "--include", "#test_b", "-x", "#test_c"], job_type=job_type)
 
     job = job_type.instances[0]
     assert job.includes == ["#test_a", "#test_b"]

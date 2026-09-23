@@ -14,7 +14,6 @@ __credits__ = []
 
 from typing import List
 
-import logging
 from ccai.xmodules.xlogging.enhancedloggers import getEnhancedLogger
 import os
 import sys
@@ -67,7 +66,9 @@ def command_testplus_testing_query(root, includes, excludes,
 
     # STEP 3 - Apply the configuration related options
 
-    this_app = ThisApplicationSingleton()
+    # Instantiate the application singleton so the application context and the default user
+    # configuration are loaded before the configuration maps are resolved.
+    ThisApplicationSingleton()
 
     # STEP 4 - Resolve the Configuration Maps
     from ccai.configuration.configurationmaps import resolve_configuration_maps
@@ -135,7 +136,6 @@ def command_testplus_testing_query(root, includes, excludes,
 
     # At this point in the code, we either lookup an existing test job or we create a test job
     # from the includes, excludes or test_module
-    result_code = 0
     with TestJobType(logger, test_root, includes=includes, excludes=excludes, metafilters=metafilters) as tjob:
         query_results = tjob.query()
 
