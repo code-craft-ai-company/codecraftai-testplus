@@ -1,6 +1,6 @@
 [project]
 name = "codecraftai-testplus"
-version = "1.2.1"
+version = "1.2.2"
 description = "Code Craft AI - TestPlus Package"
 readme = "README.rst"
 license = "LicenseRef-CodeCraftAI-Source-Available"
@@ -28,6 +28,8 @@ dependencies = [
     "codecraftai-integration-runtime>=1.0.0,<2.0.0",
     "codecraftai-landscaping>=1.0.0,<2.0.0",
     "codecraftai-xmodules>=1.0.0,<2.0.0",
+    "codecraftai-configuration>=1.0.0,<2.0.0",
+    "codecraftai-extension>=1.0.0,<2.0.0",
 ]
 
 [project.scripts]
